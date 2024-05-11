@@ -27,6 +27,8 @@ the api should expose the following routes:
 
 > **_NOTE:_**  Please try to avoid using `github copilot` and `chat-gpt` for this task 😇
 
+keep im mind that your code should be as clean as you can and follows the [SOLID](https://realpython.com/solid-principles-python/) principles
+
 ## DoD
 
 In your personal folder should be the code with:
