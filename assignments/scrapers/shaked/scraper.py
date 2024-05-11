@@ -10,6 +10,8 @@ from datetime import datetime
 # URL to scrape
 url = 'https://news.walla.co.il/breaking'
 
+# TODO: handle pagination for more than 1 page
+
 # Send a GET request to the URL
 response = requests.get(url)
 
