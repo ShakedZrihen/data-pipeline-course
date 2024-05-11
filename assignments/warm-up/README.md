@@ -29,6 +29,12 @@ the api should expose the following routes:
 
 keep im mind that your code should be as clean as you can and follows the [SOLID](https://realpython.com/solid-principles-python/) principles
 
+### Dev requirements
+
+1. handle error correctly
+2. add at least 1 unit-test using [pytest](https://docs.pytest.org/en/7.1.x/example/simple.html)
+3. follow [SOLID](https://realpython.com/solid-principles-python/) principles
+
 ## DoD
 
 In your personal folder should be the code with:
@@ -36,4 +42,3 @@ In your personal folder should be the code with:
 1. requirement.txt - all packages needed in order to run the code
 2. README.md - instruction how i can run the code
 3. swagger - with all required routes: [readmore about swagger](https://fastapi.tiangolo.com/how-to/configure-swagger-ui/)
-
