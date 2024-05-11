@@ -21,16 +21,16 @@ soup = BeautifulSoup(response.text, 'html.parser')
 # Validate soup is got the data
 # print(soup.prettify())
 
-# get all flashes
-flashes = soup.find_all('h1', class_='breaking-item-title')
+# get all breaking-news
+breaking_news = soup.find_all('h1', class_='breaking-item-title')
 
 # format data to the desired format
 
 formatted_data = {}
 
-for flash in flashes:
-    hour = flash.find('span', class_='red-time').text
-    content = [text for text in flash.contents if isinstance(text, str)]
+for news in breaking_news:
+    hour = news.find('span', class_='red-time').text
+    content = [text for text in news.contents if isinstance(text, str)]
     formatted_data[hour] = content[-1]
 
 # validate formatting

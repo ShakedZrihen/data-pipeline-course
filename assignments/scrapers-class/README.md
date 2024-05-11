@@ -9,7 +9,7 @@ As a data engineer, we want to be able to save all ynet main articles highlights
 Build simple web scrapper preferly using python (but NodeJS is ok as well)
 that:
 
-1. download [ynet](https://www.ynet.co.il/news/category/184) news flash
+1. download [ynet](https://www.ynet.co.il/news/category/184) breaking news
 2. save them in a json file yyyy-mm-dd.json with format:
 
 ```json
