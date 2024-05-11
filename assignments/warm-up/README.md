@@ -8,8 +8,8 @@ Build simple web api using python and Flask-API that will expose our collected d
 
 the api should expose the following routes:
 
-1. /health - will return 200 if the api is up
-2. /flash - will return all flashes back in the following format
+1. `/health` - will return 200 if the api is up
+2. `/flash` - will return all flashes back in the following format
 
 ```json
 {
@@ -17,7 +17,7 @@ the api should expose the following routes:
 }
 ```
 
-3. /flash/date - will return all flashes from specific date in the following format
+3. `/flash/date` - will return all flashes from specific date in the following format
 
 ```json
 {
