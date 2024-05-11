@@ -18,9 +18,12 @@ that:
 }
 ```
 
+> **_NOTE:_**  Please try to avoid using `github copilot` and chat-gpt for this task 😇
+
 ### DoD
 
-In your personal folder should be at least 2 files:
+In your personal folder should be at least 3 files:
 
 1. scraper code (scraper.py / scraper.js)
 2. json files with the relevant data
+3. requirements.txt
