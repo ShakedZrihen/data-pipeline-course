@@ -18,7 +18,7 @@ that:
 }
 ```
 
-> **_NOTE:_**  Please try to avoid using `github copilot` and chat-gpt for this task 😇
+> **_NOTE:_**  Please try to avoid using `github copilot` and `chat-gpt` for this task 😇
 
 ### DoD
 
