@@ -2,11 +2,11 @@
 
 ## Class assignment - Dockerizing the API
 
-As an engineer, we want to be able to run out API as a docker
+As an engineer, we want to be able to run our API as a docker
 
 ### Requirement
 
-Create a Dockerfile to containerize your FastAPI server.
+Create a Dockerfile to containerize your FastAPI server lambda.
 Build and run your Docker container locally.
 
 > **_NOTE:_**  Please try to avoid using `github copilot` and `chat-gpt` for this task 😇
