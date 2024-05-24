@@ -57,6 +57,7 @@ in your personal folder should be the following files:
 
 ### suggested project structure
 
+```
 data-pipelines/
 │
 ├── docker-compose.yml
@@ -72,3 +73,4 @@ data-pipelines/
 │ ├── handler.py
 │ ├── serverless.yml
 │ └── requirements.txt
+```
