@@ -9,8 +9,8 @@ as an engineer, you need to create a local development environment using Docker 
 1. Lambda Scraper (Serverless Framework + FastAPI)
 the lambda should:
 
-- expose one route: POST `/data`
-- put the data from `request.body` in sqs called `data-raw-q`
+  - expose one route: POST `/data`
+  - put the data from `request.body` in sqs called `data-raw-q`
 
 2. SQS (Amazon Simple Queue Service)
 
@@ -48,16 +48,18 @@ all lambdas can also be configured in the same `serverless.yml` file
 
 ## DoD
 
-in your personal folder should be the following files:
+in your personal folder should be at least the following files:
 
 1. `docker-compose.yml` - with all the component described above
-2. `serverless.yml`  - with all the lambdas
-3. `requirements.txt` - All packages needed to run the code.
-4. `README.md` - Instructions on how to run the code.
+2. `lambda.py` - code of lambda handlers
+3. `serverless.yml`  - with all the lambdas
+4. `requirements.txt` - All packages needed to run the code.
+5. `README.md` - Instructions on how to run the code.
 
 ### suggested project structure
 
-data-pipelines/
+```
+developer-name/
 │
 ├── docker-compose.yml
 ├── lambda-scraper/
@@ -72,3 +74,4 @@ data-pipelines/
 │ ├── handler.py
 │ ├── serverless.yml
 │ └── requirements.txt
+```
