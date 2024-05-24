@@ -7,8 +7,8 @@ as an engineer, you need to create a local development environment using Docker 
 ### Components
 
 1. **Lambda Scraper (Serverless Framework + FastAPI)**
-the lambda should:
 
+the lambda should:
 - expose one route: POST `/data`
 - put the data from `request.body` in sqs called `data-raw-q`
 
