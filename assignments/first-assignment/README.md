@@ -48,12 +48,13 @@ all lambdas can also be configured in the same `serverless.yml` file
 
 ## DoD
 
-in your personal folder should be the following files:
+in your personal folder should be at least the following files:
 
 1. `docker-compose.yml` - with all the component described above
-2. `serverless.yml`  - with all the lambdas
-3. `requirements.txt` - All packages needed to run the code.
-4. `README.md` - Instructions on how to run the code.
+2. `lambda.py` - code of lambda handlers
+3. `serverless.yml`  - with all the lambdas
+4. `requirements.txt` - All packages needed to run the code.
+5. `README.md` - Instructions on how to run the code.
 
 ### suggested project structure
 
