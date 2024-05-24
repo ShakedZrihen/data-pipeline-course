@@ -58,7 +58,7 @@ in your personal folder should be the following files:
 ### suggested project structure
 
 ```
-data-pipelines/
+developer-name/
 │
 ├── docker-compose.yml
 ├── lambda-scraper/
