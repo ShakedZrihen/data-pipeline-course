@@ -7,33 +7,32 @@ as an engineer, you need to create a local development environment using Docker 
 ### Components
 
 1. **Lambda Scraper (Serverless Framework + FastAPI)**
-
-the lambda should:
-- expose one route: POST `/data`
-- put the data from `request.body` in sqs called `data-raw-q`
+   the lambda should:
+   - expose one route: POST `/data`
+   - put the data from `request.body` in sqs called `data-raw-q`
 
 2. **SQS (Amazon Simple Queue Service)**
 
-- SQS infra
-- script that will create 1 queue: `data-raw-q`
+   - SQS infra
+   - script that will create 1 queue: `data-raw-q`
 
 3. **Lambda Processor (Serverless Framework)**
 
-- lambda that triggered by SQS event (can be configured using serverless framework)
-- print the data as JSON
+   - lambda that triggered by SQS event (can be configured using serverless framework)
+   - print the data as JSON
 
 4. **PostgreSQL**
 
-- DB container
-- 1 table: `users`
+   - DB container
+   - 1 table: `users`
 
 5. **Lambda CRUD (Serverless Framework + FastAPI)**
 
-the lambda should:
+   the lambda should:
 
-- expose one route: GET `/health` which will return 200
+   - expose one route: GET `/health` which will return 200
 
-all lambdas can also be configured in the same `serverless.yml` file
+   all lambdas can also be configured in the same `serverless.yml` file
 
 
 ## Technical Specifications
