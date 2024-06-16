@@ -1,0 +1,75 @@
+# -*- mode: yaml -*-
+
+manifest:
+  version: 1.0
+
+automations:
+  estimated_time_to_review:
+    if:
+      - true
+    run:
+      - action: add-label@v1
+        args:
+          label: "{{ calc.etr }} min review"
+          color: {{ colors.red if (calc.etr >= 20) else ( colors.yellow if (calc.etr >= 5) else colors.green ) }}
+
+  add_shaked_as_a_reviewer:
+    if:
+      - true
+    run:
+      - action: add-reviewers@v1
+        args:
+          reviewers: [ShakedZrihen]
+
+  missing_requirements:
+    if:
+      - {{ missing.requirements }}
+    run:
+      - action: request-changes@v1
+        args:
+          comment: "requirement.txt file is missing"
+      - action: add-label@v1
+        args:
+          label: missing-requirements
+          color: {{ colors.red }}
+
+  missing_serverless:
+    if:
+      - {{ missing.serverless }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-serverless
+          color: {{ colors.red }}
+
+  missing_test:
+    if:
+      - {{ missing.test }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-test
+          color: {{ colors.red }}
+
+  missing_readme:
+    if:
+      - {{ missing.readme }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-readme
+          color: {{ colors.red }}
+  
+calc:
+  etr: {{ branch | estimatedReviewTime }}
+
+missing:
+  requirements: {{ files | match(list=['requirements']) | some }}
+  serverless: {{ files | match(list=['serverless']) | some }}
+  readme: {{ files | match(list=['README']) | some }}
+  test: {{ files | match(list=['test_']) | some }}
+
+colors:
+  red: 'b60205'
+  yellow: 'fbca04'
+  green: '0e8a16'
