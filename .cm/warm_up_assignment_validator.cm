@@ -23,7 +23,7 @@ automations:
 
   missing_requirements:
     if:
-      - {{ missing.requirements }}
+      - {{ not has.requirements }}
     run:
       - action: request-changes@v1
         args:
@@ -35,7 +35,7 @@ automations:
 
   missing_serverless:
     if:
-      - {{ missing.serverless }}
+      - {{ not has.serverless }}
     run:
       - action: add-label@v1
         args:
@@ -44,7 +44,7 @@ automations:
 
   missing_test:
     if:
-      - {{ missing.test }}
+      - {{ not has.test }}
     run:
       - action: add-label@v1
         args:
@@ -53,7 +53,7 @@ automations:
 
   missing_readme:
     if:
-      - {{ missing.readme }}
+      - {{ not has.readme }}
     run:
       - action: add-label@v1
         args:
@@ -63,7 +63,7 @@ automations:
 calc:
   etr: {{ branch | estimatedReviewTime }}
 
-missing:
+has:
   requirements: {{ files | match(regex=r/warm-up\/.*\/requrements.*/) | some }}
   serverless: {{ files | match(regex=r/warm-up\/.*\/serverless.*/) | some }}
   readme: {{ files | match(regex=r/warm-up\/.*\/README.*/) | some }}
