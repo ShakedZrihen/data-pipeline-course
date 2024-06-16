@@ -64,10 +64,10 @@ calc:
   etr: {{ branch | estimatedReviewTime }}
 
 missing:
-  requirements: {{ files | match(list=['requirements']) | some }}
-  serverless: {{ files | match(list=['serverless']) | some }}
-  readme: {{ files | match(list=['README']) | some }}
-  test: {{ files | match(list=['test_']) | some }}
+  requirements: {{ files | match(regex=r/warm-up\/.*\/requrements.*/) | some }}
+  serverless: {{ files | match(regex=r/warm-up\/.*\/serverless.*/) | some }}
+  readme: {{ files | match(regex=r/warm-up\/.*\/README.*/) | some }}
+  test: {{ files | match(regex=r/warm-up\/.*\/test_.*/) | some }}
 
 colors:
   red: 'b60205'
