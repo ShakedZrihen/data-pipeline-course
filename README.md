@@ -35,7 +35,7 @@
     pyenv install 3.11
     ```
 
-## nodeJS - v18.18
+## nodeJS - v20.11
 
 1. using [website](https://nodejs.org/en/download)
 2. using brew (for mac)
@@ -48,7 +48,7 @@
     install nodejs:
 
     ```bash
-    brew install node@18.18.0
+    brew install node@20.11.0
     ```
 
 ## aws-cli - v2.7.7
