@@ -6,11 +6,12 @@ as an engineer, you need to create a local development environment using Docker 
 
 ### Components
 
-1. **Lambda Scraper (Serverless Framework + python/node)**
+1. **Lambda Scraper (Serverless Framework + FastAPI )**
 
    the lambda should:
-   - do the same as class-assignment
-   - put the scrapped data (.json) in sqs called `data-raw-q`
+   - expost one route POST `/scrape` that will trigger:
+      - do the same as class-assignment
+      - put the scrapped data (.json) in sqs called `data-raw-q`
 
 3. **SQS (Amazon Simple Queue Service)**
 
