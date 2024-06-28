@@ -13,11 +13,11 @@ the api should expose the following routes:
 
 ```json
 {
-    "date": ["hour: news"]
+    "date": [{ "hour: news" }]
 }
 ```
 
-3. `/breaking-news/date` - will return all breaking news from specific date in the following format
+3. `/breaking-news?date=<date>` - will return all breaking news from specific date in the following format
 
 ```json
 {
