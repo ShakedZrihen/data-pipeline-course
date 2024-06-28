@@ -10,7 +10,7 @@ as an engineer, you need to create a local development environment using Docker 
 
    the lambda should:
    - expost one route POST `/scrape` that will trigger:
-      - do the same as class-assignment
+      - do the same as `first-class-assignment`
       - put the scrapped data (.json) in sqs called `data-raw-q`
 
 3. **SQS (Amazon Simple Queue Service)**
