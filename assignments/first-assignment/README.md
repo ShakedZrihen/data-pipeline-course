@@ -6,7 +6,7 @@ as an engineer, you need to create a local development environment using Docker 
 
 ### Components
 
-1. **Lambda Scraper (Serverless Framework + FastAPI)**
+1. **Lambda Scraper (Serverless Framework + python/node)**
 
    the lambda should:
    - do the same as class-assignment
