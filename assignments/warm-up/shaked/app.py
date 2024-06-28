@@ -1,7 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from mangum import Mangum
 from typing import Optional
-import json
+from services.breaking_news import get_breaking_news
 
 app = FastAPI()
 
@@ -13,21 +13,14 @@ def health():
 
 @app.get("/breaking-news")
 def breaking_news(date: Optional[str] = None, time: Optional[str] = None):
-    with open("2024-05-11.json", "r") as file:
-        breaking_news_data = json.load(file)
-
-    if time:
-        news_in_time = breaking_news_data.get(time)
-        return news_in_time or HTTPException(
-            status_code=404, detail="News not found for specific time"
-        )
-
-    formatted_data = []
-    for news in breaking_news_data:
-        print(f"news: {news}, {breaking_news_data[news]}")
-        formatted_data.append({news: breaking_news_data[news]})
-
-    return {"2024-05-11": formatted_data}
+    breaking_news_data = get_breaking_news()
+    formatted_data = {}
+    for date in breaking_news_data:
+        news_from_date = []
+        for news in breaking_news_data[date]:
+            news_from_date.append({news: breaking_news_data[date][news]})
+        formatted_data[date] = news_from_date
+    return formatted_data
 
 
 handler = Mangum(app)
