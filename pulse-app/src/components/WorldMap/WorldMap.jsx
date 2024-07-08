@@ -1,55 +1,54 @@
 import { styled } from "@mui/material";
-import { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
+import useWorldMapData from "./useWorldMapData";
+import { genreColors } from "./genreColors";
+import Tooltip from "@mui/material/Tooltip";
+import { Fragment } from "react";
 
 const StyledComposableMap = styled(ComposableMap)`
-width: 100%;
-height: 80%;
-`
+  width: 100%;
+  height: 80%;
+`;
 
 const WorldMap = () => {
-  const [countryColors, setCountryColors] = useState({});
+  const { topSongFeaturesByCountry } = useWorldMapData();
 
-  const handleCountryClick = (geo) => {
-    const countryId = geo.properties.ISO_A3;
-    const newColor = prompt("Enter a color for this country (e.g., red, #ff0000):");
-    if (newColor) {
-      setCountryColors({
-        ...countryColors,
-        [countryId]: newColor
-      });
-    }
-  };
+  if (!topSongFeaturesByCountry) {
+    return null;
+  }
 
   return (
-    <StyledComposableMap>
-      <Geographies geography={"/worldFeatures.json"}>
-        {({ geographies }) =>
-          geographies.map((geo) => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              onClick={() => handleCountryClick(geo)}
-              style={{
-                default: {
-                  fill: countryColors[geo.properties.ISO_A3] || "#D6D6DA",
-                  outline: "none"
-                },
-                hover: {
-                  fill: "#F53",
-                  outline: "none"
-                },
-                pressed: {
-                  fill: "#E42",
-                  outline: "none"
-                }
-              }}
-            />
-          ))
-        }
-      </Geographies>
-    </StyledComposableMap>
+    <>
+      <StyledComposableMap>
+        <Geographies geography={"/worldFeatures.json"}>
+          {({ geographies }) =>
+            geographies.map((geo) => {
+              const songData = topSongFeaturesByCountry[geo.id];
+              const geoStyle = {
+                fill: genreColors[songData?.genre] ?? "#D6D6DA",
+                outline: "none"
+              };
+              const country = geo?.properties?.name ?? "N/A";
+
+              return (
+                <Fragment key={geo.rsmKey}>
+                  <Tooltip title={songData?.genre ? `${country}-${songData?.genre}` : "No data"}>
+                    <Geography
+                      geography={geo}
+                      style={{
+                        default: geoStyle,
+                        hover: geoStyle,
+                        pressed: geoStyle
+                      }}
+                    />
+                  </Tooltip>
+                </Fragment>
+              );
+            })
+          }
+        </Geographies>
+      </StyledComposableMap>
+    </>
   );
 };
 

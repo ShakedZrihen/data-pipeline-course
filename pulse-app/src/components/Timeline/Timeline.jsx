@@ -1,22 +1,29 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { StyledTimeline, StyledYear, StyledYearBox, StyledYearLabel } from "./Timeline.style";
 import useChartAvailableDates from "../../hooks/useChartAvailableDates";
+import ChartsContext from "../../state/context";
+import { onSelectYear } from "../../state/actions";
+
+const ALL_TIMES_YEAR = "all-times";
 
 const Timeline = () => {
-  const [selectedYear, setSelectedYear] = useState(2019);
+  const {
+    state: { selectedYear },
+    dispatch
+  } = useContext(ChartsContext);
   const { data } = useChartAvailableDates();
   const years = Object.keys(data).sort((a, b) => Number(b) - Number(a));
 
   return (
     <StyledTimeline>
-      <StyledYear key="all-times" onClick={() => setSelectedYear("all-times")}>
-        <StyledYearBox selected={selectedYear === "all-times"} />
+      <StyledYear key={ALL_TIMES_YEAR} onClick={() => dispatch(onSelectYear(ALL_TIMES_YEAR))}>
+        <StyledYearBox selected={selectedYear === ALL_TIMES_YEAR} />
         <StyledYearLabel>All times</StyledYearLabel>
       </StyledYear>
       {years.map((year) => {
         const showLabel = year % 10 === 0;
         return (
-          <StyledYear key={year} onClick={() => setSelectedYear(year)}>
+          <StyledYear key={year} onClick={() => dispatch(onSelectYear(year))}>
             <StyledYearBox selected={year === selectedYear} />
             {showLabel && <StyledYearLabel>{year.toString().slice(2)}&apos;s</StyledYearLabel>}
           </StyledYear>

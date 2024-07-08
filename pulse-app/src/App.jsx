@@ -3,6 +3,7 @@ import { CssBaseline, styled } from "@mui/material";
 import Timeline from "./components/Timeline/Timeline";
 import WorldMap from "./components/WorldMap/WorldMap";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ChartsContextProvider } from "./state/context";
 
 const darkTheme = createTheme({
   palette: {
@@ -40,19 +41,21 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <QueryClientProvider client={queryClient}>
-        <CssBaseline />
-        <StyledAppContainer>
-          <StyledHeader>
-            <h1 style={{ color: "white" }}>Pulse</h1>
-          </StyledHeader>
-          <StyledContent>
-            <Timeline />
-            <StyledWorldMapContainer>
-              <WorldMap />
-            </StyledWorldMapContainer>
-          </StyledContent>
-        </StyledAppContainer>
+        <ChartsContextProvider>
+          <StyledAppContainer>
+            <StyledHeader>
+              <h1 style={{ color: "white" }}>Pulse</h1>
+            </StyledHeader>
+            <StyledContent>
+              <Timeline />
+              <StyledWorldMapContainer>
+                <WorldMap />
+              </StyledWorldMapContainer>
+            </StyledContent>
+          </StyledAppContainer>
+        </ChartsContextProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { SERVER_BASE_URL } from "../../common/consts/api";
+import chartsByYear from "../fixtures/chartsByYear";
 
 function mockUrl(url) {
   return new URL(url, SERVER_BASE_URL).toString();
@@ -36,5 +37,26 @@ const generateAvailableDatesData = () => {
 export const handlers = [
   http.get(mockUrl("/charts/available-dates"), () => {
     return HttpResponse.json(generateAvailableDatesData());
+  }),
+  http.get(mockUrl("/charts"), (req) => {
+    const searchParams = new URL(req.request.url).searchParams;
+    const year = searchParams.get("year");
+    const date = searchParams.get("date");
+
+    if (year) {
+      return Response.json({
+        year,
+        charts: chartsByYear
+      });
+    }
+    if (date) {
+      return Response.json({
+        date,
+        charts: chartsByYear
+      });
+    }
+    return Response.json({
+      error: "No chart data found for the given date"
+    });
   })
 ];
