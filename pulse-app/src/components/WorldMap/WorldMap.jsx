@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import useWorldMapData from "./useWorldMapData";
-import { genreColors } from "./genreColors";
+import { artistTypeColors } from "./featureColors";
 import Tooltip from "@mui/material/Tooltip";
 import { Fragment } from "react";
 
@@ -24,8 +24,10 @@ const WorldMap = () => {
           {({ geographies }) =>
             geographies.map((geo) => {
               const songData = topSongFeaturesByCountry[geo.id];
+              // const byGenreColor = genreColors[songData?.genre] ?? "#D6D6DA";
+              const byArtistTypeColor = artistTypeColors[songData?.artistType] ?? artistTypeColors.unknown;
               const geoStyle = {
-                fill: genreColors[songData?.genre] ?? "#D6D6DA",
+                fill: byArtistTypeColor,
                 outline: "none"
               };
               const country = geo?.properties?.name ?? "N/A";
