@@ -3,7 +3,7 @@ import { createContext, useMemo, useReducer } from "react";
 import reducer from "./reducer";
 
 const initialProps = {
-  selectedYear: "all-times",
+  selectedYear: -1,
   selectedChart: null
 };
 
