@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ChartsContext from "../../state/context";
 import { getChartByYear } from "../../services/chart.service";
 
@@ -7,7 +7,8 @@ const useWorldMapData = () => {
     state: { selectedYear }
   } = useContext(ChartsContext);
 
-  const [worldMapData, setWorldMapData] = useState([]);
+  const [worldMapData, setWorldMapData] = useState(null);
+  const debounceTimeoutRef = useRef(null);
 
   const getTopSongFeaturesByCountry = (charts) => {
     const genreByCountry = Object.entries(charts).reduce((acc, [country, chart]) => {
@@ -24,9 +25,10 @@ const useWorldMapData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('Fetching data...')
+      console.log("fetching new data for year", selectedYear);
       const { data } = await getChartByYear(selectedYear);
       const { charts } = data ?? {};
+
       if (!charts) {
         setWorldMapData(data);
         return;
@@ -36,10 +38,22 @@ const useWorldMapData = () => {
       setWorldMapData({ topSongFeaturesByCountry, charts });
     };
 
-    fetchData();
+    if (worldMapData === null) {
+      fetchData();
+    } else {
+      debounceTimeoutRef.current = setTimeout(() => {
+        fetchData();
+      }, 500);
+    }
+
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
   }, [selectedYear]);
 
-  return worldMapData;
+  return worldMapData == null ? [] : worldMapData;
 };
 
 export default useWorldMapData;
