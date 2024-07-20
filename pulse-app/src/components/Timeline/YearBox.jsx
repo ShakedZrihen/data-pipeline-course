@@ -11,7 +11,7 @@ const YearBox = ({ year, label }) => {
   } = useContext(ChartsContext);
 
   const showLabel = label != null || year % 10 === 0;
-  const yearLabel = label ?? `${year.toString().slice(2)}&apos;s`;
+  const yearLabel = label ?? `${year.toString().slice(2)}'s`;
 
   return (
     <StyledYear onClick={() => dispatch(onSelectYear(year))}>
