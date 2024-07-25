@@ -1,3 +1,5 @@
+import os
+
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -10,17 +12,18 @@ def generate_content():
     soup = BeautifulSoup(html.text, 'html.parser')
     soup = soup.find('div', {'class': 'article-flashes-page'})
     for article in soup.find_all('div', {'class': 'AccordionSection'}):
-        date = datetime.datetime.fromisoformat(article.find('time').attrs['datetime'])
-        key1 = f'{date:%Y-%m-%d}'
-        key2 = f'{date:%H:%M}'
-        value = article.find('div', {'class': 'title'}).text
-        if not (key1 in data.keys()):
-            data[key1] = {}
-        data[key1][key2] = value
+        if article.find('time'):
+            date = datetime.datetime.fromisoformat(article.find('time').attrs['datetime'])
+            key1 = f'{date:%Y-%m-%d}'
+            key2 = f'{date:%H:%M}'
+            value = article.find('div', {'class': 'title'}).text
+            if not (key1 in data.keys()):
+                data[key1] = {}
+            data[key1][key2] = value
     return data
 
 
 def save_content(data):
     for key in data.keys():
-        with open(f'resources/{key}.json', 'w') as outfile:
+        with open(f'{os.path.dirname(__file__)}/../resources/{key}.json', 'w') as outfile:
             outfile.write(json.dumps(data[key], indent=4))

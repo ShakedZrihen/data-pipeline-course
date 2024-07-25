@@ -1,6 +1,5 @@
 import json
 import os
-from datetime import datetime, timedelta
 from services.news_generator import generate_content, save_content
 from os.path import join, dirname
 from dotenv import load_dotenv
