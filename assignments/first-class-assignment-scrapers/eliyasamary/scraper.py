@@ -23,7 +23,6 @@ all_titles = [news.find('div', class_='title').text.strip() for news in all_news
 
 data = {}
 
-
 try:
     driver.get(url)
 
