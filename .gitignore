@@ -1,4 +1,5 @@
 .venv/
+venv/
 assignments/final-project/shaked/*
 **/__pycache__/
 **/node_modules/
