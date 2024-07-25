@@ -24,7 +24,11 @@ def scrape_ynet():
             
         title = item.contents[-2].text
         time_json = {time : title}
-        news[date] = time_json
+        if date in news:
+            news[date] += [time_json]
+        else:
+            news[date] = [time_json]
+            
         
     file_path = os.path.split(os.path.realpath(__file__))[0]
     file_name = file_path + '/news.json'
