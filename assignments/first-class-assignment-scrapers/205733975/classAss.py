@@ -17,7 +17,7 @@ breaking_news = soup.find_all('div', class_='AccordionSection')
 formatted_data = {}
 
 for news in breaking_news:
-    hour = news.find('time', class_='DateDisplay').attrs['datetime'][11:19]
+    hour = news.find('time', class_='DateDisplay').attrs['datetime'][11:17]
 
     content= news.findNext('div',class_='title').text
     formatted_data[hour] = content[:]
