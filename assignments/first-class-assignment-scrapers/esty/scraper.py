@@ -4,17 +4,13 @@ from bs4 import BeautifulSoup
 import json
 from datetime import datetime
 
-# bs4 documentation: https://beautiful-soup-4.readthedocs.io/en/latest/#making-the-soup
-# bs4 cheat sheet: https://proxiesapi.com/articles/the-complete-beautifulsoup-cheatsheet-with-examples
-
 # URL to scrape
-url = 'https://news.walla.co.il/breaking'
+url = 'https://www.ynet.co.il/news/category/184'
 
 # TODO: handle pagination for more than 1 page
 
 # Send a GET request to the URL
 response = requests.get(url)
-
 # Parse the HTML content of the page with BeautifulSoup
 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -22,22 +18,28 @@ soup = BeautifulSoup(response.text, 'html.parser')
 # print(soup.prettify())
 
 # get all breaking-news
-breaking_news = soup.find_all('h1', class_='breaking-item-title')
+breaking_news = soup.find_all('div', class_='titleRow')
 
 # format data to the desired format
 
 formatted_data = {}
 
 for news in breaking_news:
-    hour = news.find('span', class_='red-time').text
-    content = [text for text in news.contents if isinstance(text, str)]
-    formatted_data[hour] = content[-1]
+    # Extract and parse the datetime attribute
+    datetime_str = news.find('time', class_='DateDisplay').attrs["datetime"]
+    datetime_obj = datetime.fromisoformat(datetime_str.replace('Z', '+00:00'))
+    hour = datetime_obj.strftime('%H:%M')
+    print("hour")
+    title = news.find('div', class_='title').text.strip()
+    formatted_data[hour] = title
 
 # validate formatting
-# print(formatted_data)
+for hour, title in formatted_data.items():
+    print(f"{hour}: {title}")
+
 
 # save the formatted_data to file
-todays_date = datetime.now().strftime('%Y-%m-%d') # yyyy-mm-dd
+todays_date = datetime.now().strftime('%Y-%m-%d')  # yyyy-mm-dd
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, f'{todays_date}.json')
 
