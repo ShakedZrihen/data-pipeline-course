@@ -4,6 +4,8 @@ from typing import Optional
 from services.news import get_breaking_news
 from services.db import init
 import uvicorn
+
+
 app = FastAPI()
 init()
 
