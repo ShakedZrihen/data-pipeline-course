@@ -25,5 +25,5 @@ def generate_content():
 
 def save_content(data):
     for key in data.keys():
-        with open(f'{os.path.dirname(__file__)}/../resources/{key}.json', 'w') as outfile:
-            outfile.write(json.dumps(data[key], indent=4))
+        with open(f'{os.path.dirname(__file__)}/../resources/{key}.json', 'w', encoding='utf-8') as outfile:
+            outfile.write(json.dumps(data[key], indent=4, ensure_ascii=False))
