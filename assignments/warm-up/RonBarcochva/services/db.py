@@ -1,8 +1,9 @@
+
 import json
 import os
-from services.news_generator import generate_content, save_content
 from os.path import join, dirname
 from dotenv import load_dotenv
+from services.news_generator import generate_content, save_content
 
 
 dotenv_path = join(dirname(__file__), '.env')
@@ -10,6 +11,7 @@ load_dotenv()
 
 
 DB_FOLDER = os.environ.get('DB_FOLDER')
+
 
 def get():
     data = {}

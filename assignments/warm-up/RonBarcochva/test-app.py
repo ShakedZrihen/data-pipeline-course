@@ -1,6 +1,4 @@
-import pytest
-import uvicorn
-from app import app
+
 import requests
 
 

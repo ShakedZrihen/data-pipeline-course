@@ -1,9 +1,9 @@
+
+from typing import Optional
 from fastapi import FastAPI, Response, status
 from mangum import Mangum
-from typing import Optional
 from services.news import get_breaking_news
 from services.db import init
-import uvicorn
 
 
 app = FastAPI()
@@ -36,7 +36,3 @@ def breaking_news(response: Response, date: Optional[str] = None, time: Optional
 
 
 handler = Mangum(app)
-
-
-if __name__ == '__main__':
-    uvicorn.run(app, host="127.0.0.1", port=8002)

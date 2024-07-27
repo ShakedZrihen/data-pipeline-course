@@ -1,9 +1,9 @@
-import os
 
+import os
 import requests
 import json
-from bs4 import BeautifulSoup
 import datetime
+from bs4 import BeautifulSoup
 
 
 def generate_content():
