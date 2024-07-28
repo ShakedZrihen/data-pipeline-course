@@ -4,3 +4,4 @@ assignments/final-project/shaked/*
 **/__pycache__/
 **/node_modules/
 **/db/
+assignments/warm-up/MoranSin/package-lock.json
