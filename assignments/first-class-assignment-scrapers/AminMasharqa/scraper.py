@@ -37,7 +37,7 @@ def scrape_ynet():
             news_time = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
             # Extract the full datetime
             news_full_datetime = news_time.strftime("%Y-%m-%d %H:%M:%S")
-            # Add to the dictionary
+            # Add to the dictionary key-value pair
             news_dict[news_full_datetime] = title
 
     # Sort the dictionary by keys (datetime) in descending order
