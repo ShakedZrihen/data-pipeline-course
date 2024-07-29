@@ -1,0 +1,44 @@
+from fastapi import FastAPI, HTTPException
+from typing import Optional, Dict, Any
+from datetime import datetime
+
+app = FastAPI()
+
+# נתונים מדומים
+breaking_news = {
+    "2024-07-29": {
+        "09:00": "News at 9 AM",
+        "12:00": "News at 12 PM",
+    },
+    "2024-07-28": {
+        "10:00": "News at 10 AM",
+        "13:00": "News at 1 PM",
+    },
+}
+
+@app.get("/health")
+def health():
+    return {"status": "OK"}
+
+@app.get("/breaking-news")
+def get_breaking_news(date: Optional[str] = None, time: Optional[str] = None) -> Dict[str, Any]:
+    if date and time:
+        news = breaking_news.get(date, {}).get(time)
+        if news:
+            return {"news": news}
+        else:
+            raise HTTPException(status_code=404, detail="News not found for given date and time")
+    elif date:
+        news_for_date = breaking_news.get(date)
+        if news_for_date:
+            return news_for_date
+        else:
+            raise HTTPException(status_code=404, detail="News not found for given date")
+    elif time:
+        news_for_time = {date: news[time] for date, news in breaking_news.items() if time in news}
+        if news_for_time:
+            return news_for_time
+        else:
+            raise HTTPException(status_code=404, detail="News not found for given time")
+    else:
+        return breaking_news

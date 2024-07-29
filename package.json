@@ -1,0 +1,17 @@
+{
+  "name": "data-pipeline-course",
+  "version": "1.0.0",
+  "description": "1. using [website](https://docs.docker.com/engine/install/)\r 2. using brew (for mac)\r     install brew:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serverless": "^3.39.0",
+    "serverless-python-requirements": "^6.1.0",
+    "serverless-wsgi": "^3.0.4"
+  }
+}
