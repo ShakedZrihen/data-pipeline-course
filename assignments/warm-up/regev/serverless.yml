@@ -21,3 +21,10 @@ functions:
 plugins:
   - serverless-python-requirements
   - serverless-offline # for local development
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+  serverless-offline:
+    httpPort: 8000  
+    host: 127.0.0.1
