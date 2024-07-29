@@ -1,6 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from services.breaking_news_crud import breaking_news_get_all, breaking_news_get_filtered
-from services.utils import validate_date, validate_time
+from services.utils import validate_input
+
+date_format = "%d/%m/%Y"
+time_format ="%H:%M"
 
 router = APIRouter()
 
@@ -12,9 +15,12 @@ async def root():
 
 @router.get("/breaking-news")
 async def get_breaking_news(date: str = "", time: str = ""):
-    if not validate_date(date) or not validate_time(time):
+    if not validate_input(date, date_format) or not validate_input(time, time_format):
         raise HTTPException(status_code=400, detail="Invalid input")
     if date or time:
-        breaking_news_get_filtered(date, time)
+        filtered_res = breaking_news_get_filtered(date, time)
+        if not filtered_res:
+            raise HTTPException(status_code=404, detail="Breaking news with those filters doesn't exist")
+        return filtered_res
     else:
         return breaking_news_get_all()
