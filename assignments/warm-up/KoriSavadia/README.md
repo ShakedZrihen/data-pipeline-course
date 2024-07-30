@@ -8,7 +8,8 @@ pip install pytest httpx
 
 2. Set-up serverless framework and plugins:
 npm install -g serverless
-npm install -g npm
+npm install -g npm 
+npm init -y
 npm install serverless-python-requirements
 npm install serverless-python-requirements --save-dev
 
