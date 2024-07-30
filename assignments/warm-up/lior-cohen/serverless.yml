@@ -1,0 +1,24 @@
+org: liorc3
+app: scraper
+service: lior-cohen
+
+provider:
+  name: aws
+  runtime: python3.11
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
