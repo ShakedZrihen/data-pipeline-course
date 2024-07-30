@@ -1,27 +1,26 @@
-service: ynet-breaking-news-api
+service: breaking-news-api
 
 provider:
   name: aws
   runtime: python3.8
+  stage: dev
   region: us-east-1
 
 functions:
   app:
-    handler: handler.main
+    handler: app.handler
     events:
+      - http:
+          path: /
+          method: any
       - http:
           path: /{proxy+}
           method: any
 
 plugins:
-  - serverless-python-requirements
+  - serverless-wsgi
 
 custom:
-  pythonRequirements:
-    dockerizePip: true
-
-package:
-  exclude:
-    - node_modules/**
-    - venv/**
-    - __pycache__/**
+  wsgi:
+    app: app.app
+    packRequirements: true

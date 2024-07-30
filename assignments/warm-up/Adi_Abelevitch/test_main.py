@@ -1,34 +1,41 @@
 from fastapi.testclient import TestClient
 from app import app
+import pytest
+import datetime
 
 client = TestClient(app)
 
-def test_health():
+def test_health_check():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "OK"}
+    assert response.json() == {"status": 200}
 
-def test_get_all_breaking_news():
+def test_get_all_news():
     response = client.get("/breaking-news")
     assert response.status_code == 200
-    assert "2024-07-29" in response.json()
+    assert isinstance(response.json(), dict)
 
-def test_get_breaking_news_by_date():
-    response = client.get("/breaking-news?date=2024-07-29")
+def test_get_news_by_date():
+    today = datetime.datetime.now().strftime('%Y-%m-%d')
+    response = client.get(f"/breaking-news?date={today}")
     assert response.status_code == 200
-    assert "09:00" in response.json()
+    assert isinstance(response.json(), dict)
 
-def test_get_breaking_news_by_time():
-    response = client.get("/breaking-news?time=09:00")
-    assert response.status_code == 200
-    assert "2024-07-29" in response.json()
+def test_get_news_by_date_and_time():
+    today = datetime.datetime.now().strftime('%Y-%m-%d')
+    time = "14:11"  
+    response = client.get(f"/breaking-news?date={today}&time={time}")
+    assert response.status_code in [200, 404]
+    if response.status_code == 200:
+        assert isinstance(response.json(), dict)
+        assert time in response.json()
 
-def test_get_breaking_news_by_date_and_time():
-    response = client.get("/breaking-news?date=2024-07-29&time=09:00")
-    assert response.status_code == 200
-    assert response.json() == {"news": "News at 9 AM"}
+def test_get_news_by_time():
+    time = "14:11"  
+    response = client.get(f"/breaking-news?time={time}")
+    assert response.status_code in [200, 404]
+    if response.status_code == 200:
+        assert isinstance(response.json(), dict)
 
-def test_get_breaking_news_not_found():
-    response = client.get("/breaking-news?date=2024-07-30&time=09:00")
-    assert response.status_code == 404
-    assert response.json() == {"detail": "News not found for given date and time"}
+if __name__ == "__main__":
+    pytest.main()

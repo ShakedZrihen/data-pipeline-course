@@ -1,1 +1,1 @@
-DEBUG = True
+DB_FOLDER = ""

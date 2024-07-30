@@ -13,5 +13,6 @@
     "serverless": "^3.39.0",
     "serverless-python-requirements": "^6.1.0",
     "serverless-wsgi": "^3.0.4"
-  }
+  },
+  "devDependencies": {}
 }

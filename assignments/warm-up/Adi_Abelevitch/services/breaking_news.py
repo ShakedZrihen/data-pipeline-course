@@ -1,31 +1,39 @@
-from typing import Optional, Dict, Any
-from fastapi import HTTPException
-from .db import load_news_data, get_all_news_data
+import sys
+import os
+from datetime import datetime
+from services.db import get_breaking_news as fetch_breaking_news
 
-def get_all_breaking_news() -> Dict[str, Any]:
-    return get_all_news_data()
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def get_breaking_news_by_date(date: str) -> Dict[str, Any]:
-    news_for_date = load_news_data(date)
-    if news_for_date:
-        return news_for_date
+def get_breaking_news(date: str = None, time: str = None):
+    data = fetch_breaking_news()
+    if data is None:
+        print("No data fetched from Walla")
+        return None
+    print(f"Fetched data: {data}")
+
+    if date and time:
+        print(f"Searching for date: {date} and time: {time}")
+        if date in data and time in data[date]:
+            return {time: data[date][time]}
+        print(f"Data not found for date: {date} and time: {time}")
+        return None
+    elif date:
+        print(f"Searching for date: {date}")
+        if date in data:
+            return data[date]
+        print(f"Data not found for date: {date}")
+        return None
+    elif time:
+        print(f"Searching for time: {time}")
+        result = {date: news for date, news in data.items() if time in news}
+        if result:
+            return result
+        print(f"Data not found for time: {time}")
+        return None
     else:
-        raise HTTPException(status_code=404, detail="News not found for given date")
+        return data
 
-def get_breaking_news_by_time(time: str) -> Dict[str, Any]:
-    news_for_time = {}
-    all_news_data = get_all_news_data()
-    for date, news_data in all_news_data.items():
-        if time in news_data:
-            news_for_time[date] = news_data[time]
-    if news_for_time:
-        return news_for_time
-    else:
-        raise HTTPException(status_code=404, detail="News not found for given time")
-
-def get_breaking_news_by_date_and_time(date: str, time: str) -> Dict[str, Any]:
-    news_data = load_news_data(date)
-    if time in news_data:
-        return {"news": news_data[time]}
-    else:
-        raise HTTPException(status_code=404, detail="News not found for given date and time")
+if __name__ == "__main__":
+    news = get_breaking_news()
+    print(news)

@@ -1,29 +1,29 @@
-# Ynet Breaking News API
+# Shaki Warm-up
 
-## How to run the code
+## Requirements
 
-1. Install dependencies:
-    ```
+- Python 3.8+
+- Node.js (with NVM for managing versions)
+- Serverless framework
+
+## Setup
+
+1. Install Python requirements:
+
+    ```bash
     pip install -r requirements.txt
     ```
 
-2. Run the server locally:
-    ```
-    uvicorn app:app --reload
+2. Install Serverless (Node) requirements:
+
+    ```bash
+    nvm use 
+    npm install
     ```
 
-3. To deploy the server using Serverless Framework, run:
-    ```
-    serverless deploy
-    ```
+## Running the Application
 
-4. Access the API documentation at:
-    ```
-    <server-endpoint>/docs
-    ```
+### As a Serverless Offline Application
 
-## API Endpoints
-
-- `GET /health`: Check if the API is up.
-- `GET /breaking-news`: Get all breaking news.
-- `GET /breaking-news?date=<date>&time=<time>`: Get breaking news for a specific date and/or time.
+```bash
+./node_modules/.bin/serverless offline start
