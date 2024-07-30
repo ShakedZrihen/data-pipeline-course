@@ -1,2 +1,18 @@
-  provider:
-  service:
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: orbitan
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: orwarup
+service: serverless-fastapi
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements

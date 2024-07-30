@@ -1,42 +1,37 @@
-from fastapi import FastAPI
-import os
-import json
+from fastapi import FastAPI, HTTPException
+from mangum import Mangum
+from services.get_data import Get_Data, query_all, query_date, query_time, query_date_time
 
 app = FastAPI()
-DATA = {}
-
-
-def Get_Data():
-    for json_file in os.listdir("data"):
-        with open(f"data/{json_file}", "r") as file:
-            data = json.load(file)
-            DATA[json_file] = data  # add data to DATA dictionary
 
 
 @app.get("/")
-async def root():
-    return {"message": "new new new"}
+def root():
+    return 200
 
 
 @app.get("/health/")
-async def health():
+def health():
     return {"status": "ok",
             "massage": "200"}
 
 
 @app.get("/breaking-news/")
-async def breaking_news(date=None, time=None):
-    Get_Data()
-    # if date is None and time is not None
-    if date is None and time is not None:
-        return {"message": f"data=----- time={time}"}
-
-    # if time is None and date is not None
-    elif time is None and date is not None:
-        return {"message": f"data={date} time=-----"}
-
-    # if both are not None
-    else:
-        return {"message": "data=----- time=-----"}
+def breaking_news(date=None, time=None):
+    db = Get_Data()
+    if date is not None and time is not None:  # if user send date and time
+        return query_date_time(db, date, time)
+    if date is None and time is not None:  # if user send time
+        return query_time(db, time)
+    elif time is None and date is not None:  # if user send date
+        return query_date(db, date)
+    else:  # if user didnt send
+        return query_all(db)
 
 
+@app.get("/{path_name:path}")
+def catch_all(path_name: str):
+    raise HTTPException(status_code=404, detail=f"{path_name} Not Found")
+
+
+handler = Mangum(app)
