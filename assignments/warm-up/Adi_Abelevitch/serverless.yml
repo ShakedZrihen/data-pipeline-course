@@ -1,26 +1,27 @@
 service: breaking-news-api
+frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: python3.8
-  stage: dev
-  region: us-east-1
+  runtime: python3.11
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
 
 functions:
-  app:
+  api:
     handler: app.handler
     events:
-      - http:
-          path: /
-          method: any
-      - http:
-          path: /{proxy+}
-          method: any
+      - httpApi: '*'
 
 plugins:
-  - serverless-wsgi
+  - serverless-python-requirements
+  - serverless-offline
 
 custom:
-  wsgi:
-    app: app.app
-    packRequirements: true
+  pythonRequirements:
+    dockerizePip: true 

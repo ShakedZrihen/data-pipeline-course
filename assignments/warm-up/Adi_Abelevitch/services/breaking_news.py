@@ -1,39 +1,57 @@
-import sys
-import os
-from datetime import datetime
-from services.db import get_breaking_news as fetch_breaking_news
+from fastapi import HTTPException
+from .db import get_breaking_news as fetch_breaking_news
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+def fetch_news_data():
+    return fetch_breaking_news()
 
-def get_breaking_news(date: str = None, time: str = None):
-    data = fetch_breaking_news()
-    if data is None:
-        print("No data fetched from Ynet")
-        return None
-    print(f"Fetched data: {data}")
-
-    if date and time:
-        print(f"Searching for date: {date} and time: {time}")
-        if date in data and time in data[date]:
-            return {time: data[date][time]}
-        print(f"Data not found for date: {date} and time: {time}")
-        return None
-    elif date:
-        print(f"Searching for date: {date}")
-        if date in data:
-            return data[date]
-        print(f"Data not found for date: {date}")
-        return None
-    elif time:
-        print(f"Searching for time: {time}")
-        result = {date: news for date, news in data.items() if time in news[date]}
-        if result:
-            return result
-        print(f"Data not found for time: {time}")
-        return None
+def get_news_by_date(news_data, date):
+    if date in news_data:
+        return news_data[date]
     else:
-        return data
+        return None
 
-if __name__ == "__main__":
-    news = get_breaking_news()
-    print(news)
+def get_news_by_time(news_data, time):
+    result = {date: news_data[date][time] for date in news_data if time in news_data[date]}
+    if result:
+        return result
+    else:
+        return None
+
+def get_news_by_date_and_time(news_data, date, time):
+    if date in news_data and time in news_data[date]:
+        return {time: news_data[date][time]}
+    else:
+        return None
+
+def format_all_news(news_data):
+    formatted_data = {}
+    for date in news_data:
+        news_from_date = []
+        for news_time in news_data[date]:
+            news_from_date.append({news_time: news_data[date][news_time]})
+        formatted_data[date] = news_from_date
+    return formatted_data
+
+def handle_date_and_time_request(news_data, date, time):
+    result = get_news_by_date_and_time(news_data, date, time)
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=404, detail="News not found for the specified date and time")
+
+def handle_date_request(news_data, date):
+    result = get_news_by_date(news_data, date)
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=404, detail="News not found for the specified date")
+
+def handle_time_request(news_data, time):
+    result = get_news_by_time(news_data, time)
+    if result:
+        return result
+    else:
+        raise HTTPException(status_code=404, detail="News not found for the specified time")
+
+def handle_all_news_request(news_data):
+    return format_all_news(news_data)

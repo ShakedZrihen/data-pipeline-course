@@ -18,7 +18,6 @@ def fetch_news():
             dates = datetime.strptime(hour_tag.attrs['datetime'], '%Y-%m-%dT%H:%M:%S.%fZ')
             hour = dates.hour + 3
             minute = dates.minute
-            # Ensure hours are within 24-hour format
             while hour >= 24:
                 hour -= 24
             formatted_hour = f'{hour:02}:{minute:02}'
