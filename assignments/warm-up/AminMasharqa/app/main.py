@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from .scraper import scrape_ynet
 
 app = FastAPI()
+# this is the same as the previous snippet
 
 @app.get("/health")
 def health_check():
