@@ -1,32 +1,32 @@
 export const genreColors = {
-  Country: "#FFD700", // Gold
-  "Hip Hop": "#FF4500", // OrangeRed
-  "Pop Rock": "#1E90FF", // DodgerBlue
-  Pop: "#FF69B4", // HotPink
-  "R&B": "#8A2BE2", // BlueViolet
-  Alternative: "#7FFF00", // Chartreuse
-  Folk: "#DEB887", // BurlyWood
-  Rock: "#DC143C", // Crimson
-  Electronic: "#00CED1", // DarkTurquoise
-  Reggae: "#FFD700", // Gold
-  Latin: "#FF6347", // Tomato
-  Jazz: "#8B4513", // SaddleBrown
-  Blues: "#0000FF", // Blue
-  Classical: "#DAA520", // GoldenRod
-  Metal: "#2F4F4F", // DarkSlateGray
-  Punk: "#FF8C00", // DarkOrange
-  Soul: "#9400D3", // DarkViolet
-  Funk: "#00FF00", // Lime
-  Gospel: "#D2691E", // Chocolate
-  World: "#FF1493", // DeepPink
-  Opera: "#8B0000", // DarkRed
-  Indie: "#FFB6C1", // LightPink
-  Disco: "#FF00FF" // Magenta
+  Country: "#9cffcd",
+  "Hip Hop": "#ff9cce",
+  "Pop Rock": "#a1f7ea",
+  Pop: "#ff9c9c",
+  "R&B": "#fff9c4",
+  Alternative: "#e6a8ff",
+  Folk: "#9ccfff",
+  Rock: "#ffc99c",
+  Electronic: "#d19cff",
+  Reggae: "#f7ff9c",
+  Latin: "#72cc98",
+  Jazz: "#cc7299",
+  Blues: "#72cc98",
+  Classical: "#cc7299",
+  Metal: "#a1f7ea",
+  Punk: "#ff9c9c",
+  Soul: "#fff9c4",
+  Funk: "#e6a8ff",
+  Gospel: "#9ccfff",
+  World: "#ffc99c",
+  Opera: "#d19cff",
+  Indie: "#f7ff9c",
+  Disco: "#9cffcd"
 };
 
 export const artistTypeColors = {
-  Band: "#FFD700", // Gold
-  Male: "#FF4500", // OrangeRed
-  Female: "#1E90FF", // DodgerBlue
-  unknown: "#8A2BE2" // BlueViolet
+  Band: "#9cffcd", // Mint Green
+  Male: "#ff9cce", // Pink
+  Female: "#a1f7ea", // Soft Teal
+  unknown: "#e6a8ff" // Lavender
 };
