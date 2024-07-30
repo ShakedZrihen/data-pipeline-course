@@ -16,13 +16,13 @@ def scrape(url):
     for news in breaking_news:
         content = news.find('div', class_='title').text
         time_str = news.find('time').get('datetime')
-        time = parser.parse(time_str).strftime('%H_%M_%S')
+        time = parser.parse(time_str).strftime('%H:%M:%S')
         news_object[time] = content
 
 
 if __name__ == '__main__':
     scrape('https://www.ynet.co.il/news/category/184')
-    file_name = datetime.today().strftime('%Y_%m_%d')
+    file_name = datetime.today().strftime('%Y-%m-%d')
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(script_dir, f'{file_name}.json')
     with open(file_path, 'w', encoding='utf-8') as f:
