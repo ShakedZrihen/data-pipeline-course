@@ -1,8 +1,8 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: wwx2604
 # "app" enables Serverless Framework Dashboard features and sharing them with other Services.
-app: moransin
-service: MoranSin
+app: breaking-news
+service: serverless-MoranSin
 
 provider:
   name: aws
@@ -13,6 +13,6 @@ functions:
     handler: app.handler
     events:
       - httpApi: '*'
-
+      
 plugins:
   - serverless-python-requirements
