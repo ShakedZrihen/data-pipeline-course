@@ -1,0 +1,75 @@
+# -*- mode: yaml -*-
+
+manifest:
+  version: 1.0
+
+automations:
+  estimated_time_to_review:
+    if:
+      - true
+    run:
+      - action: add-label@v1
+        args:
+          label: "{{ calc.etr }} min review"
+          color: {{ colors.red if (calc.etr >= 20) else ( colors.yellow if (calc.etr >= 5) else colors.green ) }}
+
+  add_shaked_as_a_reviewer:
+    if:
+      - true
+    run:
+      - action: add-reviewers@v1
+        args:
+          reviewers: [ShakedZrihen]
+
+  missing_requirements:
+    if:
+      - {{ not has.requirements }}
+    run:
+      - action: request-changes@v1
+        args:
+          comment: "requirement.txt file is missing"
+      - action: add-label@v1
+        args:
+          label: missing-requirements
+          color: {{ colors.red }}
+
+  missing_serverless:
+    if:
+      - {{ not has.serverless }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-serverless
+          color: {{ colors.red }}
+
+  missing_test:
+    if:
+      - {{ not has.test }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-test
+          color: {{ colors.red }}
+
+  missing_readme:
+    if:
+      - {{ not has.readme }}
+    run:
+      - action: add-label@v1
+        args:
+          label: missing-readme
+          color: {{ colors.red }}
+  
+calc:
+  etr: {{ branch | estimatedReviewTime }}
+
+has:
+  requirements: {{ files | match(regex=r/warm-up\/.*\/requrements.*/) | some }}
+  serverless: {{ files | match(regex=r/warm-up\/.*\/serverless.*/) | some }}
+  readme: {{ files | match(regex=r/warm-up\/.*\/README.*/) | some }}
+  test: {{ files | match(regex=r/warm-up\/.*\/test_.*/) | some }}
+
+colors:
+  red: 'b60205'
+  yellow: 'fbca04'
+  green: '0e8a16'
