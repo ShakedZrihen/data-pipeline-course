@@ -1,0 +1,26 @@
+service: fastapi-ynet
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  app:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+package:
+  individually: true
