@@ -25,17 +25,11 @@ def breaking_news(date: Optional[str] = None, time: Optional[str] = None):
 
     if date and time:
         print(f"Searching for date: {date} and time: {time}")
-        if date in news_data:
-            print(f"Found data for date: {date}")
-            print(f"Data for date: {news_data[date]}")
-            if time in news_data[date]:
-                print(f"Found data for time: {time}")
-                return {time: news_data[date][time]}
-            else:
-                print(f"Time {time} not found in data for date {date}")
+        if date in news_data and time in news_data[date]:
+            return {time: news_data[date][time]}
         else:
-            print(f"Date {date} not found in data")
-        raise HTTPException(status_code=404, detail="News not found for the specified date and time")
+            print(f"Date {date} or time {time} not found in data")
+            raise HTTPException(status_code=404, detail="News not found for the specified date and time")
     elif date:
         print(f"Searching for date: {date}")
         if date in news_data:
@@ -44,7 +38,7 @@ def breaking_news(date: Optional[str] = None, time: Optional[str] = None):
         raise HTTPException(status_code=404, detail="News not found for the specified date")
     elif time:
         print(f"Searching for time: {time}")
-        result = {date: news for date, news in news_data.items() if time in news}
+        result = {date: news_data[date][time] for date in news_data if time in news_data[date]}
         if result:
             return result
         print(f"Data not found for time: {time}")

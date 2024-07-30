@@ -1,29 +1,16 @@
-# Shaki Warm-up
+# Breaking News API
 
-## Requirements
+This project provides an API to fetch breaking news from Ynet in real-time. The API allows you to get the latest breaking news, filter by date and time, and perform health checks to ensure the server is running correctly.
 
-- Python 3.8+
-- Node.js (with NVM for managing versions)
-- Serverless framework
+## Prerequisites
 
-## Setup
+- Python 3.8 or higher
+- Node.js and npm (for serverless deployment)
 
-1. Install Python requirements:
+## Installation
 
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-2. Install Serverless (Node) requirements:
-
-    ```bash
-    nvm use 
-    npm install
-    ```
-
-## Running the Application
-
-### As a Serverless Offline Application
+### 1. Clone the repository
 
 ```bash
-./node_modules/.bin/serverless offline start
+git clone <repository-url>
+cd <repository-directory>

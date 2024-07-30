@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def get_breaking_news(date: str = None, time: str = None):
     data = fetch_breaking_news()
     if data is None:
-        print("No data fetched from Walla")
+        print("No data fetched from Ynet")
         return None
     print(f"Fetched data: {data}")
 
@@ -26,7 +26,7 @@ def get_breaking_news(date: str = None, time: str = None):
         return None
     elif time:
         print(f"Searching for time: {time}")
-        result = {date: news for date, news in data.items() if time in news}
+        result = {date: news for date, news in data.items() if time in news[date]}
         if result:
             return result
         print(f"Data not found for time: {time}")

@@ -5,23 +5,28 @@ import requests
 from bs4 import BeautifulSoup
 
 def fetch_news():
-    url = 'https://news.walla.co.il/breaking'
+    url = 'https://www.ynet.co.il/news/category/184'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    breaking_news = soup.find_all('h1', class_='breaking-item-title')
+    breaking_news = soup.find_all('div', class_='titleRow')
     formatted_data = {}
-    todays_date = datetime.now().strftime('%Y-%m-%d') 
+    todays_date = datetime.now().strftime('%Y-%m-%d')
     for news in breaking_news:
-        hour_span = news.find('span', class_='red-time')
-        if hour_span:
-            hour = hour_span.text.strip()
-            content = [text for text in news.contents if isinstance(text, str)]
-            if content:
-                if todays_date not in formatted_data:
-                    formatted_data[todays_date] = {}
-                formatted_data[todays_date][hour] = content[-1].strip()
-    
+        hour_tag = news.find('time', class_='DateDisplay')
+        if hour_tag and 'datetime' in hour_tag.attrs:
+            dates = datetime.strptime(hour_tag.attrs['datetime'], '%Y-%m-%dT%H:%M:%S.%fZ')
+            hour = dates.hour + 3
+            minute = dates.minute
+            # Ensure hours are within 24-hour format
+            while hour >= 24:
+                hour -= 24
+            formatted_hour = f'{hour:02}:{minute:02}'
+            content = news.get_text(strip=True)
+            if todays_date not in formatted_data:
+                formatted_data[todays_date] = {}
+            formatted_data[todays_date][formatted_hour] = content
+
     return formatted_data
 
 def save_content_to_file(content, path='.'):
