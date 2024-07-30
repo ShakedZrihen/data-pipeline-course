@@ -1,5 +1,4 @@
 from datetime import datetime
-from fastapi import HTTPException
 
 def validate_input(input, input_format):
     if input:
@@ -15,14 +14,17 @@ def validate_input(input, input_format):
 def filter_data(data, date, hour):
     filtered_data = {}
     for news_date in data:
-        if date and news_date == date:
+        if date and not hour and news_date == date:
             filtered_data = {news_date: data[news_date]}
             
-        news_list = data[news_date][0]
-        if hour and any(news == hour for news in news_list):
-            if date:
-                filtered_data = news_list[hour]
-            else:
-                filtered_data = {news_date : news_list[hour]}
+        if hour:    
+            news_list = data[news_date]
+            for news_obj in news_list:
+                if hour in news_obj:
+                    if date and news_date == date:
+                        filtered_data = news_obj[hour]
+                    else:
+                        filtered_data = {news_date : news_obj[hour]}
+
     return filtered_data
                                         

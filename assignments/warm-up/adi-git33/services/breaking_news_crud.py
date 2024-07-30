@@ -1,4 +1,4 @@
-from db.db import Database
+from scraper.scraper_db import Database
 from fastapi import HTTPException
 from services.utils import filter_data
 db = Database()
