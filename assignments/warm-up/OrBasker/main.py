@@ -1,6 +1,6 @@
 import os
 import datetime
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Depends
 from typing import Optional, Dict
 from mangum import Mangum
 from fastapi.responses import RedirectResponse
@@ -9,19 +9,21 @@ from services.news_generator import scrape_news_ynet, save_news, generate_random
 
 
 class NewsResponse(BaseModel):
-    news: Dict[str, Dict[str, str]]
+    news: Dict[str, str]
 
 
-# Example news data for documentation
 news_example = {
     "2024-07-30": {"08:00": "News at 8 AM", "12:00": "News at noon"},
     "2024-07-31": {"09:00": "News at 9 AM"},
 }
 
-news_data = scrape_news_ynet()
-save_news(news_data)
-
 app = FastAPI()
+
+
+def get_news_data():
+    news_data = scrape_news_ynet()
+    save_news(news_data)
+    return news_data
 
 
 @app.get("/", include_in_schema=False)
@@ -46,9 +48,10 @@ def health_check():
     },
 )
 def get_breaking_news(
-    date: Optional[datetime.date] = Query(None, example="2024-07-31"),
-    start_time: Optional[datetime.time] = Query(None, example="09:00"),
-    end_time: Optional[datetime.time] = Query(None, example="12:00"),
+    date: Optional[datetime.date] = Query(None, examples="2024-07-31"),
+    start_time: Optional[datetime.time] = Query(None, examples="09:00"),
+    end_time: Optional[datetime.time] = Query(None, examples="12:00"),
+    news_data: Dict[str, Dict[str, str]] = Depends(get_news_data),
 ) -> NewsResponse:
     date_str = (
         date.strftime("%Y-%m-%d")
@@ -66,7 +69,7 @@ def get_breaking_news(
                 filtered_news[news_time] = news_title
 
         if filtered_news:
-            return NewsResponse(news={date_str: filtered_news})
+            return NewsResponse(news=filtered_news)
         else:
             raise HTTPException(
                 status_code=404, detail="News not found for the specified time range"
