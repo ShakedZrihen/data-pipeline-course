@@ -24,10 +24,9 @@ async def get_news(date: Optional[str] = None, time: Optional[str] = None):
     
     data = get_all_news()
     formatted_data = {}
-    # print("date or time", date , time)
     if date:
         day_data = data[date]
-        if date and time:
+        if time:
             for news in day_data:
                 if time in news:
                     formatted_data.update(news)
