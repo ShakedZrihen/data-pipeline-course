@@ -5,14 +5,15 @@ data = {}
 
 
 def init():
-    directory = os.path.abspath("data")
-    for filename in os.listdir(directory):
-        if filename.endswith(".json"):
-            f = os.path.join(directory, filename)
-            with open(f, encoding='utf-8') as file:
-                file_data = json.load(file)
-                date = os.path.splitext(filename)[0]
-                data[date] = file_data
+    print("HEEEEEERE!!!!!")
+    # directory = os.path.abspath("data")
+    # for filename in os.listdir(directory):
+    #     if filename.endswith(".json"):
+    #         f = os.path.join(directory, filename)
+    #         with open(f, encoding='utf-8') as file:
+    #             file_data = json.load(file)
+    #             date = os.path.splitext(filename)[0]
+    #             data[date] = file_data
     return data
 
 
@@ -49,7 +50,7 @@ def normalize_data(reports):
     return normalized
 
 
-init()
+# init()
 # print(get_all())
 # print(get_by_date("2024-07-30"))
 # print(get_by_time("17:04:55"))

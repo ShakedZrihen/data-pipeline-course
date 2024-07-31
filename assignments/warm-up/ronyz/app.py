@@ -1,9 +1,10 @@
+from mangum import Mangum
 from fastapi import FastAPI, Response, HTTPException
 from services.controller import get_breaking_news, get_news_by_time, get_news_by_date_and_time, get_news_by_date
 
 app = FastAPI()
 
-
+print("over here")
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -29,3 +30,6 @@ async def breaking_news(res: Response, date: str | None = None, time: str | None
         res.status_code = e.status_code
         res.body = e.detail
         return {"error": e.detail}
+
+
+handler = Mangum(app)
