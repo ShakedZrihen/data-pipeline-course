@@ -26,7 +26,7 @@ def query_all(db):
 def query_date(db, date):
     if date in db:
         return db[date]
-    raise HTTPException(status_code=404, detail=404)
+    raise HTTPException(status_code=404, detail="404, Not Found")
 
 
 def query_time(db, time):
@@ -36,11 +36,11 @@ def query_time(db, time):
         if time in db[temp_date]:
             temp_data[time] = db[temp_date][time]
     if len(temp_data) == 0:
-        raise HTTPException(status_code=404, detail=404)
+        raise HTTPException(status_code=404, detail="404, Not Found")
     return temp_data
 
 
 def query_date_time(db, date, time):
     if date in db and time in db[date]:
         return db[date][time]
-    raise HTTPException(status_code=404, detail=404)
+    raise HTTPException(status_code=404, detail="404, Not Found")

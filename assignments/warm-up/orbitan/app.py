@@ -7,16 +7,16 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return 200
+    return {"status": 200}
 
 
-@app.get("/health/")
+@app.get("/health")
 def health():
     return {"status": "ok",
             "massage": "200"}
 
 
-@app.get("/breaking-news/")
+@app.get("/breaking-news", status_code=200)
 def breaking_news(date=None, time=None):
     db = Get_Data()
     if date is not None and time is not None:  # if user send date and time

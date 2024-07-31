@@ -8,6 +8,12 @@ provider:
   name: aws
   runtime: python3.9
 
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+
 functions:
   api:
     handler: app.handler
@@ -16,3 +22,4 @@ functions:
 
 plugins:
   - serverless-python-requirements
+  - serverless-offline

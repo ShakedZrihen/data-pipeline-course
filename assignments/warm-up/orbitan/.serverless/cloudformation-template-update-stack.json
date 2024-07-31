@@ -74,7 +74,7 @@
     "ApiLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/serverless-fastapi-prod-api"
+        "LogGroupName": "/aws/lambda/serverless-fastapi-dev-api"
       }
     },
     "IamRoleLambdaExecution": {
@@ -103,7 +103,7 @@
                 "-",
                 [
                   "serverless-fastapi",
-                  "prod",
+                  "dev",
                   "lambda"
                 ]
               ]
@@ -120,7 +120,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-fastapi-prod*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-fastapi-dev*:*"
                     }
                   ]
                 },
@@ -131,7 +131,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-fastapi-prod*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-fastapi-dev*:*:*"
                     }
                   ]
                 }
@@ -145,7 +145,7 @@
             "-",
             [
               "serverless-fastapi",
-              "prod",
+              "dev",
               {
                 "Ref": "AWS::Region"
               },
@@ -162,11 +162,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-fastapi/prod/1722376594131-2024-07-30T21:56:34.131Z/serverless-fastapi.zip"
+          "S3Key": "serverless/serverless-fastapi/dev/1722433411122-2024-07-31T13:43:31.122Z/serverless-fastapi.zip"
         },
         "Handler": "app.handler",
         "Runtime": "python3.9",
-        "FunctionName": "serverless-fastapi-prod-api",
+        "FunctionName": "serverless-fastapi-dev-api",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -180,20 +180,20 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionH3SPOYyyHahQ684j8G7OwCdrsD2XiiGiLL67ZT44Tw": {
+    "ApiLambdaVersionCbbqrbaZaXNPWjZjUdoWes4nBopzotYN2NLZcW6WrZ4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "jeUICVLMfAo7ckHYbCJwTqkSOrRO6m9j79CxxoagU2g="
+        "CodeSha256": "1rQFZW6kmiVOo9kOAcO/Ap3S9EpYREHTpRbGi+bNT6Q="
       }
     },
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "prod-serverless-fastapi",
+        "Name": "dev-serverless-fastapi",
         "ProtocolType": "HTTP"
       }
     },
@@ -292,16 +292,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-serverless-fastapi-prod-ServerlessDeploymentBucketName"
+        "Name": "sls-serverless-fastapi-dev-ServerlessDeploymentBucketName"
       }
     },
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionH3SPOYyyHahQ684j8G7OwCdrsD2XiiGiLL67ZT44Tw"
+        "Ref": "ApiLambdaVersionCbbqrbaZaXNPWjZjUdoWes4nBopzotYN2NLZcW6WrZ4"
       },
       "Export": {
-        "Name": "sls-serverless-fastapi-prod-ApiLambdaFunctionQualifiedArn"
+        "Name": "sls-serverless-fastapi-dev-ApiLambdaFunctionQualifiedArn"
       }
     },
     "HttpApiId": {
@@ -310,7 +310,7 @@
         "Ref": "HttpApi"
       },
       "Export": {
-        "Name": "sls-serverless-fastapi-prod-HttpApiId"
+        "Name": "sls-serverless-fastapi-dev-HttpApiId"
       }
     },
     "HttpApiUrl": {
@@ -335,7 +335,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-serverless-fastapi-prod-HttpApiUrl"
+        "Name": "sls-serverless-fastapi-dev-HttpApiUrl"
       }
     }
   }
