@@ -29,7 +29,7 @@ def extract_breaking_news(
     if date and not time:
         filtered_news = {time: news for time, news in news_data.items() if date in time}
         if filtered_news:
-            return {time: filtered_news}
+            return filtered_news
         else:
             return {"error": "No news found for the specified date"}
 

@@ -183,7 +183,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/serverless-fastapi/dev/1722418541022-2024-07-31T09:35:41.022Z/serverless-fastapi.zip"
+                        "S3Key": "serverless/serverless-fastapi/dev/1722419488158-2024-07-31T09:51:28.158Z/serverless-fastapi.zip"
                       },
                       "Handler": "app.handler",
                       "Runtime": "python3.9",
@@ -201,14 +201,14 @@
                       "ApiLogGroup"
                     ]
                   },
-                  "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs": {
+                  "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "ApiLambdaFunction"
                       },
-                      "CodeSha256": "9ZSXEEECIdojFlw1BaGb7Tsb8JB6B4LwJJI0ctErx1o="
+                      "CodeSha256": "7fBp2yx5z1eV0gwVTLTVB1BgqJpjnQCYwEA/g3YdHD4="
                     }
                   },
                   "HttpApi": {
@@ -319,7 +319,7 @@
                   "ApiLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs"
+                      "Ref": "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg"
                     },
                     "Export": {
                       "Name": "sls-serverless-fastapi-dev-ApiLambdaFunctionQualifiedArn"
@@ -460,7 +460,7 @@
                 "timeout": 6,
                 "runtime": "python3.9",
                 "vpc": {},
-                "versionLogicalId": "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs"
+                "versionLogicalId": "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg"
               }
             },
             "plugins": [
@@ -656,7 +656,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/serverless-fastapi/dev/1722418541022-2024-07-31T09:35:41.022Z/serverless-fastapi.zip"
+                  "S3Key": "serverless/serverless-fastapi/dev/1722419488158-2024-07-31T09:51:28.158Z/serverless-fastapi.zip"
                 },
                 "Handler": "app.handler",
                 "Runtime": "python3.9",
@@ -674,14 +674,14 @@
                 "ApiLogGroup"
               ]
             },
-            "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs": {
+            "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApiLambdaFunction"
                 },
-                "CodeSha256": "9ZSXEEECIdojFlw1BaGb7Tsb8JB6B4LwJJI0ctErx1o="
+                "CodeSha256": "7fBp2yx5z1eV0gwVTLTVB1BgqJpjnQCYwEA/g3YdHD4="
               }
             },
             "HttpApi": {
@@ -792,7 +792,7 @@
             "ApiLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs"
+                "Ref": "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg"
               },
               "Export": {
                 "Name": "sls-serverless-fastapi-dev-ApiLambdaFunctionQualifiedArn"
@@ -933,7 +933,7 @@
           "timeout": 6,
           "runtime": "python3.9",
           "vpc": {},
-          "versionLogicalId": "ApiLambdaVersionZL7qJeReO8wpoqtNyL31wJJ71TI1cSMwhsV3dBbRDgs"
+          "versionLogicalId": "ApiLambdaVersionHxWSelE02R0YFW0uma4iWqRq1gITmg1gL9idecwD6hg"
         }
       },
       "plugins": [
@@ -947,7 +947,7 @@
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "23789ea600e7fabc80812d37fe36d597",
+    "machineId": "a970796891be4c0bc7953e1f3ee35585",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "d92da195-799a-4dac-a0f5-2fd5c6a9d6ad",
@@ -974,12 +974,12 @@
     "serviceProviderAwsCfStackName": "serverless-fastapi-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:767397776565:stack/serverless-fastapi-dev/29ac1780-4db8-11ef-b4de-0affe235dcfd",
     "serviceProviderAwsCfStackCreated": "2024-07-29T14:38:04.166Z",
-    "serviceProviderAwsCfStackUpdated": "2024-07-31T09:36:12.274Z",
+    "serviceProviderAwsCfStackUpdated": "2024-07-31T09:52:06.896Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ApiLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:767397776565:function:serverless-fastapi-dev-api:4",
+        "OutputValue": "arn:aws:lambda:us-east-1:767397776565:function:serverless-fastapi-dev-api:5",
         "Description": "Current Lambda function version",
         "ExportName": "sls-serverless-fastapi-dev-ApiLambdaFunctionQualifiedArn"
       },
