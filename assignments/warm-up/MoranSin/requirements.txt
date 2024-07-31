@@ -1,6 +1,7 @@
 fastapi==0.89.1
 mangum==0.17.0
 requests
-BeautifulSoup
+uvicorn
+BeautifulSoup4
 datetime
 dateutil.parser
