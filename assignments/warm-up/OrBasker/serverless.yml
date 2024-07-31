@@ -1,0 +1,27 @@
+service: orbasker-breaking-new-api
+
+provider:
+  name: aws
+  runtime: python3.11
+
+package:
+  exclude:
+    - venv/**
+    - .git/**
+    - .serverless/**
+    - node_modules/**
+    - __pycache__/**
+
+
+
+functions:
+  api:
+    handler: main.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+
