@@ -25,5 +25,5 @@ fastapi dev app.py
 Test - run the following command:
     
 ```bash
-pytest
+pytest test.py
 ```
