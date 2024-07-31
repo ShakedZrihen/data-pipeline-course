@@ -10,6 +10,10 @@
   "author": "ShakedZrihen",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1665.0",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

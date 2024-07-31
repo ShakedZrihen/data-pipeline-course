@@ -10,8 +10,10 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN npm i
 
+RUN npm install -g nodemon
+
 # Make port 8000 available to the world outside this container
 EXPOSE 3000
 
 # Run server
-CMD ["node", "server.js"]
+CMD ["nodemon", "server.js"]
