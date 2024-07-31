@@ -48,9 +48,9 @@ def health_check():
     },
 )
 def get_breaking_news(
-    date: Optional[datetime.date] = Query(None, examples="2024-07-31"),
-    start_time: Optional[datetime.time] = Query(None, examples="09:00"),
-    end_time: Optional[datetime.time] = Query(None, examples="12:00"),
+    date: Optional[datetime.date] = Query(None, example="2024-07-31"),
+    start_time: Optional[datetime.time] = Query(None, example="09:00"),
+    end_time: Optional[datetime.time] = Query(None, example="12:00"),
     news_data: Dict[str, Dict[str, str]] = Depends(get_news_data),
 ) -> NewsResponse:
     date_str = (
