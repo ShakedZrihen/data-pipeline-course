@@ -1,62 +1,26 @@
-# Ynet API
+# Nave Warm-up
 
-## Description
-This is a simple web API built with FastAPI that exposes breaking news data from Ynet. The API is deployed as an AWS Lambda function using the Serverless Framework.
+1. install python requirements
 
-## Installation
+```bash
+pip install -r requirements.txt
+```
 
-1. Clone the repository:
-    ```bash
-    git clone <repository-url>
-    cd ynet_api
-    ```
+2. install serverless (node) requirements
 
-2. Create and activate a virtual environment:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
+```bash
+nvm use # to config the specific node version
+npm i
+```
 
-3. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. run it as serverless-offline application:
 
-## Running Locally
+```bash
+./node_modules/.bin/serverless offline start
+```
 
-1. Start the FastAPI server locally:
-    ```bash
-    uvicorn main:app --reload
-    ```
+or run it as a stand-alone server
 
-2. The API will be available at `http://127.0.0.1:8000`
-
-## Testing
-
-1. Install pytest:
-    ```bash
-    pip install pytest
-    ```
-
-2. Run the tests:
-    ```bash
-    pytest
-    ```
-
-## Deployment
-
-1. Install Serverless Framework:
-    ```bash
-    npm install -g serverless
-    ```
-
-2. Deploy the application:
-    ```bash
-    serverless deploy
-    ```
-
-3. The API will be available at the endpoint provided by Serverless.
-
-## API Documentation
-
-Swagger documentation is available at `<server-endpoint>/docs`.
+```bash
+uvicorn app:app --reload
+```
