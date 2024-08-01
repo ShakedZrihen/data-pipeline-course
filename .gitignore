@@ -5,3 +5,5 @@ assignments/final-project/shaked/*
 **/node_modules/
 **/db/
 **/.idea/
+**/.pytest_cache/
+**/.serverless/
