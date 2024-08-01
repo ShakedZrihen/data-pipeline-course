@@ -1,0 +1,4 @@
+fastapi
+mangum
+requests
+beautifulsoup4
