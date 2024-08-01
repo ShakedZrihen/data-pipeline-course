@@ -4,6 +4,8 @@ import useWorldMapData from "./useWorldMapData";
 import { artistTypeColors } from "./featureColors";
 import Tooltip from "@mui/material/Tooltip";
 import { Fragment } from "react";
+import CountryModal from "../CountryModal/CountryModal";
+import useModalProps from "../CountryModal/useModalProps";
 
 const StyledComposableMap = styled(ComposableMap)`
   width: 100%;
@@ -12,6 +14,7 @@ const StyledComposableMap = styled(ComposableMap)`
 
 const WorldMap = () => {
   const { topSongFeaturesByCountry } = useWorldMapData();
+  const modalProps = useModalProps();
 
   if (!topSongFeaturesByCountry) {
     return null;
@@ -36,10 +39,11 @@ const WorldMap = () => {
                 <Fragment key={geo.rsmKey}>
                   <Tooltip title={songData?.genre ? `${country}-${songData?.genre}` : "No data"}>
                     <Geography
+                      onClick={modalProps.openModal}
                       geography={geo}
                       style={{
                         default: geoStyle,
-                        hover: geoStyle,
+                        hover: { ...geoStyle, cursor: "pointer" },
                         pressed: geoStyle
                       }}
                     />
@@ -50,6 +54,7 @@ const WorldMap = () => {
           }
         </Geographies>
       </StyledComposableMap>
+      <CountryModal {...modalProps} />
     </>
   );
 };
