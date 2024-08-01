@@ -1,0 +1,74 @@
+services:
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+  sqs-create:
+    image: infrastructureascode/aws-cli:latest
+    container_name: sqs-create
+    links:
+      - sqs
+    entrypoint: sh
+    volumes:
+      - ./:/project
+      - ./create-queues.sh:/project/create-queues.sh:ro
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    command: " ./create-queues.sh"
+  backend:
+    build:
+      context: .
+    privileged: true
+    working_dir: /app
+    ports:
+      - '8000:3000'
+    container_name: backend-api
+    volumes:
+      - .:/app
+    depends_on:
+      - sqs
+      - sqs-create
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+
+
+# list all queues
+# aws --endpoint-url=http://localhost:9324 --region=us-west-1 sqs list-queues
+
+# aws --endpoint-url=http://localhost:9324 --region=us-west-1 sqs receive-message --queue-url=http://localhost:9324/000000000000/gitstream-actions-gitlab-q
+
+
+# version: '3.8'
+
+# services:
+#   postgres:
+#     image: postgres:latest
+#     container_name: postgres
+#     environment:
+#       POSTGRES_USER: user
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: mydatabase
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres-data:/var/lib/postgresql/data
+
+#   sqs:
+#     image: softwaremill/elasticmq:latest
+#     container_name: sqs
+#     ports:
+#       - '8000:3000'
+#     volumes:
+#       - ./elasticmq.conf:/opt/elasticmq.conf
+
+# volumes:
+#   postgres-data:
