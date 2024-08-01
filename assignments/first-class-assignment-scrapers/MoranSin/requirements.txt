@@ -1,0 +1,4 @@
+requests
+BeautifulSoup
+datetime
+dateutil.parser
