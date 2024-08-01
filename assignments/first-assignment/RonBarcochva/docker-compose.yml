@@ -1,10 +1,17 @@
-# Use postgres/example user/password credentials
-version: '3.9'
-
 services:
 
+  lambda-crud:
+    build:
+      context: ./lambda-crud
+      dockerfile: Dockerfile
+    container_name: lambda-crud
+    ports:
+      - '3001:3000'
+
   db:
-    image: postgres-users
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
     restart: always
     environment:
       POSTGRES_PASSWORD: example
@@ -14,3 +21,59 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./sqs/elasticmq.conf:/opt/elasticmq.conf
+
+  sqs-create:
+    image: infrastructureascode/aws-cli:latest
+    container_name: sqs-create
+    links:
+      - sqs
+    entrypoint: sh
+    volumes:
+      - ./:/project
+      - ./sqs/create-queues.sh:/project/create-queues.sh:ro
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    command: " ./create-queues.sh"
+
+  lambda-scraper:
+    build:
+      context: ./lambda-scraper
+      dockerfile: Dockerfile
+    container_name: lambda-scraper
+    ports:
+      - '3002:3000'
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+      - sqs-create
+
+  lambda-processor:
+    build:
+      context: ./lambda-processor
+      dockerfile: Dockerfile
+    container_name: lambda-processor
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+      - sqs-create
+
+
