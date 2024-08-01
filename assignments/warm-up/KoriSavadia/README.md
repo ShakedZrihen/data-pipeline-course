@@ -1,6 +1,6 @@
-# Warm Up - Readme:
+# Warm Up and Docker assignment - Readme:
 
-
+# Run: Warm up assignment
 1. Install Python packages:
 pip install fastapi
 pip install -r requirements.txt
@@ -33,3 +33,9 @@ http://localhost:3000/breaking-news?date=2024-07-30
 http://localhost:3000/breaking-news?time=08:00
 http://localhost:3000/breaking-news?date=2024-07-30&time=08:00
 change manually date and time as desire. 
+
+
+# Run: Docker for 2nd class assignment 
+1. docker build -t kori-image
+2. docker run -p 3000:3000 kori-image
+3. open explorer and write: http://localhost:3000/breaking-news
