@@ -5,7 +5,7 @@ from typing import Optional, Dict
 from mangum import Mangum
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
-from services.news_generator import scrape_news_ynet, save_news, generate_random_news
+from services.db import create_latest_news, get_latest_news, get_latest_news_by_date
 
 
 class NewsResponse(BaseModel):
@@ -20,10 +20,11 @@ news_example = {
 app = FastAPI()
 
 
+create_latest_news()
+
+
 def get_news_data():
-    news_data = scrape_news_ynet()
-    save_news(news_data)
-    return news_data
+    return get_latest_news()
 
 
 @app.get("/", include_in_schema=False)
@@ -53,28 +54,58 @@ def get_breaking_news(
     end_time: Optional[datetime.time] = Query(None, example="12:00"),
     news_data: Dict[str, Dict[str, str]] = Depends(get_news_data),
 ) -> NewsResponse:
-    date_str = (
-        date.strftime("%Y-%m-%d")
-        if date
-        else datetime.datetime.now().strftime("%Y-%m-%d")
-    )
+    if date:
+        date_str = f'{date.strftime("%Y-%m-%d")}.json'
+        if date_str not in news_data:
+            raise HTTPException(
+                status_code=404, detail="News not found for the specified date"
+            )
+        filtered_news = {
+            news_time: news_title
+            for news_time, news_title in news_data[date_str].items()
+            if (
+                (
+                    start_time is None
+                    or datetime.datetime.strptime(news_time, "%H:%M").time()
+                    >= start_time
+                )
+                and (
+                    end_time is None
+                    or datetime.datetime.strptime(news_time, "%H:%M").time() <= end_time
+                )
+            )
+        }
 
-    if date_str in news_data:
-        filtered_news = {}
-        for news_time, news_title in news_data[date_str].items():
-            news_time_obj = datetime.datetime.strptime(news_time, "%H:%M").time()
-            if (start_time is None or news_time_obj >= start_time) and (
-                end_time is None or news_time_obj <= end_time
-            ):
-                filtered_news[news_time] = news_title
-
-        if filtered_news:
-            return NewsResponse(news=filtered_news)
-        else:
+        if not filtered_news:
             raise HTTPException(
                 status_code=404, detail="News not found for the specified time range"
             )
-    raise HTTPException(status_code=404, detail="News not found for the specified date")
+    else:
+        filtered_news = {
+            f"{date_str} {news_time}": news_title
+            for date_str, news_items in news_data.items()
+            for news_time, news_title in news_items.items()
+            if (
+                (
+                    start_time is None
+                    or datetime.datetime.strptime(news_time, "%H:%M").time()
+                    >= start_time
+                )
+                and (
+                    end_time is None
+                    or datetime.datetime.strptime(news_time, "%H:%M").time() <= end_time
+                )
+            )
+        }
+
+        if not filtered_news:
+            filtered_news = {
+                f"{date_str} {news_time}": news_title
+                for date_str, news_items in news_data.items()
+                for news_time, news_title in news_items.items()
+            }
+
+    return NewsResponse(news=filtered_news)
 
 
 @app.get("/generate-news")
