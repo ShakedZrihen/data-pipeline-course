@@ -1,5 +1,3 @@
-# Shaki Warm-up
-
 1. install python requirements
 
 ```bash
@@ -9,7 +7,6 @@ pip install -r requirements.txt
 2. install serverless (node) requirements
 
 ```bash
-nvm use # to config the specific node version
 npm i
 ```
 
@@ -19,8 +16,8 @@ npm i
 ./node_modules/.bin/serverless offline start
 ```
 
-or run it as a stand-alone server
+4. run tests
 
 ```bash
-uvicorn app:app --reload
+pytest .\test.py
 ```
