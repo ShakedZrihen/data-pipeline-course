@@ -1,33 +1,34 @@
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
+import json
+import os
 
-def get_breaking_news():
-    url = 'https://www.ynet.co.il/news/category/184'
-    response = requests.get(url)
+def fetch_news_data(path='resources'):
+    news_data = {}
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-    if response.status_code != 200:
-        raise Exception("Failed to fetch the breaking news")
+    for file_name in os.listdir(path):
+        if file_name.endswith(".json"):
+            new_path = f'{path}/{file_name}'
+            with open(new_path, "r", encoding="utf-8") as file:
+                try:
+                    data = json.load(file)
+                    if isinstance(data, dict):
+                        for key, value in data.items():
+                            if isinstance(value, dict):
+                                news_data[key] = value
+                            else:
+                                print(f"Warning: Skipping key '{key}' with value type {type(value).__name__}. Expected dictionary.")
+                except json.JSONDecodeError:
+                    print(f"Warning: Failed to decode JSON in file '{file_name}'")
+                    continue
+    return news_data
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    breaking_news = soup.find_all('div', class_='titleRow')
+def get_news_by_date(news_data, date):
+    return news_data.get(date)
 
-    formatted_data = {}
-    todays_date = datetime.now().strftime('%Y-%m-%d')
-
-    for news in breaking_news:
-        hour_tag = news.find('time', class_='DateDisplay')
-        if hour_tag and 'datetime' in hour_tag.attrs:
-            dates = datetime.strptime(hour_tag.attrs['datetime'], '%Y-%m-%dT%H:%M:%S.%fZ')
-            hour = dates.hour + 3
-            minute = dates.minute
-            while hour >= 24:
-                hour -= 24
-            formatted_hour = f'{hour:02}:{minute:02}'
-            date = f'{dates.year}-{dates.month:02}-{dates.day:02}'
-            content = news.get_text(strip=True)
-            if date not in formatted_data:
-                formatted_data[date] = {}
-            formatted_data[date][formatted_hour] = content
-
-    return formatted_data
+def get_news_by_time(news_data, time):
+    result = {}
+    for date in news_data:
+        if time in news_data[date]:
+            result[date] = news_data[date][time]
+    return result if result else None

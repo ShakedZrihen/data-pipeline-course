@@ -1,0 +1,8 @@
+beautifulsoup4
+fastapi
+mangum
+pydantic
+pylance
+pytest
+requests
+uvicorn

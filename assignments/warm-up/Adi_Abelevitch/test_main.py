@@ -14,12 +14,14 @@ def test_get_all_news():
     response = client.get("/breaking-news")
     assert response.status_code == 200
     assert isinstance(response.json(), dict)
+    assert len(response.json()) > 0
 
 def test_get_news_by_date():
-    today = datetime.datetime.now().strftime('%Y-%m-%d')
-    response = client.get(f"/breaking-news?date={today}")
+    test_date = "2024-07-30"
+    response = client.get(f"/breaking-news?date={test_date}")
     assert response.status_code == 200
     assert isinstance(response.json(), dict)
+    assert all(isinstance(key, str) and isinstance(value, str) for key, value in response.json().items())
 
 def test_get_news_by_date_not_found():
     non_existing_date = "1990-01-01"
@@ -27,29 +29,27 @@ def test_get_news_by_date_not_found():
     assert response.status_code == 404
 
 def test_get_news_by_date_and_time():
-    today = datetime.datetime.now().strftime('%Y-%m-%d')
-    time = "14:11"  
-    response = client.get(f"/breaking-news?date={today}&time={time}")
-    assert response.status_code in [200, 404]
-    if response.status_code == 200:
-        assert isinstance(response.json(), dict)
-        assert time in response.json()
+    test_date = "2024-07-31"  
+    test_time = "17:50"  
+    response = client.get(f"/breaking-news?date={test_date}&time={test_time}")
+    assert response.status_code == 200
+    assert isinstance(response.json(), dict)
+    assert test_time in response.json()
 
 def test_get_news_by_date_and_time_not_found():
     non_existing_date = "1990-01-01"
-    time = "14:11"  
+    time = "14:11"
     response = client.get(f"/breaking-news?date={non_existing_date}&time={time}")
     assert response.status_code == 404
 
 def test_get_news_by_time():
-    time = "14:11"  
-    response = client.get(f"/breaking-news?time={time}")
-    assert response.status_code in [200, 404]
-    if response.status_code == 200:
-        assert isinstance(response.json(), dict)
+    test_time = "17:50" 
+    response = client.get(f"/breaking-news?time={test_time}")
+    assert response.status_code == 200
+    assert isinstance(response.json(), dict)
 
 def test_get_news_by_time_not_found():
-    non_existing_time = "25:61"  
+    non_existing_time = "25:61"
     response = client.get(f"/breaking-news?time={non_existing_time}")
     assert response.status_code == 404
 
