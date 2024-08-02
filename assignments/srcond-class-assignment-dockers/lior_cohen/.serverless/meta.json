@@ -1,0 +1,148 @@
+{
+  "/Users/liorcohen/Desktop/SWdev/Data_Pipelines/data-pipeline-course/assignments/srcond-class-assignment-dockers/lior_cohen": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.18",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "aws": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "org": "liorc3",
+            "app": "scraper",
+            "service": "lior-cohen",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.11",
+              "stage": "dev",
+              "region": "us-east-1",
+              "versionFunctions": true
+            },
+            "package": {
+              "exclude": [
+                "node_modules/**",
+                "__pycache__/**",
+                ".serverless/**",
+                ".venv/**"
+              ]
+            },
+            "functions": {
+              "api": {
+                "handler": "app.handler",
+                "events": [
+                  {
+                    "httpApi": "*"
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-offline",
+              "serverless-python-requirements"
+            ]
+          },
+          "configFileDirPath": "/Users/liorcohen/Desktop/SWdev/Data_Pipelines/data-pipeline-course/assignments/srcond-class-assignment-dockers/lior_cohen",
+          "config": {
+            "type": "aws"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": {
+            "aws": {
+              "accessKeyId": "<REDACTED>",
+              "secretAccessKey": "<REDACTED>",
+              "sessionToken": "<REDACTED>"
+            },
+            "params": null,
+            "accessKey": "<REDACTED>"
+          },
+          "isDefaultConfig": true
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "/Users/liorcohen/Desktop/SWdev/Data_Pipelines/data-pipeline-course/assignments/srcond-class-assignment-dockers/lior_cohen",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "org": "liorc3",
+      "app": "scraper",
+      "service": "lior-cohen",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.11",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true
+      },
+      "package": {
+        "exclude": [
+          "node_modules/**",
+          "__pycache__/**",
+          ".serverless/**",
+          ".venv/**"
+        ]
+      },
+      "functions": {
+        "api": {
+          "handler": "app.handler",
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-offline",
+        "serverless-python-requirements"
+      ]
+    },
+    "serviceRawFile": "org: liorc3\napp: scraper\nservice: lior-cohen\n\nprovider:\n  name: aws\n  runtime: python3.11\n\npackage:\n  exclude:\n    - node_modules/**\n    - __pycache__/**\n    - .serverless/**\n    - .venv/**\n\nfunctions:\n  api:\n    handler: app.handler\n    events:\n      - httpApi: '*'\n\nplugins:\n  - serverless-offline\n  - serverless-python-requirements\n",
+    "command": [
+      "offline-start"
+    ],
+    "options": {},
+    "error": {
+      "message": "Serverless command \"offline-start\" not found. Did you mean \"offline start\"? Run \"serverless help\" for a list of all available commands.",
+      "code": "UNRECOGNIZED_CLI_COMMAND"
+    },
+    "params": {},
+    "machineId": "c43e873bacb4ab82ff360556c8666d96",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "d0212315-be78-4383-8e4e-ea3a9ae4c80c",
+    "orgName": "liorc3",
+    "userId": "hTj4hnjMLmq94c626F",
+    "dashboard": {
+      "isEnabledForService": true,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": {
+        "providers": true,
+        "monitoring": false
+      },
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": "5k92cqTGKt1PxLyPpp",
+      "serviceProvider": {
+        "accessKeyId": "<REDACTED>",
+        "secretAccessKey": "<REDACTED>",
+        "sessionToken": "<REDACTED>"
+      },
+      "instanceParameters": null
+    },
+    "userName": "liorc3",
+    "subscription": null,
+    "userEmail": "lior32166@gmail.com",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "011528276967",
+    "versionSf": "4.1.18",
+    "serviceProviderAwsCfStackName": "lior-cohen-dev",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
