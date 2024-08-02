@@ -31,11 +31,12 @@ API Endpoints
 Health Check
 GET /health - Returns 200 if the API is up.
 Breaking News
-GET /breaking-news - Returns all breaking news in the following format:
+GET /breaking-news -`Returns all breaking news in the following format:`
+```bash
 {
   "date": [{ "hour": "news" }]
 }
-
+```
 GET /breaking-news?time=<time>`-Returns all breaking news for a specific time`
 ```bash
 {
@@ -60,7 +61,7 @@ To run unit tests using pytest:
 ```bash
 pytest test_main.py
 ```
-#Examples
+Examples
 Here are some examples of how to use the API:
 Health Check:
 ```bash
@@ -79,18 +80,4 @@ Get breaking news by date and time:
 GET http://localhost:3000/breaking-news?date=2024-07-31&time=08:03
 ```
 
-
-#Project Structure
-.warm-up
-├── app.py
-├── config.py
-├── main.py
-├── requirements.txt
-├── README.md
-├── serverless.yml
-├── test_main.py
-├── services
-│   ├── breaking_news.py
-│   └── content_genrator.py
-|   |__ db.py
 
