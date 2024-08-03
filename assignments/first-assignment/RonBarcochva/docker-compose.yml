@@ -2,8 +2,8 @@ services:
 
   lambda-crud:
     build:
-      context: ./lambda-crud
-      dockerfile: Dockerfile
+      context: lambda-crud
+      dockerfile: ../Dockerfile
     container_name: lambda-crud
     ports:
       - '3001:3000'
@@ -51,8 +51,8 @@ services:
 
   lambda-scraper:
     build:
-      context: ./lambda-scraper
-      dockerfile: Dockerfile
+      context: lambda-scraper
+      dockerfile: ../Dockerfile
     container_name: lambda-scraper
     ports:
       - '3002:3000'
@@ -67,8 +67,8 @@ services:
 
   lambda-processor:
     build:
-      context: ./lambda-processor
-      dockerfile: Dockerfile
+      context: lambda-processor
+      dockerfile: ../Dockerfile
     container_name: lambda-processor
     environment:
       - AWS_ACCESS_KEY_ID=local
