@@ -14,5 +14,4 @@ COPY package.json .
 RUN pip install -r requirements.txt
 RUN npm install
 
-EXPOSE 3000
 CMD ["/bin/bash", "-c", "./node_modules/.bin/serverless offline start"]
