@@ -1,0 +1,6 @@
+fastapi==0.89.1
+uvicorn
+beautifulsoup4
+mangum==0.17.0
+requests==2.26.0
+pytest
