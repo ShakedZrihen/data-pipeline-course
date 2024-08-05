@@ -17,5 +17,7 @@ npm i```
 2. run it as serverless-offline application:
 ```./node_modules/.bin/serverless offline start```
 
+OR 
+
 ```bash
 uvicorn main:app --reload```
