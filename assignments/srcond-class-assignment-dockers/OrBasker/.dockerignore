@@ -1,0 +1,12 @@
+node_modules
+venv
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.env
+*.log
+*.tmp
+.DS_Store
+resources/
+*.json
