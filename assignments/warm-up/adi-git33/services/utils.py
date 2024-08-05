@@ -13,6 +13,10 @@ def validate_input(input, input_format):
     
 def filter_data(data, date, hour):
     filtered_data = {}
+    
+    if date and not hour and date not in data:
+        return filtered_data
+
     for news_date in data:
         if date and not hour and news_date == date:
             filtered_data = {news_date: data[news_date]}
