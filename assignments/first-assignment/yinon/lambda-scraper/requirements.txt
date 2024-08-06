@@ -1,0 +1,5 @@
+fastapi
+mangum
+requests
+beautifulsoup4
+boto3
