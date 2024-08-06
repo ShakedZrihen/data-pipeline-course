@@ -26,11 +26,10 @@ def generate_news_content():
                 hm = time.strftime("%H:%M")
                 if date not in formatted_data:  
                     formatted_data[date] = {}
-        formatted_data[date][hm] = content.text
+                formatted_data[date][hm] = content.text  
     return formatted_data
 
 def save_content_to_file(content, date, path='.'):
     filename = os.path.join(path, f"{date}.json")
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(content, f, ensure_ascii=False, indent=4)
- 

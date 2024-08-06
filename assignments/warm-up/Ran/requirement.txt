@@ -1,3 +1,6 @@
 fastapi==0.89.1
 mangum==0.17.0
 uvicorn
+requests
+bs4
+pytz

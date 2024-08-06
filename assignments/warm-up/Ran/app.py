@@ -3,6 +3,7 @@ from mangum import Mangum
 from typing import Optional
 from services.breaking_news import get_breaking_news
 from services.db import init
+
 app = FastAPI()
 init()
 
@@ -15,28 +16,23 @@ def breaking_news(date: Optional[str] = None, time: Optional[str] = None):
     breaking_news_data = get_breaking_news()
 
     if date and time:
-        if date in breaking_news_data and time in breaking_news_data[date]:
-            return {time: breaking_news_data[date][time]}
-        else:
-            raise HTTPException(status_code=404, detail="News not found for the specified date and time")
+        news_at_time = breaking_news_data.get(date, {}).get(time)
+        if news_at_time:
+            return {time: news_at_time}
+        raise HTTPException(status_code=404, detail="News not found for the date and time")
     
     if date:
-        if date in breaking_news_data:
-            return breaking_news_data[date]
-        else:
-            raise HTTPException(status_code=404, detail="News not found for the specified date")
+        news_on_date = breaking_news_data.get(date)
+        if news_on_date:
+            return news_on_date
+        raise HTTPException(status_code=404, detail="News not found for the date")
 
     if time:
-        news_by_time = {}
-        for news_date in breaking_news_data:
-            if time in breaking_news_data[news_date]:
-                news_by_time[news_date] = breaking_news_data[news_date][time]
+        news_by_time = {news_date: times[time] for news_date, times in breaking_news_data.items() if time in times}
         if news_by_time:
             return news_by_time
-        else:
-            raise HTTPException(status_code=404, detail="News not found for the specified time")
+        raise HTTPException(status_code=404, detail="News not found for the time")
 
     return breaking_news_data
-
 
 handler = Mangum(app)
