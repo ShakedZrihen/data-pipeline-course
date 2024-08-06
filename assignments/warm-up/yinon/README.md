@@ -1,7 +1,7 @@
 1. install python requirements
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 2. install serverless (node) requirements
