@@ -1,0 +1,68 @@
+service: data-pipeline-crud
+
+
+provider:
+  name: AMAZON_AWS
+  runtime: python3.11
+  timeout: 50
+  region: us-east-1
+
+  environment:
+    QUEUE_URL:
+      Ref: RawDataQueue
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:ReceiveMessage
+        - sqs:GetQueueAttributes
+      Resource:
+        Fn::GetAtt: [ RawDataQueue, Arn ]
+
+functions:
+  dataProcessor:
+    handler: app.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - RawDataQueue
+              - Arn
+          batchSize: 10
+          maximumBatchingWindow: 20
+          enabled: true
+
+
+
+package:
+  exclude:
+    - .git/**
+    - .venv/**
+    - node_modules/**
+    - __pycache__/**
+
+resources:
+  Resources:
+    RawDataQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-offline-sqs
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://sqs:9324
+    region: us-east-1
+    accessKeyId: local
+    secretAccessKey: local
+    queues:
+      - QueueName: data-raw-q

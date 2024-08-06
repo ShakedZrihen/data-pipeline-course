@@ -1,0 +1,89 @@
+services:
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+  sqs-create:
+    image: infrastructureascode/aws-cli:latest
+    container_name: sqs-create
+    links:
+      - sqs
+    entrypoint: sh
+    volumes:
+      - ./:/project
+      - ./create-queues.sh:/project/create-queues.sh:ro
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    command: " ./create-queues.sh"
+  backend:
+    build:
+      context: Crud
+    privileged: true
+    working_dir: /app
+    ports:
+      - '8000:8000'
+    container_name: backend-api
+    depends_on:
+      - sqs
+      - sqs-create
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+
+  scraper:
+    build:
+      context: Scraper
+    privileged: true
+    working_dir: /app
+    ports:
+      - '8001:8000'
+    container_name: backend_build
+    depends_on:
+      - sqs
+      - sqs-create
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+
+  postgres: 
+   image: postgres:11.1-alpine
+   restart: always
+   ports: 
+    - "5432:5432"
+   container_name: postgres
+   environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+
+   volumes:
+    - ./SqlFile.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  proccess:
+    build:
+      context: proccesor
+    privileged: true
+    working_dir: /app
+    container_name: proccess_container
+    depends_on:
+      - sqs
+      - sqs-create
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+
+# list all queues
+# aws --endpoint-url=http://localhost:9324 --region=us-west-1 sqs list-queues
+
+# aws --endpoint-url=http://localhost:9324 --region=us-west-1 sqs receive-message --queue-url=http://localhost:9324/000000000000/gitstream-actions-gitlab-q
