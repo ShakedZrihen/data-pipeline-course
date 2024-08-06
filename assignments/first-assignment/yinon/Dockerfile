@@ -11,7 +11,7 @@ COPY requirements.txt .
 COPY serverless.yml .
 COPY package.json .
 
-RUN pip install -r requirement.txt
+RUN pip install -r requirements.txt
 RUN npm install
 
 EXPOSE 3000
