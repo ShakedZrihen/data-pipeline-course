@@ -1,0 +1,29 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  process:
+    handler: handler.process_message
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - DataRawQueue
+              - Arn
+
+resources:
+  Resources:
+    DataRawQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
