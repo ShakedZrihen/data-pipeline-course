@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 import boto3
 import json
-from ..services.breaking_news import fetch_news_data
+from services.breaking_news import fetch_news_data
 
 app = FastAPI()
 

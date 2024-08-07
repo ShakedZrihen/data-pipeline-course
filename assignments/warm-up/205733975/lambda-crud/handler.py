@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Query
-from ..services.breaking_news import fetch_news_data
+from services.breaking_news import fetch_news_data
 from datetime import datetime
 from mangum import Mangum
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String

@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
-# Expose port 3000 to the outside world
-EXPOSE 3000
+# Expose port 3001 to the outside world
+EXPOSE 3001
 
 # Command to run the FastAPI application
-CMD ["uvicorn", "handler:app", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["uvicorn", "handler:app", "--host", "0.0.0.0", "--port", "3001"]
