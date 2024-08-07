@@ -1,1 +1,1 @@
-uvicorn
+boto3

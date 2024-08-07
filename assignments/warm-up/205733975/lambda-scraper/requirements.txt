@@ -3,4 +3,5 @@ pydantic
 boto3
 uvicorn
 requests
+mangum
 beautifulsoup4

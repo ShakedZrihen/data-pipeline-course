@@ -14,8 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 
-# Expose port 3002 to the outside world
-EXPOSE 3002
-
 # Command to run the FastAPI application
-CMD ["uvicorn", "handler:app", "--host", "0.0.0.0", "--port", "3002"]
+CMD ["python", "handler.py"]

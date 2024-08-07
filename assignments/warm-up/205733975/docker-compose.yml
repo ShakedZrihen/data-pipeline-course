@@ -23,21 +23,21 @@ services:
     container_name: sqs-create
     links:
       - sqs
-    entrypoint: sh
+    entrypoint: bash
     volumes:
-      - ./:/project
-      - ./create-queues.sh:/project/create-queues.sh:ro
+      - .:/project
+      - ./create-queues.sh:/create-queues.sh:ro
     environment:
       - AWS_ACCESS_KEY_ID=local
       - AWS_SECRET_ACCESS_KEY=local
       - AWS_DEFAULT_REGION=us-west-1
       - AWS_ENDPOINT_URL=http://sqs:9324
-    command: "./create-queues.sh"
+    command: "/create-queues.sh"
 
   scraper:
     build: ./lambda-scraper
     ports:
-      - "3001:3000"
+      - "3001:3001"
     volumes:
       - ./lambda-scraper:/app
     environment:
@@ -51,8 +51,6 @@ services:
 
   processor:
     build: ./lambda-processor
-    ports:
-      - "3002:3000"
     volumes:
       - ./lambda-processor:/app
     environment:
@@ -67,7 +65,7 @@ services:
   crud:
     build: ./lambda-crud
     ports:
-      - "3003:3000"
+      - "3003:3003"
     volumes:
       - ./lambda-crud:/app
     environment:

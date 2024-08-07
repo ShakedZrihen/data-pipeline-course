@@ -11,7 +11,7 @@ functions:
       - sqs:
           arn:
             Fn::GetAtt:
-              - DataRawQueue
+              - SQSQueue
               - Arn
 
 resources:
