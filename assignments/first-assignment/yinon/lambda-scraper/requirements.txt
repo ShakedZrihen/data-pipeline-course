@@ -1,5 +1,5 @@
 fastapi
 mangum
 requests
-beautifulsoup4
+bs4
 boto3

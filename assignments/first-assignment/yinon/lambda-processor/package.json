@@ -13,6 +13,7 @@
     },
     "dependencies": {
       "serverless-offline": "^13.6.0",
-      "serverless-wsgi": "^3.0.4"
+      "serverless-wsgi": "^3.0.4",
+      "serverless-offline-sqs": "^8.0.0"
     }
   }

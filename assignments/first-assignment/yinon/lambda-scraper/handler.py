@@ -2,7 +2,10 @@ from fastapi import FastAPI
 import boto3
 import json
 import os
-from magnum import Mangum
+from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+from mangum import Mangum
+import requests
 
 app = FastAPI()
 
@@ -32,7 +35,7 @@ def scrape():
             new_time = new_dt.strftime("%H:%M")
             formatted_data[new_time] = title
         response = sqs.send_message(
-            QueueUrl=os.getenv('SQS_QUEUE_URL', 'http://sqs:9324/queue/data-raw-q'),
+            QueueUrl="http://sqs:9324/000000000000/data-raw-q",
             MessageBody=json.dumps(formatted_data, ensure_ascii=False)
         )
         print(f"Message sent. Message ID: {response['MessageId']}")

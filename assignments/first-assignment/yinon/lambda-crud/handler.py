@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from magnum import Mangum
+from mangum import Mangum
 app=FastAPI()
 @app.get("/health")
 def health():
