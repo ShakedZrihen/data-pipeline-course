@@ -3,7 +3,6 @@ import json
 from typing import Optional
 from mangum import Mangum
 
-
 def load_json_data(file_path: str):
     with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
@@ -12,7 +11,7 @@ app = FastAPI()
 
 @app.get("/health")
 def health():
-    return 200
+    return {"status": "ok"}
 
 @app.post("/scrape")
 def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
@@ -24,7 +23,6 @@ def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
         raise HTTPException(status_code=404, detail="File not found")
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Error decoding JSON")
-
 
     formatted_data = {}
 
@@ -55,6 +53,5 @@ def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
         formatted_data = data
 
     return formatted_data
-
 
 handler = Mangum(app)

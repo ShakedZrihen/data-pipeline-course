@@ -14,7 +14,7 @@ app = FastAPI()
 def health():
     return 200
 
-@app.post("/scrape")
+@app.get("/breaking-news")
 def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
     file_path = "2024-07-31.json"
     
@@ -55,6 +55,5 @@ def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
         formatted_data = data
 
     return formatted_data
-
 
 handler = Mangum(app)
