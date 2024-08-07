@@ -18,6 +18,7 @@ def handler(event, context):
         while not len(response['Messages']):
             time.sleep(5)
             response = sqs.receive_message(QueueUrl=queue_url)
+        sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=response['Messages'][0]['ReceiptHandle'])
         print(response['Messages'][0]['Body'])
         return response
     except Exception as e:
