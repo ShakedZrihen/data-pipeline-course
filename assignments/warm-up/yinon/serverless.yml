@@ -1,10 +1,9 @@
 service: breaking-news-api
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: python3.11
-  profile: warmapp
 
 package:
   exclude:
@@ -17,7 +16,7 @@ functions:
   api:
     handler: app.handler
     events:
-      - httpApi: '*'
+      - httpApi: "*"
 
 plugins:
   - serverless-python-requirements
