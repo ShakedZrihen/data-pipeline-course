@@ -1,0 +1,26 @@
+service: fastapi-app
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  api:
+    handler: main.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+package:
+  exclude:
+    - node_modules/**
+    - .git/**
+    - .vscode/**
+    - tests/**
+    - docs/**
