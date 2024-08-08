@@ -1,0 +1,54 @@
+service: my-service
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+  environment:
+    QUEUE_URL:
+      Ref: MyQueue
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:ReceiveMessage"
+        - "sqs:GetQueueAttributes"
+      Resource:
+        Fn::GetAtt:
+          - MyQueue
+          - Arn
+
+plugins:
+  - serverless-offline-sqs
+  - serverless-python-requirements
+  - serverless-offline
+
+functions:
+
+  processor:
+    timeout: 100
+    handler: handler.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+          enabled: true
+
+resources:
+  Resources:
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: data-raw-q
+
+custom:
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://sqs:9324
+    region: 'us-east-1'
+    accessKeyId: 'local'
+    secretAccessKey: 'local'
+    queues:
+      - QueueName: data-raw-q
