@@ -1,0 +1,20 @@
+service: serverless-fastapi
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  api:
+    handler: main.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 3000
