@@ -1028,5 +1028,162 @@
         "ExportName": "sls-fastapi-app-dev-HttpApiUrl"
       }
     ]
+  },
+  "/app": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.19",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "aws": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "fastapi-app",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.11",
+              "stage": "dev",
+              "region": "us-east-1",
+              "versionFunctions": true
+            },
+            "functions": {
+              "api": {
+                "handler": "main.handler",
+                "events": [
+                  {
+                    "httpApi": "*"
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-python-requirements"
+            ],
+            "custom": {
+              "pythonRequirements": {
+                "dockerizePip": true
+              }
+            },
+            "package": {
+              "exclude": [
+                "node_modules/**",
+                ".git/**",
+                ".vscode/**",
+                "tests/**",
+                "docs/**"
+              ]
+            }
+          },
+          "configFileDirPath": "/app",
+          "config": {
+            "type": "aws"
+          },
+          "options": {
+            "host": "0.0.0.0"
+          },
+          "stage": "dev",
+          "dashboard": null,
+          "isDefaultConfig": true
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "/app",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "fastapi-app",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.11",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true
+      },
+      "functions": {
+        "api": {
+          "handler": "main.handler",
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-python-requirements"
+      ],
+      "custom": {
+        "pythonRequirements": {
+          "dockerizePip": true
+        }
+      },
+      "package": {
+        "exclude": [
+          "node_modules/**",
+          ".git/**",
+          ".vscode/**",
+          "tests/**",
+          "docs/**"
+        ]
+      }
+    },
+    "serviceRawFile": "service: fastapi-app\n\nprovider:\n  name: aws\n  runtime: python3.11\n\nfunctions:\n  api:\n    handler: main.handler\n    events:\n      - httpApi: '*'\n\nplugins:\n  - serverless-python-requirements\n\ncustom:\n  pythonRequirements:\n    dockerizePip: true\n\npackage:\n  exclude:\n    - node_modules/**\n    - .git/**\n    - .vscode/**\n    - tests/**\n    - docs/**\n",
+    "command": [
+      "offline"
+    ],
+    "options": {
+      "host": "0.0.0.0"
+    },
+    "error": {
+      "message": "Serverless command \"offline\" not found. Run \"serverless help\" for a list of all available commands.",
+      "code": "UNRECOGNIZED_CLI_COMMAND"
+    },
+    "params": {},
+    "machineId": "451b9a6c596ff1d5b6393e9c5d6425a6",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "93fb518c-e69b-46e8-bea2-7648934470e8",
+    "orgName": "reshaflame",
+    "userId": "K335NfD8RgZ481fbR6",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "reshaflame",
+    "subscription": null,
+    "userEmail": "reshaflame@gmail.com",
+    "versionSf": "4.1.19",
+    "serviceProviderAwsCfStackName": "fastapi-app-dev",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  },
+  "unknown": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.19",
+    "isWithinCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "command": [
+      "login"
+    ],
+    "options": {},
+    "error": null,
+    "machineId": "451b9a6c596ff1d5b6393e9c5d6425a6",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
   }
 }

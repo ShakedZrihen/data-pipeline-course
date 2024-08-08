@@ -1,11 +1,16 @@
-version: '3.8'
-
+version: '3'
 services:
-  fastapi:
-    build: .
+  backend:
+    build:
+      context: .
+    working_dir: /app
     ports:
-      - "8000:8000"
+      - '8000:8000'
     volumes:
       - .:/app
     environment:
-      - PYTHONUNBUFFERED=1
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - SERVERLESS_ACCESS_KEY=AKLLyRmFbLiHfhN2w3dB9XxP5H3wbShO3pmOLubX0kXSg
+

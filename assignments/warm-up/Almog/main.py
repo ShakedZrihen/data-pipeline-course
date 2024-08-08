@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 import os
 import json
-from mangum import Mangum  # Import Mangum
+from mangum import Mangum
 
 app = FastAPI()
 
