@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  sqs:
+    image: softwaremill/elasticmq:latest
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf:ro
+  sqs-create:
+    image: infrastructureascode/aws-cli:latest
+    container_name: sqs-create
+    links:
+      - sqs
+    entrypoint: sh
+    volumes:
+      - ./:/project
+      - ./create-queues.sh:/project/create-queues.sh:ro
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    command: " ./create-queues.sh"
+
+  scraper:
+    build:
+      context: ./lambda-scraper
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+
+
+  processor:
+    build:
+      context: ./lambda-processor
+      dockerfile: Dockerfile
+
+  crud:
+    build:
+      context: ./lambda-crud
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+
+volumes:
+  pgdata:

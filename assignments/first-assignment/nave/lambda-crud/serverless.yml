@@ -1,0 +1,39 @@
+service: my-service
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+  environment:
+    QUEUE_URL: http://sqs:9324/queue/data-raw-q
+
+functions:
+  scraper:
+    handler: handler.scrape
+    events:
+      - http:
+          path: scrape
+          method: post
+
+  processor:
+    handler: handler.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+
+  crud:
+    handler: handler.health
+    events:
+      - http:
+          path: health
+          method: get
+
+resources:
+  Resources:
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: data-raw-q
