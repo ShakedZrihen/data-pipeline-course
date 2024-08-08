@@ -1,8 +1,8 @@
 service: lambda-processor
-
+frameworkVersion: ">3.0.0 || <4.0.0"
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.9
 
 functions:
   process:
@@ -11,7 +11,7 @@ functions:
       - sqs:
           arn:
             Fn::GetAtt:
-              - SQSQueue
+              - DataRawQueue
               - Arn
 
 resources:
@@ -23,7 +23,15 @@ resources:
 
 plugins:
   - serverless-python-requirements
+  - serverless-offline-sqs
+  - serverless-offline
 
 custom:
+  serverless-offline:
+    httpPort: 3196
+  serverless-offline-sqs:
+    endpoint: http://sqs:9324
+    accessKetId: x
+    secretAccessKey: x
   pythonRequirements:
     dockerizePip: true

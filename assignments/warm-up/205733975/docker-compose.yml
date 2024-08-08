@@ -50,9 +50,9 @@ services:
       - sqs-create
 
   processor:
-    build: ./lambda-processor
-    volumes:
-      - ./lambda-processor:/app
+    build:
+      context: ./lambda-processor
+    container_name: processor
     environment:
       - AWS_ACCESS_KEY_ID=local
       - AWS_SECRET_ACCESS_KEY=local
