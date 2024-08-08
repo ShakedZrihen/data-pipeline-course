@@ -6,14 +6,12 @@ from config import DB_FOLDER
 
 def get():
     data = {}
-    
     for date in os.listdir(DB_FOLDER):
         if date.endswith('.json'):
             file_path = os.path.join(DB_FOLDER, date)
             with open(file_path, 'r', encoding='utf-8') as f:
                 news = json.load(f)
                 data[date.replace('.json', '')] = news
-    
     return data
 
 
