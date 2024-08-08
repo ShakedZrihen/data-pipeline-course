@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from services.content_generator import generate_random_content, save_content_to_file
 from config import DB_FOLDER
 
