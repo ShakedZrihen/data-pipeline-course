@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "esbuild": "^0.23.0",
+    "serverless-wsgi": "^3.0.4"
+  },
+  "name": "almog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "serverless-offline": "^14.0.0",
+    "serverless-python-requirements": "^6.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
