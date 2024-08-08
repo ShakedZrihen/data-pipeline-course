@@ -1,0 +1,23 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+
+functions:
+  processor:
+    handler: handler.processor
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - SQSQueue
+              - Arn
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
