@@ -4,7 +4,6 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.11
-  profile: warmapp
 
 package:
   exclude:
@@ -21,4 +20,4 @@ functions:
 
 plugins:
   - serverless-python-requirements
-  - serverless-offline # for local development
+  - serverless-offline
