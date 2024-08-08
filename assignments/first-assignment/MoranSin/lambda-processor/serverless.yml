@@ -8,6 +8,7 @@ provider:
 functions:
   process:
     handler: handler.process
+    timeout: 30
     events:
       - sqs:
           arn:

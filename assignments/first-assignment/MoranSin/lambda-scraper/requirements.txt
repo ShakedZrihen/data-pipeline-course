@@ -1,4 +1,8 @@
 fastapi==0.89.1
 mangum==0.17.0
 requests
-awscli-local
+boto3
+uvicorn
+beautifulsoup4
+python-dateutil
+datetime
