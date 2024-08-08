@@ -1,0 +1,15 @@
+{
+  "name": "nave",
+  "version": "1.0.0",
+  "description": "## Description This is a simple web API built with FastAPI that exposes breaking news data from Ynet. The API is deployed as an AWS Lambda function using the Serverless Framework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-python-requirements": "^6.1.0"
+  }
+}

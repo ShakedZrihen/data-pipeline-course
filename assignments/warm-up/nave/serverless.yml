@@ -1,0 +1,18 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: maymonave
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: nave
+service: ynet-api
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  api:
+    handler: handler.hello
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
