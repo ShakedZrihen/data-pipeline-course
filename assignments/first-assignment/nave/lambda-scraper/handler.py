@@ -5,10 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 from fastapi import FastAPI, Request
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 
-# Initialize the SQS client
 sqs = boto3.client('sqs', 
                    endpoint_url = 'http://sqs:9324',
                    region_name='us-west-1', 
@@ -32,9 +30,6 @@ async def scrape_data(request: Request):
         # Parse the HTML content of the page with BeautifulSoup
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Validate soup is got the data
-        # print(soup.prettify())
-
         # get all breaking-news
         breaking_news = soup.find_all('div', class_='titleRow')
 
@@ -44,20 +39,9 @@ async def scrape_data(request: Request):
             dateTime = row.find('time').attrs['datetime']
             title = row.find('div', class_='title').text
             formatted_data[dateTime] = title
-            
-        # # validate formatting
-        # print(formatted_data)
-
-            
-            # Log the data being sent
         logging.info(f"Sending message to SQS with data: {formatted_data}")
-            
-            # Send message to SQS
         response = sqs.send_message(QueueUrl='http://sqs:9324/000000000000/data-raw-q', MessageBody=json.dumps(formatted_data, ensure_ascii=False))
-            
-            # Log the response from SQS
-        logging.info(f"SQS Response: {response}")
-            
+        logging.info(f"SQS Response: {response}")          
         return "Data sent to SQS"
     
     except Exception as e:

@@ -1,4 +1,4 @@
-# Local Development Environment for Data Pipeline
+# Local Development Environment for Data Pipeline - Nave Maymon
 
 ## Prerequisites
 - Docker: Version 20.x or later
@@ -10,5 +10,8 @@
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-repo.git
-   cd developer-name
+   cd nave
+
+2. **Run the program**
+
+
