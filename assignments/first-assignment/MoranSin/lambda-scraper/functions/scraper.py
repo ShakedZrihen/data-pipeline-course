@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import timedelta, datetime
 import dateutil.parser as parser 
-import json
-import os
+# import json
+# import os
 
 formatted_data = {}
 
@@ -31,12 +31,11 @@ def scraper():
             formatted_data[date] += [inner_json]
         else:
             formatted_data[date] = [inner_json]
+    return formatted_data
+   
 
-            
-scraper()   
+# script_dir = os.path.dirname(os.path.abspath(__file__))
+# file_path = os.path.join(script_dir, 'data-raw-q.json')
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, 'data-raw-q.json')
-
-with open(file_path, 'w', encoding='utf-8') as f:
-    json.dump(formatted_data, f, ensure_ascii=False, indent=4)
+# with open(file_path, 'w', encoding='utf-8') as f:
+#     json.dump(formatted_data, f, ensure_ascii=False, indent=4)

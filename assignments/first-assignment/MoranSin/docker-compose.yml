@@ -7,6 +7,13 @@ services:
       - "8000:8000"
     depends_on:
       - sqs
+  
+  lambda-processor:
+    build:
+      context: ./lambda-processor
+      dockerfile: Dockerfile
+    depends_on:
+      - sqs
 
   lambda-crud:
     build:
