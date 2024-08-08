@@ -1,0 +1,28 @@
+service: breaking-news-api
+
+provider:
+  name: aws
+  runtime: python3.11
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline # for local development
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+  serverless-offline:
+    httpPort: 8000  
+    host: 127.0.0.1
