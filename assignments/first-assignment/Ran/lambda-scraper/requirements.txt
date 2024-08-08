@@ -1,0 +1,8 @@
+fastapi
+boto3
+uvicorn
+requests
+beautifulsoup4
+pytz
+mangum
+datetime
