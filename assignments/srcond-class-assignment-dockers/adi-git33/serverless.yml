@@ -1,0 +1,23 @@
+service: breaking-news-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
