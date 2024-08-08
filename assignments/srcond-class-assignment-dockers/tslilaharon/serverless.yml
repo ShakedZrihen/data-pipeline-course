@@ -1,0 +1,23 @@
+service: ynet-news-api
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  app:
+    handler: main.app
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
