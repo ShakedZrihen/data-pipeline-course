@@ -1,0 +1,34 @@
+.
+├── __pycache__
+│   └── app.cpython-312.pyc
+├── create-queues.sh
+├── docker-compose.yml
+├── elasticmq.conf
+├── lambda-crud
+│   ├── Dockerfile
+│   ├── __pycache__
+│   ├── handler.py
+│   ├── requirements.txt
+│   └── serverless.yml
+├── lambda-processor
+│   ├── Dockerfile
+│   ├── __pycache__
+│   ├── handler.py
+│   ├── requirements.txt
+│   └── serverless.yml
+├── lambda-scraper
+│   ├── Dockerfile
+│   ├── __pycache__
+│   ├── handler.py
+│   ├── requirements.txt
+│   └── serverless.yml
+├── package-lock.json
+├── package.json
+├── requirements.txt
+├── serverless.yml
+├── services
+│   ├── __pycache__
+│   └── breaking_news.py
+
+
+476 directories, 22 files

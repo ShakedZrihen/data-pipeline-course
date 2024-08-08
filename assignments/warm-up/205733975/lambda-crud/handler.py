@@ -2,6 +2,21 @@ from fastapi import FastAPI, HTTPException, Query
 from services.breaking_news import fetch_news_data
 from datetime import datetime
 from mangum import Mangum
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String
+
+DATABASE_URL = "postgresql://user:password@postgres/mydb"
+
+engine = create_engine(DATABASE_URL)
+metadata = MetaData()
+
+users = Table(
+    'users', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('name', String, nullable=False)
+)
+
+metadata.create_all(engine)
+
 app = FastAPI()
 
 @app.get("/health")
@@ -30,7 +45,5 @@ def breaking_news(date: str = None, time: str = None):
         news_today = news_data.get(todays_date, {})
         news_list = [{hour: news} for hour, news in news_today.items()]
         return {todays_date: news_list}
-
-
 
 handler = Mangum(app)

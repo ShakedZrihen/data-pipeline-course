@@ -1,49 +1,78 @@
-# Breaking News API- Amit Ronen
+# Breaking News API - Amit Ronen
 
 ## Overview
-
 This FastAPI project scrapes breaking news from Ynet and provides an API to access the latest news.
 
 ## Project Structure
+
 ``` plaintext
 205733975/
-├── app.py 
-├── services/
-│ └── breaking_news.py 
-├── tests.py
-├── package.json
+├── create-queues.sh
+├── docker-compose.yml
+├── elasticmq.conf
+├── lambda-crud
+│ ├── Dockerfile
+│ ├── handler.py
+│ ├── requirements.txt
+│ └── serverless.yml
+├── lambda-processor
+│ ├── Dockerfile
+│ ├── handler.py
+│ ├── requirements.txt
+│ └── serverless.yml
+├── lambda-scraper
+│ ├── Dockerfile
+│ ├── handler.py
+│ ├── requirements.txt
+│ └── serverless.yml
 ├── package-lock.json
+├── package.json
 ├── requirements.txt
-└── serverless.yml
+├── serverless.yml
+├── services
+│ └── breaking_news.py
 ```
 
 ## Endpoints
 
 - **/health**: GET - Check API status.
-- **/breaking-news**: GET - Retrieve breaking news. Optional query parameters: `date` (YYYY-MM-DD), `time`.
+- **/breaking-news**: GET - Retrieve breaking news. Optional query parameters: date (YYYY-MM-DD), time.
+- **/scrape**: POST - Scrape the latest breaking news and store in DB.
 
-## Setup & Run
 
-1. **install python requirements**:
-   ```bash
-    pip install -r requirements.txt
-2. **install serverless (node) requirements:**
-   ```bash
-   nvm use # to config the specific node version
-    npm i
-3. **run it as serverless-offline application:**
-   ```bash
-   ./node_modules/.bin/serverless offline start
+## Docker Compose Setup & Run
 
-**Or run it as a stand-alone server:**
-```bash
-    uvicorn app:app --reload
+### Build and Start the Services using Docker Compose:
+
+```sh
+docker-compose up --build
 ```
 
-## Commands 
-1. http://127.0.0.1:8000/health 
-2. http://127.0.0.1:8000/breaking-news 
-3. http://127.0.0.1:8000/breaking-news?date= 
-4. http://127.0.0.1:8000/breaking-news?time= 
-5. http://127.0.0.1:8000/breaking-news?date=&time= 
+## API Commands
 
+### Health Check
+
+```sh
+http://0.0.0.0:3000/health 
+````
+### Retrieve Breaking News:
+```sh
+http://0.0.0.0:3000/breaking-news 
+```
+### Retrieve Breaking News by Date:
+```sh
+http://0.0.0.0:3000/breaking-news?date= 
+```
+### Retrieve Breaking News by Time:
+```sh
+http://0.0.0.0:3000/breaking-news?time= 
+```
+### Retrieve Breaking News by Date and Time:
+```sh
+http://0.0.0.0:3000/breaking-news?date=&time= 
+```
+
+### Trigger Scrape with Postman:
+```sh
+http://0.0.0.0:3000/scrape
+```
