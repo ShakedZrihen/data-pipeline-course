@@ -5,7 +5,7 @@ services:
       context: .
     working_dir: /app
     ports:
-      - '8000:8000'
+      - '3000:3000'
     volumes:
       - .:/app
     environment:
