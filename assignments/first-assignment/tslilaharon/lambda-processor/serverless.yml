@@ -1,0 +1,13 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  process_event:
+    handler: handler.process_event
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt: [data-raw-q, Arn]

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  sqs:
+    image: softwaremill/elasticmq:latest
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: tslilaharon
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: db_tslilaharon
+    ports:
+      - "5432:5432"
+
+  lambda-scraper:
+    build: ./lambda-scraper
+    command: bash -c "python create_queue.py && uvicorn handler:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+    depends_on:
+      - sqs
+
+  lambda-processor:
+    build: ./lambda-processor
+    command: python handler.py
+    environment:
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+    depends_on:
+      - sqs
+
+  lambda-crud:
+    build: ./lambda-crud
+    command: uvicorn handler:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=db_tslilaharon
+      - DB_USER=tslilaharon
+      - DB_PASSWORD=123456789
+    depends_on:
+      - postgres
