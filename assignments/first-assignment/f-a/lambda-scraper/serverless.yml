@@ -1,0 +1,12 @@
+service: lambda-scraper
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  scrape:
+    handler: handler.fetch_news
+    events:
+      - http:
+          path: scrape
+          method: post

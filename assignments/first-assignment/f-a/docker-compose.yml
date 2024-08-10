@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: your_database_name
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  sqs:
+    image: softwaremill/elasticmq:latest
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+
+  lambda-scraper:
+    build: ./lambda-scraper
+    ports:
+      - "8000:8000"
+    depends_on:
+      - sqs
+
+  lambda-processor:
+    build: ./lambda-processor
+    depends_on:
+      - sqs
+
+  lambda-crud:
+    build: ./lambda-crud
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

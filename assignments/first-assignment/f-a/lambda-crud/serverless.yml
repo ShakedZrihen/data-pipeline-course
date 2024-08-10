@@ -1,0 +1,12 @@
+service: lambda-crud
+provider:
+  name: aws
+  runtime: python3.10
+
+functions:
+  health:
+    handler: handler.health_check
+    events:
+      - http:
+          path: health
+          method: get

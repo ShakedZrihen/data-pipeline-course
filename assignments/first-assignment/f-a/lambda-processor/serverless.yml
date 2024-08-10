@@ -1,0 +1,14 @@
+service: lambda-processor
+provider:
+  name: aws
+  runtime: python3.12
+
+functions:
+  process:
+    handler: handler.process_message
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - SQSQueue
+              - Arn
