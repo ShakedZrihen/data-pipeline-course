@@ -33,7 +33,7 @@ This project sets up a local development environment for a data pipeline using D
 
 2. **Build and start the Docker containers in detached mode**:
     ```sh
-    docker-compose up -d --build
+    docker-compose up -d 
     ```
 
 3. **View logs from the Lambda Processor**:
