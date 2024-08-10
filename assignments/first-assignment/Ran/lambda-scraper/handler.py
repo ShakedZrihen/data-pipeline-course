@@ -19,7 +19,6 @@ def scrape():
         
         output_dir = "data"
         os.makedirs(output_dir, exist_ok=True)
-        
         save_content_to_file(generated_content, todays_date, output_dir)
         
         response = sqs.send_message(

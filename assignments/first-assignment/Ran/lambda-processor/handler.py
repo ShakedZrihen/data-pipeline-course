@@ -1,6 +1,5 @@
 import json
 import logging
-import time
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -8,7 +7,6 @@ logger = logging.getLogger()
 def process(event, context):
     logger.info("Received event: %s", json.dumps(event))
     try:
-        time.sleep(2)
         if event is None:
             raise ValueError("Event data is None")
         
