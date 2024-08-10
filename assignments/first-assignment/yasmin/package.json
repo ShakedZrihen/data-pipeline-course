@@ -1,0 +1,16 @@
+{
+    "name": "data-pipeline",
+    "version": "1.0.0",
+    "description": "Data pipeline with scraper, processor, and CRUD Lambda functions",
+    "main": "handler.py",
+    "scripts": {
+      "deploy": "serverless deploy",
+      "remove": "serverless remove"
+    },
+    "dependencies": {
+      "serverless": "^2.72.3",
+      "serverless-python-requirements": "^5.1.0"
+    },
+    "devDependencies": {}
+  }
+  

@@ -1,20 +1,19 @@
 {
-  "name": "yasmin",
+  "name": "lambda-processor",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "ShakedZrihen",
-  "license": "ISC",
   "devDependencies": {
-    "serverless": "^3.39.0",
     "serverless-python-requirements": "^6.1.0"
   },
   "dependencies": {
     "serverless-offline": "^13.6.0",
+    "serverless-offline-sqs": "^8.0.0",
     "serverless-wsgi": "^3.0.4"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

@@ -1,4 +1,4 @@
-# Build Python dependencies
+# Use the official Python image from the Docker Hub
 FROM python:3.11-slim
 
 # Set the working directory in the container
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Node.js and npm
@@ -16,12 +16,11 @@ RUN apt-get update && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
-# Verify npm installation
-RUN npm --version
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
 # Install Node.js dependencies
-COPY package*.json ./
 RUN npm install
 
-# Command to run the lambda processor
+# Run Serverless Offline when the container launches
 CMD ["npx", "serverless", "offline", "start", "--config", "serverless.yml"]

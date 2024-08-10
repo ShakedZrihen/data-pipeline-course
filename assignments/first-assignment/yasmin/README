@@ -1,13 +1,19 @@
-# Local Development Environment
+# Local Development Environment for Data Pipeline
 
-## Requirements
-- Docker 20.x or later
-- Docker Compose 1.27 or later
-- Python 3.11 or later
-- Serverless Framework 2.x or later
+This project sets up a local development environment using Docker Compose for a data pipeline consisting of multiple services.
 
-## Setup
+## Components
 
-1. Start Docker Compose:
-   ```bash
-   docker-compose up
+- **Lambda Scraper**: Scrapes data from a website and puts it in an SQS queue.
+- **SQS**: Local implementation using ElasticMQ.
+- **Lambda Processor**: Processes data from the SQS queue.
+- **PostgreSQL**: Database container for storing data.
+- **Lambda CRUD**: Simple CRUD operations exposed via FastAPI.
+
+## Setup Instructions
+
+1. Ensure Docker and Docker Compose are installed on your machine.
+2. Clone the repository and navigate to the project directory.
+3. Run `docker-compose up` to start all services.
+4. Access the scraper service at `http://localhost:8000`.
+5. Access the CRUD service at `http://localhost:8001/health`.

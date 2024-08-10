@@ -1,57 +1,33 @@
 from fastapi import FastAPI, HTTPException
+import boto3
 import json
-from typing import Optional
+from datetime import datetime
+from services.content_generator import generate_news_content, save_content_to_file
 from mangum import Mangum
-
-def load_json_data(file_path: str):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return json.load(file)
+import os
 
 app = FastAPI()
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+sqs = boto3.client('sqs', endpoint_url='http://sqs:9324',region_name='us-east-1',aws_access_key_id='x', aws_secret_access_key='x')
+queue_url = 'http://sqs:9324/queue/data-raw-q'
 
 @app.post("/scrape")
-def get_date_hours_news(date: Optional[str] = None, time: Optional[str] = None):
-    file_path = "2024-07-31.json"
-    
+def scrape():
     try:
-        data = load_json_data(file_path)
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="File not found")
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=400, detail="Error decoding JSON")
-
-    formatted_data = {}
-
-    if date and time:
-        if date in data:
-            if time in data[date]:
-                formatted_data = {date: {time: data[date][time]}}
-            else:
-                raise HTTPException(status_code=404, detail="Time not found for the given date")
-        else:
-            raise HTTPException(status_code=404, detail="Date not found")
-
-    elif date:
-        if date in data:
-            formatted_data = data[date]
-        else:
-            raise HTTPException(status_code=404, detail="Date not found")
-
-    elif time:
-        for new_date, new_items in data.items():
-            if time in new_items:
-                if new_date not in formatted_data:
-                    formatted_data[new_date] = {}
-                formatted_data[new_date][time] = new_items[time]
-        if not formatted_data:
-            raise HTTPException(status_code=404, detail="Time not found across all dates")
-    else:
-        formatted_data = data
-
-    return formatted_data
+        todays_date = datetime.now().strftime('%d-%m-%Y')
+        generated_content = generate_news_content()
+        
+        output_dir = "data"
+        os.makedirs(output_dir, exist_ok=True)
+        
+        save_content_to_file(generated_content, todays_date, output_dir)
+        
+        response = sqs.send_message(
+            QueueUrl=queue_url,
+            MessageBody=json.dumps(generated_content, ensure_ascii=False)
+        )
+        return {"message": "Data scraped and sent to SQS", "SQSResponse": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 handler = Mangum(app)
