@@ -1,0 +1,121 @@
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: amin
+      POSTGRES_PASSWORD: amin1234
+      POSTGRES_DB: amin_db
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - C:/Users/amin_/OneDrive/Desktop/data-pipelines/data-pipeline-course/assignments/first-assignment/AminMasharqa/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    networks:
+      - aminmasharqa_default
+
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+    volumes:
+      - C:/Users/amin_/OneDrive/Desktop/data-pipelines/data-pipeline-course/assignments/first-assignment/AminMasharqa/sqs-create/queues.conf:/opt/elasticmq.conf
+    environment:
+      - HOSTNAME=sqs
+      - HOSTNAME_EXTERNAL=sqs
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9324/?Action=ListQueues || exit 1"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    restart: always
+    networks:
+      - aminmasharqa_default
+
+
+
+  sqs-create:
+    image: amazon/aws-cli:latest
+    container_name: sqs-create
+    depends_on:
+      sqs:
+        condition: service_healthy
+    volumes:
+      - C:/Users/amin_/OneDrive/Desktop/data-pipelines/data-pipeline-course/assignments/first-assignment/AminMasharqa/sqs-create:/sqs-create
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    entrypoint: ["sh", "/sqs-create/create-queues.sh"]
+    restart: on-failure
+    networks:
+      - aminmasharqa_default
+
+
+  scraper:
+    build: ./lambda-scraper
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./lambda-scraper:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+      - sqs-create
+    restart: always
+    networks:
+      - aminmasharqa_default
+
+  processor:
+    build: ./lambda-processor
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./lambda-processor:/app
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+      - sqs-create
+    restart: always
+    networks:
+      - aminmasharqa_default
+
+  crud:
+    build: ./lambda-crud
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./lambda-crud:/app
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydb
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - aminmasharqa_default
+
+networks:
+  aminmasharqa_default:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
+    

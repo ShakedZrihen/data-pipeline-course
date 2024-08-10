@@ -1,0 +1,20 @@
+service: lambda-scraper
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+
+functions:
+  scrape:
+    handler: handler.scrape
+    events:
+      - http:
+          path: scrape
+          method: post
+  retrieve:
+    handler: handler.get_messages
+    events:
+      - http:
+          path: messages
+          method: get

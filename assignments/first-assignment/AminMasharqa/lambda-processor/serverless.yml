@@ -1,0 +1,13 @@
+service: lambda-processor  # Name of the service
+
+provider:
+  name: aws
+  runtime: python3.11  # Specify the runtime
+  region: us-east-1  # AWS region
+
+functions:
+  process:
+    handler: handler.process_sqs_event  # Adjust the handler path as needed
+    events:
+      - sqs:
+          arn: arn:aws:sqs:us-east-1:000000000000:data-raw-q.fifo # Update ARN for your AWS environment
