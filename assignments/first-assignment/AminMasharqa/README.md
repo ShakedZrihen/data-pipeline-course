@@ -61,11 +61,7 @@ Ensure you have the following installed:
 1. **Run Database Test**:
    Open a new terminal window and execute the following command while Docker Compose is running:
 
-   ```bash
-   docker-compose exec <your_service_name> python test_db.py
-   ```
-
-   Replace `<your_service_name>` with the name of the service running your application. This script will check if the database and the `users` table have been created.
+   python test_db.py
 
 ## Notes
 
