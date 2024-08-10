@@ -1,7 +1,6 @@
 Here's a `README.md` file that outlines the steps for running your code, testing it with Postman, and validating the database setup. Feel free to adjust any details as needed:
 
-```markdown
-# Project Setup and Testing Guide
+Project Setup and Testing Guide
 
 ## Overview
 
