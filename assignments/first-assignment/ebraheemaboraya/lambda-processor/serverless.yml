@@ -1,0 +1,36 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  endpointType: 'http'
+
+functions:
+  processor:
+    handler: handler.lambda_handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+          batchSize: 10
+
+resources:
+  Resources:
+    MyQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 3002
+    host: localhost
+    stages:
+      - dev

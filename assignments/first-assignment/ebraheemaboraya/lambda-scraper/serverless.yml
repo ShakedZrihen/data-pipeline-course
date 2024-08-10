@@ -1,0 +1,29 @@
+service: lambda-scraper
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+
+functions:
+  app:
+    handler: handler.app
+    events:
+      - http:
+          path: scrape
+          method: post
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+
+custom:
+  wsgi:
+    app: handler.app
+    packRequirements: false
+
+# Add package-specific requirements
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
