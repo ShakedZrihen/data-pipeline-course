@@ -1,10 +1,11 @@
 {
   "name": "omeriko2310",
   "version": "1.0.0",
-  "description": "## Description This project is a simple FastAPI application that exposes breaking news data via HTTP endpoints.",
+  "description": "## Description: This project is a simple FastAPI application that exposes breaking news data via HTTP endpoints.",
   "main": "index.js",
   "directories": {
     "test": "tests"
+
   },
   "scripts": {
     "test": "pytest"
