@@ -1,0 +1,115 @@
+{
+    "/app": {
+      "versionSfCore": null,
+      "versionFramework": "4.1.19",
+      "isWithinCompose": false,
+      "isCompose": false,
+      "composeOrgName": null,
+      "composeServiceName": null,
+      "servicePath": "/app",
+      "serviceConfigFileName": "serverless.yml",
+      "service": {
+        "service": "lambda-crud",
+        "frameworkVersion": "3",
+        "provider": {
+          "name": "aws",
+          "runtime": "python3.11",
+          "timeout": 100,
+          "region": "us-east-1",
+          "environment": {
+            "QUEUE_URL": {
+              "Ref": "firstQueue"
+            }
+          },
+          "iamRoleStatements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:GetQueueAttributes"
+              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "firstQueue",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        },
+        "package": {
+          "exclude": [
+            "node_modules/**",
+            "__pycache__/**",
+            ".serverless/**",
+            ".venv/**"
+          ]
+        },
+        "functions": {
+          "api": {
+            "handler": "handler.handler",
+            "events": [
+              {
+                "sqs": {
+                  "arn": {
+                    "Fn::GetAtt": [
+                      "firstQueue",
+                      "Arn"
+                    ]
+                  },
+                  "enabled": true
+                }
+              }
+            ]
+          }
+        },
+        "resources": {
+          "Resources": {
+            "firstQueue": {
+              "Type": "AWS::SQS::Queue",
+              "Properties": {
+                "QueueName": "data-raw-q"
+              }
+            }
+          }
+        },
+        "plugins": [
+          "serverless-python-requirements",
+          "serverless-offline",
+          "serverless-offline-sqs"
+        ],
+        "custom": {
+          "serverless-offline-sqs": {
+            "autoCreate": true,
+            "apiVersion": "2012-11-05",
+            "endpoint": "http://sqs:9324",
+            "region": "us-east-1",
+            "accessKeyId": "<REDACTED>",
+            "secretAccessKey": "<REDACTED>",
+            "queues": [
+              {
+                "QueueName": "data-raw-q"
+              }
+            ]
+          }
+        }
+      },
+      "serviceRawFile": "service: lambda-crud\r\nframeworkVersion: '3'\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.11\r\n  timeout: 100\r\n  region: us-east-1\r\n  environment:\r\n    QUEUE_URL:\r\n      Ref: firstQueue\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - sqs:ReceiveMessage\r\n        - sqs:GetQueueAttributes\r\n      Resource:\r\n        Fn::GetAtt: [ firstQueue, Arn ]\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - __pycache__/**\r\n    - .serverless/**\r\n    - .venv/**\r\n\r\nfunctions:\r\n  api:\r\n    handler: handler.handler\r\n    events:\r\n      - sqs:\r\n          arn:\r\n            Fn::GetAtt:\r\n              - firstQueue\r\n              - Arn\r\n          enabled: true\r\nresources:\r\n  Resources:\r\n    firstQueue:\r\n      Type: AWS::SQS::Queue\r\n      Properties:\r\n        QueueName: data-raw-q\r\n\r\n\r\nplugins:\r\n  - serverless-python-requirements\r\n  - serverless-offline \r\n  - serverless-offline-sqs\r\n\r\ncustom:\r\n  serverless-offline-sqs:\r\n    autoCreate: true\r\n    apiVersion: '2012-11-05'\r\n    endpoint: http://sqs:9324\r\n    region: us-east-1\r\n    accessKeyId: local\r\n    secretAccessKey: local\r\n    queues:\r\n      - QueueName: data-raw-q",
+      "command": [
+        "offline"
+      ],
+      "options": {
+        "port": "8002"
+      },
+      "error": {
+        "message": "You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".",
+        "stack": "Error: You must sign in or use a license key with Serverless Framework V.4 and later versions. Please use \"serverless login\".\n    at Authentication.getAuthenticatedData (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:910:10542)\n    at async Authentication.resolverAuthenticate (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:912:20540)\n    at async _Meta.authenticateAndResolve (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:920:10814)\n    at async route (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16254)\n    at async Object.run2 [as run] (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16702)\n    at async run3 (file:///root/.serverless/releases/4.1.19/package/dist/sf-core.js:920:17962)"
+      },
+      "machineId": "ae76ba08232eae8c3314cc0faefc7164",
+      "serviceProviderAwsCfStackId": null,
+      "serviceProviderAwsCfStackCreated": null,
+      "serviceProviderAwsCfStackUpdated": null,
+      "serviceProviderAwsCfStackStatus": null,
+      "serviceProviderAwsCfStackOutputs": null
+    }
+  }
