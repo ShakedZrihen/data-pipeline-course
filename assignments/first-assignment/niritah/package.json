@@ -1,0 +1,26 @@
+{
+  "name": "niritah123",
+  "version": "1.0.0",
+  "description": "## Description This project is a simple FastAPI application that exposes breaking news data via HTTP endpoints.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "pytest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShakedZrihen/data-pipeline-course.git#niritah123"
+  },
+  "author": "Nir Itah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShakedZrihen/data-pipeline-course/issues"
+  },
+  "homepage": "https://github.com/ShakedZrihen/data-pipeline-course/tree/niritah123#readme",
+  "dependencies": {
+    "serverless": "^3.39.0",
+    "serverless-python-requirements": "^6.1.0"
+  }
+}
