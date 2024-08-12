@@ -1,0 +1,14 @@
+service: lambda-crud
+
+provider:
+  name: aws
+  runtime: python3.11
+  endpointType: http
+
+functions:
+  health:
+    handler: handler.app
+    events:
+      - http:
+          path: health
+          method: get

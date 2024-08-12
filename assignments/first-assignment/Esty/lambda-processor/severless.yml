@@ -1,0 +1,23 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.11
+  endpointType: http
+
+functions:
+  process:
+    handler: handler.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyQueue
+              - Arn
+
+resources:
+  Resources:
+    MyQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
