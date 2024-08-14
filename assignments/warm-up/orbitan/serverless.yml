@@ -18,7 +18,9 @@ functions:
   api:
     handler: app.handler
     events:
-      - httpApi: '*'
+      - http:
+          path: '/scrape'
+          method: post
 
 plugins:
   - serverless-python-requirements
@@ -26,4 +28,4 @@ plugins:
 
 custom:
   serverless-offline:
-    httpPort: 3000
+    httpPort: 3001

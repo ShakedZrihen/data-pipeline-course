@@ -1,17 +1,26 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11
+# Use an official Node.js runtime as a parent image
+FROM node:18
 
-# Set the working directory in the container
-WORKDIR /app
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN npm install
 
-# Make port 80 available to the world outside this container
-EXPOSE 3000
+# Install the Serverless Framework globally
+RUN npm install -g serverless
 
-# Run app.py when the container launches
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "3000"]
+# Copy the rest of the application code
+COPY . .
+
+# Set environment variables for Serverless credentials
+ENV SERVERLESS_ACCESS_KEY=your_access_key
+
+# Expose the port that the Serverless Offline server will run on
+EXPOSE 3001
+
+# Command to run Serverless Offline
+CMD ["serverless", "offline", "start"]
