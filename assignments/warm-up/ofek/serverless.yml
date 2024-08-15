@@ -1,10 +1,10 @@
+app: myapp
 service: breaking-news-api
-frameworkVersion: '3'
 
 provider:
-  name: aws
-  runtime: python3.11
-  profile: warmapp
+    name: aws
+    runtime: python3.11
+    profile: warmup
 
 package:
   exclude:
@@ -21,4 +21,9 @@ functions:
 
 plugins:
   - serverless-python-requirements
-  - serverless-offline # for local development
+  - serverless-offline
+
+custom:
+    serverless-offline:
+      host: 0.0.0.0
+      httpPort: 3000
