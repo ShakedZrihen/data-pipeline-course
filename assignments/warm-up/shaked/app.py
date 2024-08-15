@@ -18,7 +18,7 @@ def breaking_news(date: Optional[str] = None, time: Optional[str] = None):
     for date in breaking_news_data:
         news_from_date = []
         for news in breaking_news_data[date]:
-            news_from_date.append({news: breaking_news_data[date][news]})
+            news_from_date.append({news: breaking_news_data[date][time]})
         formatted_data[date] = news_from_date
     return formatted_data
 
