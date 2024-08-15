@@ -1,10 +1,10 @@
-service: breaking-news-api
+app: warmapp
+service: warmapp-1
 frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: python3.11
-  profile: warmapp
 
 package:
   exclude:
