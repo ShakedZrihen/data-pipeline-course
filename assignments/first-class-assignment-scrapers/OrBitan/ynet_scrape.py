@@ -11,7 +11,7 @@ def ynet_scrape():
     url = 'https://www.ynet.co.il/news/category/184'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    news= soup.find_all('div', class_='titleRow')
+    news = soup.find_all('div', class_='titleRow')
     for new in news:
         date = new.find('div', class_='date')
         title = new.find('div', class_='title')
@@ -26,8 +26,10 @@ def ynet_scrape():
         news_list[final_time] = title.text
     print(news_list)
 
+
 ynet_scrape()
-todays_date = datetime.now().strftime('%Y-%m-%d') # yyyy-mm-dd
+
+todays_date = datetime.now().strftime('%Y-%m-%d')  # yyyy-mm-dd
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, f'{todays_date}.json')
 
