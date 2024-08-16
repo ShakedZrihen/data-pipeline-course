@@ -1,0 +1,39 @@
+service: lambda-processor
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+
+functions:
+  process:
+    handler: handler.process
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - DataRawQueue
+              - Arn
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-offline-sqs
+
+resources:
+  Resources:
+    DataRawQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
+
+custom:
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://sqs:9324 
+    region: us-east-1
+    accessKeyId: accessKey
+    secretAccessKey: secretKey
+    queues:
+      - QueueName: data-raw-q

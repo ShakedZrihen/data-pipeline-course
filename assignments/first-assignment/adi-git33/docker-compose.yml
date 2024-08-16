@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  lambda-crud:
+    build:
+      context: ./lambda-crud
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  lambda-processor:
+    build:
+      context: ./lambda-processor
+      dockerfile: Dockerfile
+    depends_on:
+      - sqs
+
+  lambda-scraper:
+    build:
+      context: ./lambda-scraper
+      dockerfile: Dockerfile
+    depends_on:
+      - sqs
+    ports:
+      - "8000:8000"
+    environment:
+      AWS_ACCESS_KEY_ID: "accessKey"
+      AWS_SECRET_ACCESS_KEY: "secretKey"
+  
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: sqs
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/elasticmq.conf
+
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

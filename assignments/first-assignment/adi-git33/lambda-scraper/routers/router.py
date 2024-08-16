@@ -1,22 +1,29 @@
 from fastapi import APIRouter, HTTPException
-from services.scrapper import breaking_news_get_all, breaking_news_get_filtered
-from services.utils import validate_input
-sqs = boto3.resource('sqs')
+from services.scrapper import scrape_ynet
+import boto3
+import os
+import json
 
 
-date_format = "%d/%m/%Y"
-time_format ="%H:%M"
+sqs = boto3.client(
+    'sqs', 
+    region_name="us-east-1",
+    endpoint_url='http://sqs:9324'
+)
+
+queue_url = 'http://sqs:9324/queue/data-raw-q'
 
 router = APIRouter()
 
 @router.post("/scrape")
-async def get_breaking_news(date: str = "", time: str = ""):
-    if not validate_input(date, date_format) or not validate_input(time, time_format):
-        raise HTTPException(status_code=400, detail="Invalid input")
-    if date or time:
-        filtered_res = breaking_news_get_filtered(date, time)
-        if not filtered_res:
-            raise HTTPException(status_code=404, detail="Breaking news with those filters doesn't exist")
-        return filtered_res
-    else:
-        return breaking_news_get_all()
+async def scrape():
+    try:
+        scraped_data = scrape_ynet()
+        response = sqs.send_message(
+            QueueUrl=queue_url,
+            MessageBody=json.dumps(scraped_data, ensure_ascii=False)
+        )
+        return {"message": "Data has been scraped and sent to SQS", "sqs_response": response}
+        # return scraped_data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

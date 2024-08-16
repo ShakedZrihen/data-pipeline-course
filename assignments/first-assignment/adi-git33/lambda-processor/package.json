@@ -1,7 +1,7 @@
 {
   "name": "adi-git33",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "handler.py",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "adi-git33": "file:",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-offline": "^13.6.0",
+    "serverless-offline-sqs": "^8.0.0",
     "serverless-wsgi": "^3.0.4"
   }
 }
