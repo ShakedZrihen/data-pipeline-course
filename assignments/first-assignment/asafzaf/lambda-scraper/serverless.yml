@@ -1,0 +1,16 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: asafza
+service: lambda-scraper
+
+provider:
+  name: aws
+  runtime: python3.9
+
+functions:
+  scraper:
+    handler: handler.scraper
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements

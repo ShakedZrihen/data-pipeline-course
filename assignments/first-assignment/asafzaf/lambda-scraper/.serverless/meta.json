@@ -1,0 +1,155 @@
+{
+  "unknown": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.19",
+    "isWithinCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "command": [],
+    "options": {},
+    "error": null,
+    "machineId": "9b17b6149c6404aed1379d21a185e0bf",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  },
+  "C:\\Users\\asafz\\Desktop\\pipes-python\\repo\\data-pipeline-course\\assignments\\first-assignment\\asafzaf\\lambda-scraper": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.19",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "aws": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "org": "asafza",
+            "service": "lambda-scraper",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.9",
+              "stage": "dev",
+              "region": "us-east-1",
+              "versionFunctions": true
+            },
+            "functions": {
+              "scraper": {
+                "handler": "handler.scraper",
+                "events": [
+                  {
+                    "http": null
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-python-requirements",
+              "serverless-offline"
+            ]
+          },
+          "configFileDirPath": "C:\\Users\\asafz\\Desktop\\pipes-python\\repo\\data-pipeline-course\\assignments\\first-assignment\\asafzaf\\lambda-scraper",
+          "config": {
+            "type": "aws"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "isDefaultConfig": true
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "C:\\Users\\asafz\\Desktop\\pipes-python\\repo\\data-pipeline-course\\assignments\\first-assignment\\asafzaf\\lambda-scraper",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "org": "asafza",
+      "service": "lambda-scraper",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.9",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true
+      },
+      "functions": {
+        "scraper": {
+          "handler": "handler.scraper",
+          "events": [
+            {
+              "http": null
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-python-requirements",
+        "serverless-offline"
+      ]
+    },
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: asafza\r\nservice: lambda-scraper\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n\r\nfunctions:\r\n  scraper:\r\n    handler: handler.scraper\r\n    events:\r\n      - http:\r\n\r\nplugins:\r\n  - serverless-python-requirements\r\n  - serverless-offline",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "error": {
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:854:2669)\n    at async PluginManager.loadAllPlugins (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:854:1293)\n    at async Serverless.init (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:861:9760)\n    at async runFramework (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:909:880)\n    at async route (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16304)\n    at async Object.run2 [as run] (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16702)\n    at async run3 (file:///C:/Users/asafz/.serverless/releases/4.1.19/package/dist/sf-core.js:920:17962)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
+    "params": {},
+    "machineId": "9b17b6149c6404aed1379d21a185e0bf",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "0d2a5f25-620a-4380-8a85-655a62f51d21",
+    "orgName": "asafza",
+    "userId": "fd7NW716KTH7KK0DK9",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "asafza",
+    "subscription": null,
+    "userEmail": "asaf.zafrir@gmail.com",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "471112933169",
+    "versionSf": "4.1.19",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:471112933169:stack/serverless-fastapi-prod/87556c90-4ebe-11ef-b527-0ebd25ef6105",
+    "serviceProviderAwsCfStackCreated": "2024-07-30T21:56:09.378Z",
+    "serviceProviderAwsCfStackUpdated": "2024-07-31T14:07:10.427Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "AppLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:471112933169:function:serverless-fastapi-prod-app:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-serverless-fastapi-prod-AppLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "HttpApiId",
+        "OutputValue": "2v4ff8lud2",
+        "Description": "Id of the HTTP API",
+        "ExportName": "sls-serverless-fastapi-prod-HttpApiId"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-fastapi-prod-serverlessdeploymentbucket-otm4tc4nvw7a",
+        "ExportName": "sls-serverless-fastapi-prod-ServerlessDeploymentBucketName"
+      },
+      {
+        "OutputKey": "HttpApiUrl",
+        "OutputValue": "https://2v4ff8lud2.execute-api.us-east-1.amazonaws.com",
+        "Description": "URL of the HTTP API",
+        "ExportName": "sls-serverless-fastapi-prod-HttpApiUrl"
+      }
+    ]
+  }
+}

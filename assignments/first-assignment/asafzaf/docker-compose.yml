@@ -1,0 +1,75 @@
+version: '3.8'
+services:
+  lambda-scraper:
+    build:
+      context: ./lambda-scraper
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - AWS_ACCESS_KEY_ID=123
+      - AWS_SECRET_ACCESS_KEY=123
+      - AWS_DEFAULT_REGION=us-east-1
+    depends_on:
+      - sqs
+    networks:
+      - asafzaf_app-network
+
+  lambda-processor:
+    build:
+      context: ./lambda-processor
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=123
+      - AWS_SECRET_ACCESS_KEY=123
+      - AWS_DEFAULT_REGION=us-east-1
+    depends_on:
+      - sqs
+    networks:
+      - asafzaf_app-network
+
+  sqs:
+    image: softwaremill/elasticmq:latest
+    container_name: data-raw-q
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+    networks:
+      - asafzaf_app-network
+  
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - asafzaf_app-network
+  
+  lambda-crud:
+    build:
+      context: ./lambda-crud
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    environment:
+      - AWS_ACCESS_KEY_ID=123
+      - AWS_SECRET
+      - AWS_DEFAULT_REGION=us-east-1
+    networks:
+      - asafzaf_app-network
+
+networks:
+  asafzaf_app-network:
+    driver: bridge
+
+volumes:
+  pgdata:

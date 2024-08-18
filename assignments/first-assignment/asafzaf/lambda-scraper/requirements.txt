@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+fastapi
+mangum
+uvicorn
+awscli
+boto3
