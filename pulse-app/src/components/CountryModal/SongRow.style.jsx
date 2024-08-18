@@ -7,7 +7,7 @@ export const SongWrapper = styled("div")`
   align-items: center;
   padding: 0 1rem;
   margin-bottom: 0.7rem;
-  background: ${({ position }) => (position % 2 ? `#9cffcd` : `#ff9cce`)};
+  background: ${({ position }) => (position % 2 ? `#F4538A` : `#59D5E0`)};
 `;
 
 export const Position = styled("p")`

@@ -7,6 +7,9 @@ const initialProps = {
   selectedChart: null
 };
 
+
+// [{ source: spotify, songName: songName, artistName: artistName, position: position, date: date }]
+
 const ChartsContext = createContext(initialProps);
 export const ChartsContextProvider = ({ children, selectedYear }) => {
   const [state, dispatch] = useReducer(reducer, {

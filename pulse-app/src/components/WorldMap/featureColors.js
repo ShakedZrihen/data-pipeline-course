@@ -25,8 +25,8 @@ export const genreColors = {
 };
 
 export const artistTypeColors = {
-  Band: "#9cffcd", // Mint Green
-  Male: "#ff9cce", // Pink
-  Female: "#a1f7ea", // Soft Teal
-  unknown: "#e6a8ff" // Lavender
+  Band: "#FAA300", 
+  Male: "#59D5E0", 
+  Female: "#F4538A", 
+  unknown: "#e6a8ff" 
 };

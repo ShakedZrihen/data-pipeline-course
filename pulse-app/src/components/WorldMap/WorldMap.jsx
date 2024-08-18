@@ -13,7 +13,7 @@ const StyledComposableMap = styled(ComposableMap)`
 `;
 
 const WorldMap = () => {
-  const { topSongFeaturesByCountry } = useWorldMapData();
+  const { topSongFeaturesByCountry, charts } = useWorldMapData();
   const modalProps = useModalProps();
 
   if (!topSongFeaturesByCountry) {
@@ -27,10 +27,13 @@ const WorldMap = () => {
           {({ geographies }) =>
             geographies.map((geo) => {
               const songData = topSongFeaturesByCountry[geo.id];
+
               // const byGenreColor = genreColors[songData?.genre] ?? "#D6D6DA";
               const byArtistTypeColor = artistTypeColors[songData?.artistType] ?? artistTypeColors.unknown;
+              const chart = charts[geo.id];
+
               const geoStyle = {
-                fill: byArtistTypeColor,
+                fill: chart ? byArtistTypeColor : "grey",
                 outline: "none"
               };
               const country = geo?.properties?.name ?? "N/A";
@@ -39,11 +42,11 @@ const WorldMap = () => {
                 <Fragment key={geo.rsmKey}>
                   <Tooltip title={songData?.genre ? `${country}-${songData?.genre}` : "No data"}>
                     <Geography
-                      onClick={modalProps.openModal}
+                      onClick={() => modalProps.openModal({ country, chart })}
                       geography={geo}
                       style={{
                         default: geoStyle,
-                        hover: { ...geoStyle, cursor: "pointer" },
+                        hover: { ...geoStyle, ...(chart && { cursor: "pointer" }) },
                         pressed: geoStyle
                       }}
                     />

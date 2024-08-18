@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { Modal, styled, Typography } from "@mui/material";
-import useCountryData from "./useCountryData";
 import SongRow from "./SongRow";
 
 const Wrapper = styled("div")`
@@ -21,13 +21,17 @@ const ChartWrapper = styled("div")`
 `;
 
 const CountryModal = (props) => {
-  const { name, chart } = useCountryData();
+  const { country, open, onClose, chart } = props;
+
+  if (!chart) {
+    return null;
+  }
 
   return (
-    <Modal {...props}>
+    <Modal open={open} onClose={onClose}>
       <Wrapper>
         <Typography variant="h3" component="h3">
-          {name}
+          {country}
         </Typography>
         <ChartWrapper>
           {chart.map((song) => (
