@@ -4,19 +4,13 @@ import Timeline from "./components/Timeline/Timeline";
 import WorldMap from "./components/WorldMap/WorldMap";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ChartsContextProvider } from "./state/context";
+import AppHeader from "./components/AppHeader";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark"
   }
 });
-
-const StyledHeader = styled("header")`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-`;
 
 const StyledAppContainer = styled("div")`
   padding: 2rem 4rem;
@@ -45,9 +39,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <ChartsContextProvider>
           <StyledAppContainer>
-            <StyledHeader>
-              <h1 style={{ color: "white" }}>Pulse</h1>
-            </StyledHeader>
+            <AppHeader />
             <StyledContent>
               <Timeline />
               <StyledWorldMapContainer>

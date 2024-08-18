@@ -1,11 +1,11 @@
 import { styled } from "@mui/material";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import useWorldMapData from "./useWorldMapData";
 import { artistTypeColors } from "./featureColors";
 import Tooltip from "@mui/material/Tooltip";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import CountryModal from "../CountryModal/CountryModal";
 import useModalProps from "../CountryModal/useModalProps";
+import ChartsContext from "../../state/context";
 
 const StyledComposableMap = styled(ComposableMap)`
   width: 100%;
@@ -13,7 +13,11 @@ const StyledComposableMap = styled(ComposableMap)`
 `;
 
 const WorldMap = () => {
-  const { topSongFeaturesByCountry, charts } = useWorldMapData();
+  const {
+    state: { worldMapData }
+  } = useContext(ChartsContext);
+  const { topSongFeaturesByCountry, charts } = worldMapData;
+
   const modalProps = useModalProps();
 
   if (!topSongFeaturesByCountry) {
