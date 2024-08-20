@@ -2,12 +2,14 @@
 import { createContext, useEffect, useMemo, useReducer, useRef } from "react";
 import reducer from "./reducer";
 import { getChartByYear } from "../services/chart.service";
-import { ON_UPDATE_WORLD_MAP_DATA } from "./actions";
+import { onUpdateWorldMapData } from "./actions";
 import { getTopSongFeaturesByCountry } from "../common/utils/charts";
+import { FILTERS } from "../common/consts/filters";
 
 const initialProps = {
   selectedYear: -1,
-  selectedChart: null
+  selectedChart: null,
+  byFilter: FILTERS.GENDER
 };
 
 const ChartsContext = createContext(initialProps);
@@ -32,7 +34,7 @@ export const ChartsContextProvider = ({ children, selectedYear }) => {
       }
       const topSongFeaturesByCountry = getTopSongFeaturesByCountry(charts);
 
-      dispatch({ type: ON_UPDATE_WORLD_MAP_DATA, payload: { topSongFeaturesByCountry, charts } });
+      dispatch(onUpdateWorldMapData({ topSongFeaturesByCountry, charts }));
     };
 
     if (!Object.keys(state.worldMapData)) {

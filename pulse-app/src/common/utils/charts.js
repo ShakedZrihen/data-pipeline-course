@@ -1,5 +1,5 @@
 export const getTopSongFeaturesByCountry = (charts) => {
-  const genreByCountry = Object.entries(charts).reduce((acc, [country, chart]) => {
+  const featuresByCountry = Object.entries(charts).reduce((acc, [country, chart]) => {
     const genre = chart?.[0]?.songFeatures?.genre ?? "unknown";
     const artistType = chart?.[0]?.artistFeatures?.type ?? "unknown";
     const artistGender = chart?.[0]?.artistFeatures?.gender ?? "unknown";
@@ -8,5 +8,5 @@ export const getTopSongFeaturesByCountry = (charts) => {
     return acc;
   }, {});
 
-  return genreByCountry;
+  return featuresByCountry;
 };

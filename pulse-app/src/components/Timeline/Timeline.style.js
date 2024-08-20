@@ -9,7 +9,7 @@ export const StyledTimeline = styled("div")`
 export const StyledYearBox = styled("div")`
   height: 1.2rem;
   width: 0.8rem;
-  background-color: ${({ selected }) => (selected ? "#F4538A" : "white")};
+  background-color: ${({ selected }) => (selected ? "#ff8fb7" : "white")};
 `;
 
 export const StyledYear = styled("div")`
