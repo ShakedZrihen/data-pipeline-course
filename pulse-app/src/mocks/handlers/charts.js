@@ -1,9 +1,9 @@
 import { http, HttpResponse } from "msw";
-import { SERVER_BASE_URL } from "../../common/consts/api";
+import { MOCK_URL } from "../../common/consts/api";
 import chartsByYear from "../fixtures/chartsByYear";
 
 function mockUrl(url) {
-  return new URL(url, SERVER_BASE_URL).toString();
+  return new URL(url, MOCK_URL).toString();
 }
 
 // Function to generate days for a given month and year
