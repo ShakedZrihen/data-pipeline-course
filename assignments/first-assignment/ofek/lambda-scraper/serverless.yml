@@ -1,0 +1,29 @@
+app: myapp
+service: breaking-news-api
+
+provider:
+    name: aws
+    runtime: python3.11
+
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+custom:
+    serverless-offline:
+      host: 0.0.0.0
+      httpPort: 3000

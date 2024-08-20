@@ -1,3 +1,5 @@
 requests
 beautifulsoup4
 dateutil
+fastapi==0.89.1
+mangum==0.17.0

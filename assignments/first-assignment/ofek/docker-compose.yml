@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+  sqs:
+    image: softwaremill/elasticmq:latest
+    ports:
+      - "9324:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf
+    networks:
+      - mynetwork
+
+  lambda-scraper:
+    build:
+      context: ./lambda-scraper
+    container_name: lambda-scraper
+    ports:
+      - '3000:3000'
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+    networks:
+      - mynetwork
+
+  lambda-processor:
+    build:
+      context: ./lambda-processor
+    container_name: lambda-processor
+    command: python handler.py
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+    depends_on:
+      - sqs
+    networks:
+      - mynetwork
+
+  lambda-crud:
+    build:
+      context: ./lambda-crud
+    environment:
+      - AWS_ACCESS_KEY_ID=fake_access_key
+      - AWS_SECRET_ACCESS_KEY=fake_secret_key
+    ports:
+      - "3001:3000"
+    networks:
+      - mynetwork
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

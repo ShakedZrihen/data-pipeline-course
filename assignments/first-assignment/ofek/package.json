@@ -1,0 +1,19 @@
+{
+  "name": "ofek",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serverless": "^3.39.0",
+    "serverless-offline": "^14.0.0"
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "serverless-python-requirements": "^6.1.0"
+  }
+}

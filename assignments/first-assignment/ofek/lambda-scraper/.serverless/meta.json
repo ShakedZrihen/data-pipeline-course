@@ -1,0 +1,144 @@
+{
+  "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-scraper": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.19",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "aws": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "app": "myapp",
+            "service": "breaking-news-api",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.11",
+              "profile": "lambdascraper",
+              "stage": "dev",
+              "region": "us-east-1",
+              "versionFunctions": true
+            },
+            "package": {
+              "exclude": [
+                "node_modules/**",
+                "__pycache__/**",
+                ".serverless/**",
+                ".venv/**"
+              ]
+            },
+            "functions": {
+              "api": {
+                "handler": "handler.handler",
+                "events": [
+                  {
+                    "httpApi": "*"
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-python-requirements",
+              "serverless-offline"
+            ],
+            "custom": {
+              "serverless-offline": {
+                "host": "0.0.0.0",
+                "httpPort": 3000
+              }
+            }
+          },
+          "configFileDirPath": "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-scraper",
+          "config": {
+            "type": "aws"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "isDefaultConfig": true
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-scraper",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "app": "myapp",
+      "service": "breaking-news-api",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.11",
+        "profile": "lambdascraper",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true
+      },
+      "package": {
+        "exclude": [
+          "node_modules/**",
+          "__pycache__/**",
+          ".serverless/**",
+          ".venv/**"
+        ]
+      },
+      "functions": {
+        "api": {
+          "handler": "handler.handler",
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-python-requirements",
+        "serverless-offline"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "host": "0.0.0.0",
+          "httpPort": 3000
+        }
+      }
+    },
+    "serviceRawFile": "app: myapp\r\nservice: breaking-news-api\r\n\r\nprovider:\r\n    name: aws\r\n    runtime: python3.11\r\n    profile: lambdascraper\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - __pycache__/**\r\n    - .serverless/**\r\n    - .venv/**\r\n\r\nfunctions:\r\n  api:\r\n    handler: handler.handler\r\n    events:\r\n      - httpApi: '*'\r\n\r\nplugins:\r\n  - serverless-python-requirements\r\n  - serverless-offline\r\n\r\ncustom:\r\n    serverless-offline:\r\n      host: 0.0.0.0\r\n      httpPort: 3000",
+    "command": [
+      "offline",
+      "start"
+    ],
+    "options": {},
+    "error": {
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:854:2669)\n    at async PluginManager.loadAllPlugins (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:854:1293)\n    at async Serverless.init (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:861:9760)\n    at async runFramework (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:909:880)\n    at async route (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16304)\n    at async Object.run2 [as run] (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:920:16702)\n    at async run3 (file:///C:/Users/%D7%90%D7%95%D7%A4%D7%A7%20%D7%90%D7%9C%D7%99%D7%94%D7%95/.serverless/releases/4.1.19/package/dist/sf-core.js:920:17962)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
+    "params": {},
+    "machineId": "7233382254d0c000d92674fcfa29b435",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "08428257-9651-4795-a0cf-f5e0b3163c9a",
+    "orgName": "ofekeli",
+    "userId": "LTYl2KdBdL9hm8d43F",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "ofekeli",
+    "subscription": null,
+    "userEmail": "ofekeliyahu123@gmail.com",
+    "versionSf": "4.1.19",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}

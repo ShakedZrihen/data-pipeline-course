@@ -27,7 +27,7 @@ as an engineer, you need to create a local development environment using Docker 
     ports:
       - "9324:9324"
     volumes:
-      - ./elasticmq.conf:/opt/elasticmq.conf
+      - ./elasticmq.elasticmq.conf:/opt/elasticmq.elasticmq.conf
    ```
 
    elasticmq.conf:

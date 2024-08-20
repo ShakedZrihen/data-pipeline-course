@@ -5,7 +5,7 @@ services:
     ports:
       - "9324:9324"
     volumes:
-      - ./elasticmq.conf:/opt/elasticmq.conf
+      - ./elasticmq.elasticmq.conf:/opt/elasticmq.elasticmq.conf
   sqs-create:
     image: infrastructureascode/aws-cli:latest
     container_name: sqs-create

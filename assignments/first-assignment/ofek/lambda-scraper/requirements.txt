@@ -1,0 +1,8 @@
+requests
+beautifulsoup4
+python-dateutil
+fastapi==0.89.1
+mangum==0.17.0
+uvicorn
+httpx
+boto3

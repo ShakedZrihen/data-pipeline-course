@@ -1,0 +1,125 @@
+{
+  "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-crud": {
+    "versionSfCore": null,
+    "versionFramework": "4.1.23",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "aws": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "lambda-crud",
+            "provider": {
+              "name": "aws",
+              "runtime": "python3.11",
+              "stage": "dev",
+              "region": "us-east-1",
+              "versionFunctions": true
+            },
+            "functions": {
+              "api": {
+                "handler": "handler.handler",
+                "events": [
+                  {
+                    "httpApi": "*"
+                  }
+                ]
+              }
+            },
+            "plugins": [
+              "serverless-python-requirements",
+              "serverless-offline"
+            ],
+            "custom": {
+              "serverless-offline": {
+                "host": "0.0.0.0",
+                "port": 3001
+              }
+            }
+          },
+          "configFileDirPath": "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-crud",
+          "config": {
+            "type": "aws"
+          },
+          "options": {},
+          "stage": "dev",
+          "dashboard": null,
+          "_credentialsPromise": "<REDACTED>",
+          "isDefaultConfig": true
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "C:\\workshoppyton\\pythonProject1\\data-pipeline-course\\assignments\\first-assignment\\ofek\\lambda-crud",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "lambda-crud",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.11",
+        "stage": "dev",
+        "region": "us-east-1",
+        "versionFunctions": true
+      },
+      "functions": {
+        "api": {
+          "handler": "handler.handler",
+          "events": [
+            {
+              "httpApi": "*"
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-python-requirements",
+        "serverless-offline"
+      ],
+      "custom": {
+        "serverless-offline": {
+          "host": "0.0.0.0",
+          "port": 3001
+        }
+      }
+    },
+    "serviceRawFile": "service: lambda-crud\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.11\r\n\r\nfunctions:\r\n  api:\r\n    handler: handler.handler\r\n    events:\r\n      - httpApi: '*'\r\n\r\nplugins:\r\n  - serverless-python-requirements\r\n  - serverless-offline\r\n\r\ncustom:\r\n  serverless-offline:\r\n    host: 0.0.0.0\r\n    port: 3001\r\n",
+    "command": [
+      "start",
+      "offline"
+    ],
+    "options": {},
+    "error": {
+      "message": "Serverless command \"start offline\" not found. Run \"serverless help\" for a list of all available commands.",
+      "code": "UNRECOGNIZED_CLI_COMMAND"
+    },
+    "params": {},
+    "machineId": "02ef48611c814172393489cb862a287c",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "08428257-9651-4795-a0cf-f5e0b3163c9a",
+    "orgName": "ofekeli",
+    "userId": "LTYl2KdBdL9hm8d43F",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "ofekeli",
+    "subscription": null,
+    "userEmail": "ofekeliyahu123@gmail.com",
+    "versionSf": "4.1.23",
+    "serviceProviderAwsCfStackName": "lambda-crud-dev",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
