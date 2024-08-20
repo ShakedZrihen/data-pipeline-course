@@ -6,3 +6,5 @@ assignments/final-project/shaked/*
 **/db/
 assignments/warm-up/MoranSin/package-lock.json
 **/.idea/
+**.env
+**.env

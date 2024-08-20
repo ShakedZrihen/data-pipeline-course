@@ -1,0 +1,76 @@
+<html class="no-touchevents" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+        <link href="/spotifycharts.svg" rel="shortcut icon" />
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+        <title>Spotify Charts - Spotify Charts are made by fans</title>
+        <meta content="The new home for Spotify Charts. Dive into artist, genre, city and local pulse charts to see what music is moving fans around the world." name="description" />
+        <meta content="Spotify Charts - Spotify Charts are made by fans" property="og:title" />
+        <meta content="The new home for Spotify Charts. Dive into artist, genre, city and local pulse charts to see what music is moving fans around the world." property="og:description" />
+        <meta content="https://charts-images.scdn.co/csc_assets/thumbnails/embed_thumbnail_1200x630.png" property="og:image" />
+        <meta content="ruWC_F0SbT2WKsLaxexOhIEBbc8MpAqW2mNLiIIEnMs" name="google-site-verification" />
+        <meta content="8" name="next-head-count" />
+        <link as="style" href="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/css/13dbddf485e4a660.css" rel="preload" />
+        <link data-n-g="" href="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/css/13dbddf485e4a660.css" rel="stylesheet" />
+        <link as="style" href="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/css/703a0d12455970a3.css" rel="preload" />
+        <link data-n-p="" href="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/css/703a0d12455970a3.css" rel="stylesheet" />
+        <noscript data-n-css=""></noscript>
+        <script defer="" nomodule="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/webpack-4b5c309a0175dd5a.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/framework-dc33c0b5493501f0.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/main-a10220fda36c7b79.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/pages/_app-21b239bd58aa6258.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/75fc9c18-6268e8a2f6ae8a14.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/279-49a5c3620c16a459.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/81-90e749073a066311.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/445-b8dcc4d1e4c92040.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/946-8e4261bd7200bb14.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/970-4effbaa426a135f8.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/646-c337120e022040b4.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/831-57dadb07a3f0c3cc.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/214-7fc9958bb19948f9.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/chunks/pages/charts/view/%5Balias%5D/%5Bdate%5D-802697ff656a68a9.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/rzdFvcdHld2tP5U8FYxfv/_buildManifest.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/rzdFvcdHld2tP5U8FYxfv/_ssgManifest.js"></script>
+        <script defer="" src="https://mrkt-web.scdn.co/charts-spotify-com/_next/static/rzdFvcdHld2tP5U8FYxfv/_middlewareManifest.js"></script>
+        <style data-styled="active" data-styled-version="5.3.5"></style>
+    </head>
+    <body data-qa="spotify-charts-website">
+        <div data-reactroot="" id="__next">
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUI-Regular-cc3b1de388efa4cbca6c75cebc24585e.woff2" rel="preload" type="font/woff2" />
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUITitleVariable-8769ccfde3379b7ebcadd9529b49d0cc.woff2" rel="preload" type="font/woff2" />
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUITitle-Bold-37290f1de77f297fcc26d71e9afcf43f.woff2" rel="preload" type="font/woff2" />
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUI-Bold-4264b799009b1db5c491778b1bc8e5b7.woff2" rel="preload" type="font/woff2" />
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUITitleVariable-8769ccfde3379b7ebcadd9529b49d0cc.woff2" rel="preload" type="font/woff2" />
+            <link as="font" crossorigin="anonymous" href="https://encore.scdn.co/fonts/SpotifyMixUITitle-Extrabold-ba6c73cd7f82c81e49cf2204017803ed.woff2" rel="preload" type="font/woff2" />
+            <div class="_app__StyledAppContainer-sc-1qg2pyp-0 fywcK encore-layout-themes encore-creator-light-theme encore-layout-themes">
+                <footer class="Container-sc-79vijq-0 jHHBen ChartsFooter__StyledAppFooter-sc-68p0np-0 btVmFl">
+                    <nav>
+                        <ul class="TypeList__TypeListElement-sc-1jhixr6-0 cYaiNz List-sc-vnil8g-0 bwSore" data-encore-id="typeList" role="list">
+                            <li class="encore-text encore-text-body-medium encore-internal-color-text-base TypeListItem__TypeListItemElement-sc-q1l2mf-0 faxyKF Item-sc-16ne99o-0 KnKZc" data-encore-id="typeListItem">
+                                <a class="Link-sc-k8gsk-0 jZggoQ Link-sc-fe80qw-0 fTUXkm encore-text-marginal-bold" data-encore-id="textLink" href="https://www.spotify.com/legal" rel="noopener noreferrer" target="_blank">Legal</a>
+                            </li>
+                            <li class="encore-text encore-text-body-medium encore-internal-color-text-base TypeListItem__TypeListItemElement-sc-q1l2mf-0 faxyKF Item-sc-16ne99o-0 KnKZc" data-encore-id="typeListItem">
+                                <a class="Link-sc-k8gsk-0 jZggoQ Link-sc-fe80qw-0 fTUXkm encore-text-marginal-bold" data-encore-id="textLink" href="https://www.spotify.com/legal/privacy-policy/" rel="noopener noreferrer" target="_blank">Privacy</a>
+                            </li>
+                            <li class="encore-text encore-text-body-medium encore-internal-color-text-base TypeListItem__TypeListItemElement-sc-q1l2mf-0 faxyKF Item-sc-16ne99o-0 KnKZc" data-encore-id="typeListItem">
+                                <a class="Link-sc-k8gsk-0 jZggoQ Link-sc-fe80qw-0 fTUXkm encore-text-marginal-bold" data-encore-id="textLink" href="https://www.spotify.com/legal/cookies-policy/" rel="noopener noreferrer" target="_blank">Cookies</a>
+                            </li>
+                            <li class="encore-text encore-text-body-medium encore-internal-color-text-base TypeListItem__TypeListItemElement-sc-q1l2mf-0 faxyKF Item-sc-16ne99o-0 KnKZc" data-encore-id="typeListItem">
+                                <a class="Link-sc-k8gsk-0 jZggoQ Link-sc-fe80qw-0 fTUXkm encore-text-marginal-bold" data-encore-id="textLink" href="https://support.spotify.com/us/artists/article/charts/" rel="noopener noreferrer" target="_blank">FAQ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div>
+                        <small class="encore-text encore-text-marginal Copyright-sc-15d7gge-0 hMzUTa" data-encore-id="text" translate="no">© <!-- -->2024<!-- --> Spotify AB</small>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{}},"page":"/charts/view/[alias]/[date]","query":{},"buildId":"rzdFvcdHld2tP5U8FYxfv","assetPrefix":"https://mrkt-web.scdn.co/charts-spotify-com","nextExport":true,"autoExport":true,"isFallback":false,"scriptLoader":[]}</script>
+        <next-route-announcer>
+            <p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; width: 1px; white-space: nowrap; overflow-wrap: normal;">Spotify Charts - Spotify Charts are made by fans</p>
+        </next-route-announcer>
+    </body>
+</html>

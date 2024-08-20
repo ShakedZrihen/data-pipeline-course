@@ -1,68 +1,30 @@
-# Data Pipeline
 
-## Course installations list
+# Final Assignment
 
-### Docker - latest
+## Description
 
-1. using [website](https://docs.docker.com/engine/install/)
-2. using brew (for mac)
-    install brew:
+For the final assignment, you need to enhance your Lambda Scraper to be triggered every 6 hours, scrape data from a **given website**, and put the scraped data into the SQS. Additionally, the Lambda Processor should format this data and save it into PostgreSQL using the CRUD Lambda.
 
-    ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+### Requirements
 
-    install docker:
+1. **Lambda Scraper**:
+   - Modify the Lambda Scraper to be triggered every 6 hours.
+   - Scrape data from a **specified website**.
+   - Put the scraped data into the SQS queue `data-raw-q`.
 
-    ```bash
-    brew install docker --cask
-    ```
+2. **Lambda Processor**:
+   - Triggered by SQS events.
+   - Format the data and save it into the PostgreSQL database using the CRUD Lambda.
 
-## python3 - 3.11
+3. **Lambda CRUD**:
+   - Expose additional routes:
+     - GET `/data` - Return data from PostgreSQL.
+     - POST `/data` - Save data into PostgreSQL.
 
-1. using [website](https://www.python.org/downloads/)
-2. using brew (for mac)
-    install brew:
+### DoD
 
-    ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+your personal data pipeline should be able to run locally and:
 
-    install python3:
-
-    ```bash
-    brew install pyenv
-    pyenv install 3.11
-    ```
-
-## nodeJS - v20.11
-
-1. using [website](https://nodejs.org/en/download)
-2. using brew (for mac)
-    install brew:
-
-    ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
-
-    install nodejs:
-
-    ```bash
-    brew install node@20.11.0
-    ```
-
-## aws-cli - v2.7.7
-
-1. using [website](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
-2. using brew (for mac)
-    install brew:
-
-    ```bash
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
-
-    install nodejs:
-
-    ```bash
-    brew install awscli
-    ```
+- scrape
+- save
+- serve data

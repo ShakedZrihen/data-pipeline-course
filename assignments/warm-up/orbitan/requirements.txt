@@ -1,4 +1,0 @@
-fastapi==0.89.1
-mangum==0.17.0
-pytest
-uvicorn

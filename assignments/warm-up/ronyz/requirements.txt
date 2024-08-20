@@ -1,5 +1,0 @@
-fastapi~=0.111.1
-uvicorn
-mangum~=0.17.0
-pytest~=8.3.2
-httpx

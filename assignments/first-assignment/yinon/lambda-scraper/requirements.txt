@@ -1,5 +1,0 @@
-fastapi
-mangum
-requests
-bs4
-boto3

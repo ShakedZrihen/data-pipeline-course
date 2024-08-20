@@ -1,0 +1,10 @@
+fastapi
+pydantic
+scrapy
+boto3
+uvicorn
+pydantic-settings
+beautifulsoup4 
+requests
+selenium
+playwright
