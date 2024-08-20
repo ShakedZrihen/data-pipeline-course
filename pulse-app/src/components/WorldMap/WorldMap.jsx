@@ -40,17 +40,13 @@ const WorldMap = () => {
                 [FILTERS.GENRE]: byGenreColor
               };
 
-              if (songData) {
-                console.log({ songData });
-              }
-
               const tooltipByFilter = {
                 [FILTERS.GENDER]: songData?.artistType,
                 [FILTERS.GENRE]: songData?.genre
               };
 
               const color = colorByFilter[byFilter];
-              const tooltipDescription = tooltipByFilter[byFilter] ?? 'no data';
+              const tooltipDescription = tooltipByFilter[byFilter] ?? "no data";
 
               const chart = charts[geo.id];
 

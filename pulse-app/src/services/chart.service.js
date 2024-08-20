@@ -12,3 +12,9 @@ export const getChartByYear = async (year) => {
 
   return response;
 };
+
+export const getChartByDate = async (date) => {
+  const response = await axios.get(new URL(`/charts?date=${date}`, SERVER_BASE_URL).toString());
+
+  return response;
+};

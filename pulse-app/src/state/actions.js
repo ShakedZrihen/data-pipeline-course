@@ -1,4 +1,5 @@
 export const ON_SELECT_YEAR = "ON_SELECT_YEAR";
+export const ON_SELECT_DATE = "ON_SELECT_DATE";
 export const ON_SELECT_CHART = "ON_SELECT_CHART";
 export const ON_UPDATE_WORLD_MAP_DATA = "ON_UPDATE_WORLD_MAP_DATA";
 export const ON_CHANGE_BY_FILTER = "ON_CHANGE_BY_FILTER";
@@ -6,6 +7,11 @@ export const ON_CHANGE_BY_FILTER = "ON_CHANGE_BY_FILTER";
 export const onSelectYear = (year) => ({
   type: ON_SELECT_YEAR,
   payload: year
+});
+
+export const onSelectDate = (date) => ({
+  type: ON_SELECT_DATE,
+  payload: date
 });
 
 export const onSelectChart = (chart) => ({
