@@ -1,0 +1,20 @@
+{
+  "name": "ronyz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "serverless": "^3.39.0",
+    "serverless-offline": "^11.6.0",
+    "serverless-offline-sqs": "^8.0.0",
+    "serverless-python-requirements": "^6.1.1",
+    "serverless-wsgi": "^3.0.4",
+    "velocityjs": "^2.0.6"
+  }
+}

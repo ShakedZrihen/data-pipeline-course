@@ -1,0 +1,50 @@
+app: first-assignment
+service: first-assignment-1
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: us-east-1
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: lambda-scraper/handler.handler 
+    events:
+      - httpApi:
+          path: /scrape
+          method: post
+  crud:
+    handler: lambda-crud/handler.handler
+    events:
+      - httpApi:
+          path: /health
+          method: get
+  processor:
+    handler: lambda-processor/handler.handler
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt: [MyQueue, Arn]
+          batchSize: 10
+
+resources:
+  Resources:
+    MyQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: data-raw-q
+
+custom:
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://sqs:9324
+    accessKeyId: local

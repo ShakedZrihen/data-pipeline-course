@@ -40,7 +40,3 @@ def get_news_by_date_and_time(date, time):
     raise HTTPException(status_code=404, detail="Not Found")
 
 
-# print(get_breaking_news())
-# print(get_news_by_date("2024-07-30"))
-# print(get_news_by_time("17:04:55"))
-# print(get_news_by_date_and_time("2024-07-30", "17:04:55"))

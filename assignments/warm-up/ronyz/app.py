@@ -4,7 +4,6 @@ from services.controller import get_breaking_news, get_news_by_time, get_news_by
 
 app = FastAPI()
 
-print("over here")
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

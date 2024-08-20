@@ -1,0 +1,23 @@
+services:
+  sqs:
+    image: softwaremill/elasticmq:latest
+    ports:
+      - "9324:9324"
+  
+  sls:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - '3000:3000'
+    container_name: sls
+    image: sls:latest
+    depends_on:
+      - sqs
+    environment:
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://sqs:9324
+
+  pos

@@ -1,0 +1,7 @@
+mangum
+fastapi
+requests
+bs4
+python-dateutil
+datetime
+boto3
