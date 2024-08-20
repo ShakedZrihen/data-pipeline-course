@@ -1,0 +1,27 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ofekeli
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: myapp
+service: breaking-news-api
+
+provider:
+    name: aws
+    runtime: python3.11
+    profile: warmup
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
