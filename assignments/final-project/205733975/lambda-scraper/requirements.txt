@@ -1,0 +1,8 @@
+fastapi
+pydantic
+boto3
+uvicorn
+requests
+mangum
+beautifulsoup4
+requests
