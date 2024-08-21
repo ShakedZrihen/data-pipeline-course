@@ -158,11 +158,11 @@ def get_charts(date: str = Query(..., description="The date for which to retriev
                     "duration": str(row.duration),
                     "spotify_url": row.spotify_url,
                     "artistFeatures": {
-                        "type": "Solo",  # Assuming solo, you might want to add logic for this
+                        "type": "Solo",
                         "gender": row.gender if row.gender else "Unknown"
                     },
                     "songFeatures": {
-                        "key": "Unknown",  # You don't have this information in your database
+                        "key": "Unknown",
                         "genre": row.genreName if row.genreName else "Unknown",
                         "language": row.language if row.language else "Unknown"
                     }

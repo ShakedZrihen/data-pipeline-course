@@ -44,7 +44,7 @@ def scrape_data_for_date_and_country(date, country):
             peak_rank = entry['chartEntryData'].get('peakRank', "N/A")
 
             song_data = {
-                'date': chart_date,  # Use the chart_date instead of the input date
+                'date': chart_date,
                 'song_name': track_name,
                 'artist_names': artist_name,
                 'release_date': release_date,
@@ -56,7 +56,7 @@ def scrape_data_for_date_and_country(date, country):
                     "currentRank": rank,
                     "previousRank": previous_rank,
                     "peakRank": peak_rank,
-                    "rankDate": chart_date,  # Use the chart_date here as well
+                    "rankDate": chart_date,
                 }
             }
             top_songs.append(song_data)
@@ -86,7 +86,7 @@ def scrape_data():
     while current_date <= end_date:
         for country in countries:
             scrape_data_for_date_and_country(current_date.strftime('%Y-%m-%d'), country)
-            time.sleep(0.3)  # Delay of 2 seconds to prevent token blockage
+            time.sleep(0.3)
         current_date += timedelta(weeks=1)
 
     return {"message": "Scraping completed"}
