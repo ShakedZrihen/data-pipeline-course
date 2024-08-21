@@ -1,0 +1,22 @@
+service: lambda-scraper
+
+provider:
+  name: aws
+  runtime: python3.11
+
+functions:
+  app:
+    handler: handler.app
+    events:
+      - http:
+          path: scrape
+          method: POST
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+
