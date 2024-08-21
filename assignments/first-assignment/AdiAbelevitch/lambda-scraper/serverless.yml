@@ -1,0 +1,21 @@
+service: lambda-scraper
+
+provider:
+  name: aws
+  runtime: python3.11
+
+plugins:
+  - serverless-offline
+
+functions:
+  scrape:
+    handler: handler.scrape
+    events:
+      - httpApi:
+          method: POST
+          path: /scrape
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+  ports:
+    - "8000:8000"

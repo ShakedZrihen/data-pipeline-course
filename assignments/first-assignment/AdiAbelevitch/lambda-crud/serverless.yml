@@ -1,0 +1,40 @@
+service: lambda-crud
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11
+
+package:
+  exclude:
+    - node_modules/**
+    - __pycache__/**
+    - .serverless/**
+    - .venv/**
+
+functions:
+  api:
+    handler: handler.health
+    layers:
+      - {Ref: PythonRequirementsLambdaLayer}
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+  serverless-offline:
+    host: 0.0.0.0
+    ports:
+      - "8001:8001"
+
+
+layers:
+  pythonRequirements:
+    path: requirements
+    compatibleRuntimes:
+      - python3.11
