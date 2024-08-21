@@ -1,6 +1,7 @@
 import os
 import time
 import boto3
+from pprint import pprint
 
 
 def handler(event, context):
@@ -13,14 +14,10 @@ def handler(event, context):
     )
     try:
         queue_url = "http://sqs:9324/000000000000/data-raw-q"
-        response = sqs.receive_message(QueueUrl=queue_url)
-        print('Waiting for messages...')
-        while not len(response['Messages']):
-            time.sleep(5)
-            response = sqs.receive_message(QueueUrl=queue_url)
-        sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=response['Messages'][0]['ReceiptHandle'])
-        print(response['Messages'][0]['Body'])
-        return response
+        for record in event['Records']:
+            sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=record['receiptHandle'])
+            pprint(record['body'])
+        return event
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
