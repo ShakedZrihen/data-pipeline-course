@@ -20,4 +20,13 @@ services:
       - AWS_DEFAULT_REGION=us-west-1
       - AWS_ENDPOINT_URL=http://sqs:9324
 
-  pos
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: local
+      POSTGRES_DB: local
+    volumes:
+      - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql

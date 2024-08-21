@@ -48,3 +48,11 @@ custom:
     apiVersion: '2012-11-05'
     endpoint: http://sqs:9324
     accessKeyId: local
+    secretAccessKey: local
+    queues:
+      - QueueName: data-raw-q
+
+plugins:
+  - serverless-python-requirements
+  - serverless-offline-sqs
+  - serverless-offline

@@ -48,4 +48,14 @@ def scrape():
             QueueUrl=queue_url,
             MessageBody=json.dumps(data)
         )
-        print("message sent to qu
+        print("message sent to queue")
+    
+    except Exception as e:
+        print(f"failed to send message to queue: {e}")
+        raise HTTPException(status_code=500, detail="failed to send message to queue")
+   
+    finally:
+        return {"message": "scraped ynet"}
+
+
+handler = Mangum(app)
