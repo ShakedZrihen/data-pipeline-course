@@ -9,7 +9,8 @@ import ChartsContext from "../../state/context";
 import { FILTERS } from "../../common/consts/filters";
 
 const StyledComposableMap = styled(ComposableMap)`
-  width: 100%;
+  // width: 100%;
+  flex-grow: 1;
   height: 80%;
 `;
 
