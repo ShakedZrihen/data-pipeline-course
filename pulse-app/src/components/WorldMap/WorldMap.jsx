@@ -32,6 +32,7 @@ const WorldMap = () => {
         <Geographies geography={"/worldFeatures.json"}>
           {({ geographies }) =>
             geographies.map((geo) => {
+              console.log({ id: geo.id, name: geo.properties.name });
               const songData = topSongFeaturesByCountry[geo.id];
               const byArtistTypeColor = artistTypeColors[songData?.artistType] ?? artistTypeColors.unknown;
               const byGenreColor = genreColors[songData?.genre] ?? "#D6D6DA";

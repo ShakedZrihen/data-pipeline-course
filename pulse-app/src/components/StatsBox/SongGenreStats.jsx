@@ -3,7 +3,8 @@ import ChartsContext from "../../state/context";
 import { normalizeCounts } from "../../common/utils/stats";
 import { GraphContainer, Label, LineBox, LineContainer, StyledStatsBox } from "./StatsBox.style";
 
-const GenderStats = () => {
+// TODO: change content to fit all genres
+const SongGenreStats = () => {
   const {
     state: {
       worldMapData: { topSongFeaturesByCountry }
@@ -39,4 +40,4 @@ const GenderStats = () => {
   );
 };
 
-export default GenderStats;
+export default SongGenreStats;
