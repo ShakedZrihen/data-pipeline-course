@@ -32,7 +32,6 @@ export const getThursdayWeeks = (payload) => {
   const data = payload?.availableDates ?? payload;
   // Iterate over each year
   Object.keys(data).forEach((year) => {
-    console.log({year})
     // Iterate over each month in the year
     Object.keys(data[year]).forEach((month) => {
       // Iterate over each day in the month

@@ -1,12 +1,13 @@
 import { styled } from "@mui/material";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { artistTypeColors, genreColors } from "./featureColors";
+import { artistTypeColors, COLOR_PALETTES, genreColors } from "./featureColors";
 import Tooltip from "@mui/material/Tooltip";
 import { Fragment, useContext } from "react";
 import CountryModal from "../CountryModal/CountryModal";
 import useModalProps from "../CountryModal/useModalProps";
 import ChartsContext from "../../state/context";
 import { FILTERS } from "../../common/consts/filters";
+import { hashGenreToIndex } from "../../common/utils/colors";
 
 const StyledComposableMap = styled(ComposableMap)`
   // width: 100%;
@@ -32,10 +33,9 @@ const WorldMap = () => {
         <Geographies geography={"/worldFeatures.json"}>
           {({ geographies }) =>
             geographies.map((geo) => {
-              console.log({ id: geo.id, name: geo.properties.name });
               const songData = topSongFeaturesByCountry[geo.id];
               const byArtistTypeColor = artistTypeColors[songData?.artistType] ?? artistTypeColors.unknown;
-              const byGenreColor = genreColors[songData?.genre] ?? "#D6D6DA";
+              const byGenreColor = genreColors[songData?.genre] ?? COLOR_PALETTES[hashGenreToIndex(songData?.genre)];
 
               const colorByFilter = {
                 [FILTERS.GENDER]: byArtistTypeColor,

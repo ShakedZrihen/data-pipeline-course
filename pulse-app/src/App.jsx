@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ChartsContextProvider } from "./state/context";
 import AppHeader from "./components/AppHeader";
 import GenderStats from "./components/StatsBox/GenderStats";
+import SongGenreStats from "./components/StatsBox/SongGenreStats";
 
 const darkTheme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ const App = () => {
               <StyledWorldMapContainer>
                 <StyledStatsContainer>
                   <GenderStats />
+                  <SongGenreStats />
                 </StyledStatsContainer>
                 <WorldMap />
               </StyledWorldMapContainer>

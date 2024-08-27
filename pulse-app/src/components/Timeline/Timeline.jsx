@@ -1,10 +1,9 @@
 import { StyledTimeline } from "./Timeline.style";
-import { ALL_TIMES_YEAR } from "./consts";
 import YearBox from "./YearBox";
 import useTimeline from "./useTimeline";
 
 const Timeline = () => {
-  const { latestWeeks, handleWheel } = useTimeline();
+  const { latestWeeks } = useTimeline();
 
   const years = Object.keys(latestWeeks).sort((a, b) => b - a);
   const dates = [];
@@ -18,12 +17,7 @@ const Timeline = () => {
     dates.push(<YearBox key={first.date} year={year} date={first.date} label={year} />);
   });
 
-  return (
-    <StyledTimeline /*onWheel={handleWheel}*/>
-      <YearBox key={ALL_TIMES_YEAR} year={ALL_TIMES_YEAR} date={ALL_TIMES_YEAR} label="All times" />
-      {dates}
-    </StyledTimeline>
-  );
+  return <StyledTimeline /*onWheel={handleWheel}*/>{dates}</StyledTimeline>;
 };
 
 export default Timeline;

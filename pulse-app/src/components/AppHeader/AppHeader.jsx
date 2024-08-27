@@ -19,7 +19,7 @@ const AppHeader = () => {
         <RadioGroup row defaultValue="byGender" onChange={(e) => dispatch(onChangeByFilter(e.target.value))}>
           <FormControlLabel value="byGender" control={<Radio variant="plain" />} label="By Gender" />
           <FormControlLabel value="byGenre" control={<Radio variant="plain" />} label="By Genre" />
-          <FormControlLabel value="bySong" control={<Radio variant="plain" />} label="By Song" />
+          {/* <FormControlLabel value="bySong" control={<Radio variant="plain" />} label="By Song" /> */}
         </RadioGroup>
       </FormControl>
     </StyledHeader>

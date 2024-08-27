@@ -2,6 +2,9 @@ import { useContext } from "react";
 import ChartsContext from "../../state/context";
 import { normalizeCounts } from "../../common/utils/stats";
 import { GraphContainer, Label, LineBox, LineContainer, StyledStatsBox } from "./StatsBox.style";
+import { COLOR_PALETTES } from "../WorldMap/featureColors";
+import { hashGenreToIndex } from "../../common/utils/colors";
+import { Tooltip } from "@mui/material";
 
 // TODO: change content to fit all genres
 const SongGenreStats = () => {
@@ -10,32 +13,34 @@ const SongGenreStats = () => {
       worldMapData: { topSongFeaturesByCountry }
     }
   } = useContext(ChartsContext);
-
+  console.log({ topSongFeaturesByCountry });
   if (!topSongFeaturesByCountry) {
     return null;
   }
 
-  const byArtistCounter = Object.values(topSongFeaturesByCountry ?? {}).reduce((acc, { artistType }) => {
-    acc[artistType] = (acc[artistType] ?? 0) + 1;
+  const byGenreCounter = Object.values(topSongFeaturesByCountry ?? {}).reduce((acc, { genre }) => {
+    acc[genre] = (acc[genre] ?? 0) + 1;
     return acc;
   }, {});
 
-  const normelizedCounts = normalizeCounts(byArtistCounter);
+  const normelizedCounts = normalizeCounts(byGenreCounter);
 
-  const bandBoxes = Array.from({ length: normelizedCounts.Band ?? 0 }, (_, i) => <LineBox key={i} color="#ffba41" />);
-  const maleBoxes = Array.from({ length: normelizedCounts.Male ?? 0 }, (_, i) => <LineBox key={i} color="#00c4d0" />);
-  const femaleBoxes = Array.from({ length: normelizedCounts.Female ?? 0 }, (_, i) => (
-    <LineBox key={i} color="#fd8db5" />
-  ));
+  const graphLines = Object.entries(normelizedCounts).map(([genre, count]) => {
+    return (
+      <Tooltip key={genre} title={genre}>
+        <LineContainer>
+          {Array.from({ length: count ?? 0 }, (_, i) => (
+            <LineBox key={i} color={COLOR_PALETTES[hashGenreToIndex(genre)]} />
+          ))}
+        </LineContainer>
+      </Tooltip>
+    );
+  });
 
   return (
     <StyledStatsBox>
-      <GraphContainer>
-        <LineContainer>{bandBoxes}</LineContainer>
-        <LineContainer>{maleBoxes}</LineContainer>
-        <LineContainer>{femaleBoxes}</LineContainer>
-      </GraphContainer>
-      <Label>Artist Gender</Label>
+      <GraphContainer>{graphLines}</GraphContainer>
+      <Label>Song Genre</Label>
     </StyledStatsBox>
   );
 };

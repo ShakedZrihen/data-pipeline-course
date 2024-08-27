@@ -15,7 +15,6 @@ const useTimeline = () => {
   const weeks = getThursdayWeeks(data);
 
   const latestWeeks = getLatestDatesFromThursdays(weeks);
-  console.log({ latestWeeks, weeks });
   const years = Object.keys(data)
     .map(Number)
     .sort((a, b) => b - a);

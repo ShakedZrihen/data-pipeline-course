@@ -24,6 +24,8 @@ export const genreColors = {
   Disco: "#66ffcc"
 };
 
+export const COLOR_PALETTES = Object.values(genreColors);
+
 export const artistTypeColors = {
   Band: "#ffba41", 
   Male: "#00c4d0", 
