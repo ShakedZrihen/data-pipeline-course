@@ -1,6 +1,10 @@
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Date, BigInteger, ForeignKey, select, and_
 from mangum import Mangum
+import json
+from sqlalchemy import create_engine, select, and_
+import logging
 
 DATABASE_URL = "postgresql://user:password@postgres/mydb"
 
@@ -52,6 +56,10 @@ metadata.create_all(engine)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*']
+)
 @app.post("/insert-data")
 def insert_data(data: dict):
     with engine.connect() as conn:
@@ -124,10 +132,24 @@ def insert_data(data: dict):
 @app.get("/charts")
 def get_charts(date: str = Query(..., description="The date for which to retrieve the charts")):
     charts = {}
+
+    # Country code mapping
+    country_code_map = {
+        "au": "AUS",
+        "ar": "ARG",
+        "at": "AUT",
+        "be": "BEL",
+        "global": "RUS",
+        "il":"ISR",
+        "us":"USA",
+        "es": "ESP"
+    }
+
     try:
         with engine.connect() as conn:
             query = select(
                 rankings_table.c.currentRank,
+                rankings_table.c.chartName,
                 songs_table.c.songName,
                 artists_table.c.artistName,
                 artists_table.c.gender,
@@ -135,39 +157,57 @@ def get_charts(date: str = Query(..., description="The date for which to retriev
                 songs_table.c.long.label('duration'),
                 songs_table.c.songLink.label('spotify_url'),
                 genres_table.c.genreName,
-                songs_table.c.language,
-                artists_table.c.country
+                songs_table.c.language
             ).select_from(
-                rankings_table.join(songs_table, rankings_table.c.songID == songs_table.c.songID)
-                .join(artists_table, songs_table.c.artistID == artists_table.c.artistID)
-                .join(genres_table, songs_table.c.genreID == genres_table.c.genreID)
+                rankings_table.outerjoin(songs_table, rankings_table.c.songID == songs_table.c.songID)
+                .outerjoin(artists_table, songs_table.c.artistID == artists_table.c.artistID)
+                .outerjoin(genres_table, songs_table.c.genreID == genres_table.c.genreID)
             ).where(rankings_table.c.rankDate == date)
 
             result = conn.execute(query).fetchall()
 
-            for row in result:
-                country_code = row.country
-                if country_code not in charts:
-                    charts[country_code] = []
+            logging.info(f"Total rows fetched: {len(result)}")
 
-                song_data = {
-                    "position": row.currentRank,
-                    "song": row.songName,
-                    "artist": row.artistName,
-                    "album": row.albumIMG,
-                    "duration": str(row.duration),
-                    "spotify_url": row.spotify_url,
-                    "artistFeatures": {
-                        "type": "Solo",
-                        "gender": row.gender if row.gender else "Unknown"
-                    },
-                    "songFeatures": {
-                        "key": "Unknown",
-                        "genre": row.genreName if row.genreName else "Unknown",
-                        "language": row.language if row.language else "Unknown"
+            for row in result:
+                try:
+                    chart_name_parts = row.chartName.split(' - ')
+                    if len(chart_name_parts) > 1:
+                        original_country_code = chart_name_parts[-1].lower()
+                    else:
+                        original_country_code = 'global'
+
+                    country_code = country_code_map.get(original_country_code, original_country_code.upper())
+
+                    if country_code not in charts:
+                        charts[country_code] = []
+
+                    song_data = {
+                        "position": row.currentRank,
+                        "song": row.songName if row.songName is not None else "Unknown Song",
+                        "artist": row.artistName if row.artistName is not None else "Unknown Artist",
+                        "album": row.albumIMG if row.albumIMG is not None else "",
+                        "duration": str(row.duration) if row.duration is not None else "0",
+                        "spotify_url": row.spotify_url if row.spotify_url is not None else "",
+                        "artistFeatures": {
+                            "type": "Solo",
+                            "gender": row.gender if row.gender is not None else "Unknown"
+                        },
+                        "songFeatures": {
+                            "key": "Unknown",
+                            "genre": row.genreName if row.genreName is not None else "pop",
+                            "language": row.language if row.language is not None else "Unknown"
+                        }
                     }
-                }
-                charts[country_code].append(song_data)
+                    charts[country_code].append(song_data)
+                except Exception as e:
+                    logging.error(f"Error processing row: {row}. Error: {str(e)}")
+
+            for country_code in charts:
+                charts[country_code] = sorted(charts[country_code], key=lambda x: x['position'])
+
+            logging.info(f"Countries in result: {list(charts.keys())}")
+            for country, songs in charts.items():
+                logging.info(f"{country}: {len(songs)} songs")
 
         if not charts:
             raise HTTPException(status_code=404, detail="No charts found for the given date")
@@ -175,6 +215,24 @@ def get_charts(date: str = Query(..., description="The date for which to retriev
         return {"charts": charts}
 
     except Exception as e:
+        logging.error(f"Failed to retrieve charts: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to retrieve charts: {str(e)}")
 
+def get_available_dates():
+    try:
+        with open('availDates.json', 'r') as file:
+            dates_data = json.load(file)
+
+        return dates_data
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="availDates.json file not found")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Error decoding availDates.json")
+
+
+@app.get("/charts/available-dates")
+async def available_dates():
+    return get_available_dates()
+
 handler = Mangum(app)
+

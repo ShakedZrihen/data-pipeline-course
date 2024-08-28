@@ -1,14 +1,11 @@
 import json
 import requests
 import base64
-
 # Spotify API
-client_id = '5b8ef6449a724f70869525772512e68d'
-client_secret = 'a108167e70924f0b8ea70c3f016c3a2a'
+client_id = '1a18c8c9bc3e4d09aebe778ff7b55f9b'
+client_secret = 'e1884f7071af47a18ffec342f9e9c5ee'
 
 crud_url = 'http://crud:3003/insert-data'
-
-
 def get_spotify_token():
     auth_url = "https://accounts.spotify.com/api/token"
     headers = {
@@ -123,7 +120,6 @@ def process_message(event, context):
 
             try:
                 spotify_data = get_spotify_data(song_name, artist_names, country)
-
                 if spotify_data:
                     # Artists Table
                     artists_table = [
