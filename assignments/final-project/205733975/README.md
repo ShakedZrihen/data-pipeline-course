@@ -1,8 +1,7 @@
-# Breaking News API - Amit Ronen
+# Final Project - Amit Ronen - 205733975
 
 ## Overview
-This FastAPI project scrapes breaking news from Ynet and provides an API to access the latest news.
-
+This projects contain a full flow- Collection of the data from Spotify and save it to the DB, to its presentation by the UI.
 ## Project Structure
 
 ``` plaintext
@@ -14,6 +13,7 @@ This FastAPI project scrapes breaking news from Ynet and provides an API to acce
 │ ├── Dockerfile
 │ ├── handler.py
 │ ├── requirements.txt
+│ ├── availDates.json
 │ └── serverless.yml
 ├── lambda-processor
 │ ├── Dockerfile
@@ -29,15 +29,13 @@ This FastAPI project scrapes breaking news from Ynet and provides an API to acce
 ├── package.json
 ├── requirements.txt
 ├── serverless.yml
-├── services
-│ └── breaking_news.py
+
 ```
 
 ## Endpoints
 
-- **/health**: GET - Check API status.
-- **/breaking-news**: GET - Retrieve breaking news. Optional query parameters: date (YYYY-MM-DD), time.
-- **/scrape**: POST - Scrape the latest breaking news and store in DB.
+- **/charts?date=**: GET - Get all the chart's data for a date(yyyy-mm-dd).
+- **/available-dates**: GET - Retrieve all the available dates of the chart's data.
 
 
 ## Docker Compose Setup & Run
@@ -50,29 +48,14 @@ docker-compose up --build
 
 ## API Commands
 
-### Health Check
+### Get chart data
 
 ```sh
-http://0.0.0.0:3000/health 
+http://localhost:3003/charts?date=
 ````
-### Retrieve Breaking News:
-```sh
-http://0.0.0.0:3000/breaking-news 
-```
-### Retrieve Breaking News by Date:
-```sh
-http://0.0.0.0:3000/breaking-news?date= 
-```
-### Retrieve Breaking News by Time:
-```sh
-http://0.0.0.0:3000/breaking-news?time= 
-```
-### Retrieve Breaking News by Date and Time:
-```sh
-http://0.0.0.0:3000/breaking-news?date=&time= 
-```
 
-### Trigger Scrape with Postman:
+### Get available dates
+
 ```sh
-http://0.0.0.0:3000/scrape
-```
+http://localhost:3003/charts/available-dates
+````

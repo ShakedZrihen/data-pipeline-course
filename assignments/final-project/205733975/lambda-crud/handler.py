@@ -132,7 +132,6 @@ def insert_data(data: dict):
 @app.get("/charts")
 def get_charts(date: str = Query(..., description="The date for which to retrieve the charts")):
     charts = {}
-
     # Country code mapping
     country_code_map = {
         "au": "AUS",
