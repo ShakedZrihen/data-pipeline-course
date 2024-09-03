@@ -7,6 +7,7 @@ client_secret = 'e1884f7071af47a18ffec342f9e9c5ee'
 
 crud_url = 'http://crud:3003/insert-data'
 def get_spotify_token():
+    # Generate Spotify API token using client credentials
     auth_url = "https://accounts.spotify.com/api/token"
     headers = {
         'Authorization': 'Basic ' + base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
@@ -20,6 +21,7 @@ def get_spotify_token():
 
 
 def get_artist_genres(artist_id, token):
+    # Retrieve artist genres from Spotify API
     artist_url = f"https://api.spotify.com/v1/artists/{artist_id}"
     headers = {
         'Authorization': f'Bearer {token}'
@@ -30,6 +32,7 @@ def get_artist_genres(artist_id, token):
 
 
 def get_artist_gender_from_wikipedia(artist_name):
+    # Determine artist gender from Wikipedia summary
     wikipedia_url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{artist_name.replace(' ', '_')}"
     response = requests.get(wikipedia_url)
     if response.status_code == 200:
@@ -45,6 +48,7 @@ def get_artist_gender_from_wikipedia(artist_name):
 
 
 def get_spotify_data(song_name, artist_names, country):
+    # Search for a song on Spotify and retrieve related data
     token = get_spotify_token()
     print(f"Token: {token[:10]}...")
     search_url = "https://api.spotify.com/v1/search"
@@ -68,6 +72,7 @@ def get_spotify_data(song_name, artist_names, country):
         first_genre = genres[0] if genres else None
         gender = get_artist_gender_from_wikipedia(artist['name'])
 
+        # Return the structured data for further processing
         return {
             "Artists Table": [
                 {
@@ -96,6 +101,7 @@ def get_spotify_data(song_name, artist_names, country):
 
 
 def send_data_to_crud(data):
+    # Send the processed data to the CRUD service
     try:
         response = requests.post(crud_url, json=data)
         if response.status_code == 200:
@@ -107,6 +113,7 @@ def send_data_to_crud(data):
 
 
 def process_message(event, context):
+    # Process incoming messages from SQS
     for record in event['Records']:
         message_body = record['body']
         print("Received message from SQS:", message_body)
@@ -121,7 +128,7 @@ def process_message(event, context):
             try:
                 spotify_data = get_spotify_data(song_name, artist_names, country)
                 if spotify_data:
-                    # Artists Table
+                    # Prepare data for each table
                     artists_table = [
                         {
                             "artistName": artist['artistName'],
@@ -158,7 +165,7 @@ def process_message(event, context):
                     # Genres Table
                     genres_table = spotify_data.get('Genres Table', [])
 
-                    # Combine everything into the final structure
+                    # Combine all data into the final structure for CRUD insertion
                     combined_data = {
                         "Artists Table": artists_table,
                         "Songs Table": songs_table,
